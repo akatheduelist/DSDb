@@ -1,13 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-import enum
-
-class Genders(enum.Enum):
-    male = "Male"
-    female = "Female"
-    other = "Other"
-    not_say = "I'd rather not say."
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -21,10 +14,12 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     full_name = db.Column(db.String(99))
     bio = db.Column(db.Text())
-    gender = db.Column(db.Enum(Genders))
+    gender = db.Column(db.Enum('m', 'f'))
     dob = db.Column(db.Date())
     country = db.Column(db.String(2))
     profile_image = db.Column(db.String(255))
+
+    reviews = db.relationship("Review", back_populates="user")
 
     @property
     def password(self):

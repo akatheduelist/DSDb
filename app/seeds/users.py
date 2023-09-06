@@ -1,16 +1,65 @@
 from app.models import db, User, environment, SCHEMA
 from sqlalchemy.sql import text
+from faker import Faker
+from faker.providers import person, address, date_time, internet, misc, lorem
 
+fake = Faker()
+fake.add_provider(person)
+fake.add_provider(date_time)
+fake.add_provider(internet)
+fake.add_provider(misc)
+fake.add_provider(lorem)
+fake.add_provider(address)
+
+def fake_users():
+    for _ in range(10):
+        yield User(
+            username = fake.user_name(),
+            email = fake.free_email(),
+            password = fake.password(),
+            full_name = fake.name(),
+            bio = fake.paragraph(),
+            gender = "m",
+            dob = fake.date_of_birth(),
+            country = fake.country_code(),
+            profile_image = fake.image_url()
+        )
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='Demo', email='demo@aa.io', password='password')
+        username='Demo', 
+        email='demo@aa.io', 
+        password='password',
+        full_name = fake.name(),
+        bio = fake.paragraph(),
+        gender = "m",
+        dob = fake.date_of_birth(),
+        country = fake.country_code(),
+        profile_image = fake.image_url())
     marnie = User(
-        username='marnie', email='marnie@aa.io', password='password')
+        username='marnie', 
+        email='marnie@aa.io', 
+        password='password',
+        full_name = fake.name(),
+        bio = fake.paragraph(),
+        gender = "m",
+        dob = fake.date_of_birth(),
+        country = fake.country_code(),
+        profile_image = fake.image_url())
     bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password')
-
+        username='bobbie', 
+        email='bobbie@aa.io', 
+        password='password',
+        full_name = fake.name(),
+        bio = fake.paragraph(),
+        gender = "m",
+        dob = fake.date_of_birth(),
+        country = fake.country_code(),
+        profile_image = fake.image_url())
+    
+    generated_users = list(fake_users())
+    add_users = [db.session.add(user) for user in generated_users]
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
