@@ -11,7 +11,7 @@ class Review(db.Model):
     review = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
 
-    user = db.relationship("User", back_populates="review", cascade="all, delete-orphan")
+    user = db.relationship("User", back_populates="reviews")
 
     def to_dict(self):
         return {
