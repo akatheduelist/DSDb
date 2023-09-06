@@ -26,6 +26,8 @@ class User(db.Model, UserMixin):
     country = db.Column(db.String(2))
     profile_image = db.Column(db.String(255))
 
+    reviews = db.relationship("Review", back_populates="user")
+
     @property
     def password(self):
         return self.hashed_password

@@ -7,14 +7,14 @@ class Vehicle(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    year = db.Column(db.Integer(4), nullable=False)
+    year = db.Column(db.Integer, nullable=False)
     make = db.Column(db.String(40), nullable=False)
     model = db.Column(db.String(40), nullable=False)
     trim = db.Column(db.String(40))
     vehicle_country = db.Column(db.String(2))
-    dougscore_id = db.Column(db.Integer(), nullable=False)
+    # dougscore_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("dougscores.id")), nullable=False)
 
-    dougscore = db.relationship("Dougscore", uselist=False, back_populates="vehicle", cascade="all, delete-orphan")
+    dougscore = db.relationship("DougScore", uselist=False, back_populates="vehicle", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {

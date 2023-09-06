@@ -21,9 +21,10 @@ class DougScore(db.Model):
     daily_total = db.Column(db.Integer, nullable=False)
     dougscore_total = db.Column(db.Integer, nullable=False)
     video_link = db.Column(db.String(255), nullable=False)
-    location_id = db.Column(db.Integer, nullable=False) 
-    
-    vehicle = db.relationship("Vehicle", back_populates="dougscore", cascade="all, delete-orphan")
+    location_id = db.Column(db.Integer, nullable=False)
+    vehicle_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("vehicles.id")), nullable=False)
+
+    vehicle = db.relationship("Vehicle", back_populates="dougscore")
 
     def to_dict(self):
         return {
@@ -42,5 +43,5 @@ class DougScore(db.Model):
             'dougscore_total': self.dougscore_total,
             'video_link': self.video_link,
             'location_id': self.location_id,
-            'vehicle': self.vehicle
+            'vehicle_id': self.vehicle_id
         }
