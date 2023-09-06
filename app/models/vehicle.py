@@ -24,4 +24,5 @@ class Vehicle(db.Model):
             'model': self.model,
             'trim': self.trim,
             'vehicle_country': self.vehicle_country,
+            'dougscore': self.dougscore
         }
