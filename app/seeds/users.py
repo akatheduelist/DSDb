@@ -28,11 +28,35 @@ def fake_users():
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='Demo', email='demo@aa.io', password='password')
+        username='Demo', 
+        email='demo@aa.io', 
+        password='password',
+        full_name = fake.name(),
+        bio = fake.paragraph(),
+        gender = "m",
+        dob = fake.date_of_birth(),
+        country = fake.country_code(),
+        profile_image = fake.image_url())
     marnie = User(
-        username='marnie', email='marnie@aa.io', password='password')
+        username='marnie', 
+        email='marnie@aa.io', 
+        password='password',
+        full_name = fake.name(),
+        bio = fake.paragraph(),
+        gender = "m",
+        dob = fake.date_of_birth(),
+        country = fake.country_code(),
+        profile_image = fake.image_url())
     bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password')
+        username='bobbie', 
+        email='bobbie@aa.io', 
+        password='password',
+        full_name = fake.name(),
+        bio = fake.paragraph(),
+        gender = "m",
+        dob = fake.date_of_birth(),
+        country = fake.country_code(),
+        profile_image = fake.image_url())
     
     generated_users = list(fake_users())
     add_users = [db.session.add(user) for user in generated_users]
