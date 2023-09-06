@@ -51,7 +51,7 @@ def upgrade():
     with op.batch_alter_table('users', schema=None) as batch_op:
         batch_op.add_column(sa.Column('full_name', sa.String(length=99), nullable=True))
         batch_op.add_column(sa.Column('bio', sa.Text(), nullable=True))
-        batch_op.add_column(sa.Column('gender', sa.Enum('m', 'f'), nullable=True))
+        batch_op.add_column(sa.Column('gender', sa.Enum('m', 'f', name="gender"), nullable=True))
         batch_op.add_column(sa.Column('dob', sa.Date(), nullable=True))
         batch_op.add_column(sa.Column('country', sa.String(length=2), nullable=True))
         batch_op.add_column(sa.Column('profile_image', sa.String(length=255), nullable=True))
