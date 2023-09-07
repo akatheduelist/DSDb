@@ -14,6 +14,7 @@ class Vehicle(db.Model):
     vehicle_country = db.Column(db.String(2))
 
     dougscore = db.relationship("DougScore", uselist=False, back_populates="vehicle")
+    quirks = db.relationship("Quirk", back_populates="vehicle")
 
     def to_dict(self):
         return {
