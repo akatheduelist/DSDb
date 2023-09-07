@@ -14,7 +14,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     full_name = db.Column(db.String(99))
     bio = db.Column(db.Text())
-    gender = db.Column(db.Enum('m', 'f'), name="user_gender")
+    gender = db.Column(db.Enum('m', 'f'), name='user_gender')
     dob = db.Column(db.Date())
     country = db.Column(db.String(2))
     profile_image = db.Column(db.String(255))
