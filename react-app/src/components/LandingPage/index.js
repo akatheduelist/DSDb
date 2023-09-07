@@ -28,7 +28,7 @@ function LandingPage() {
 						<h4>Model: {vehicle.model}</h4>
 						<h4>Trim: {vehicle.trim}</h4>
 						<h4>Country: {vehicle.vehicle_country}</h4>
-                        <h2>Dougscore: {vehicle.dougscore.daily_comfort}</h2>
+                        <h2>Dougscore: {vehicle.dougscore.dougscore_total}</h2>
 					</div>
 				))}
 		</>

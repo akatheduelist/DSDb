@@ -20,6 +20,7 @@ class User(db.Model, UserMixin):
     profile_image = db.Column(db.String(255))
 
     reviews = db.relationship("Review", back_populates="user")
+    quirks = db.relationship("Quirk", back_populates="user")
 
     @property
     def password(self):
