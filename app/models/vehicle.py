@@ -12,9 +12,8 @@ class Vehicle(db.Model):
     model = db.Column(db.String(40), nullable=False)
     trim = db.Column(db.String(40))
     vehicle_country = db.Column(db.String(2))
-    # dougscore_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("dougscores.id")), nullable=False)
 
-    dougscore = db.relationship("DougScore", uselist=False, back_populates="vehicle", cascade="all, delete-orphan")
+    dougscore = db.relationship("DougScore", uselist=False, back_populates="vehicle")
 
     def to_dict(self):
         return {
@@ -24,5 +23,21 @@ class Vehicle(db.Model):
             'model': self.model,
             'trim': self.trim,
             'vehicle_country': self.vehicle_country,
-            'dougscore': self.dougscore
+            'dougscore': {
+                'weekend_styling': self.dougscore.weekend_styling,
+                'weekend_acceleration': self.dougscore.weekend_acceleration,
+                'weekend_handling': self.dougscore.weekend_handling,
+                'weekend_funfactor': self.dougscore.weekend_funfactor,
+                'weekend_coolfactor': self.dougscore.weekend_coolfactor,
+                'weekend_total': self.dougscore.weekend_total,
+                'daily_features': self.dougscore.daily_features,
+                'daily_comfort': self.dougscore.daily_comfort,
+                'daily_quality': self.dougscore.daily_quality,
+                'daily_practicality': self.dougscore.daily_practicality,
+                'daily_value': self.dougscore.daily_value,
+                'daily_total': self.dougscore.daily_total,
+                'dougscore_total': self.dougscore.dougscore_total,
+                'video_link': self.dougscore.video_link,
+                'location_id': self.dougscore.location_id,
+            }
         }

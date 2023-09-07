@@ -15,7 +15,6 @@ def vehicles():
 
 
 @vehicle_routes.route('/<int:id>')
-@login_required
 def vehicle(id):
     """
     Query for a vehicle by id and returns that vehicle in a dictionary
