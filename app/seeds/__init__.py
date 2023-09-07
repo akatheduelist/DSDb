@@ -2,6 +2,7 @@ from flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .reviews import seed_reviews, undo_reviews
 from .vehicles import seed_vehicles, undo_vehicles
+from .dougscores import seed_dougscores, undo_dougscores
 
 from app.models.db import db, environment, SCHEMA
 
@@ -21,9 +22,11 @@ def seed():
         undo_users()
         undo_reviews()
         undo_vehicles()
+        undo_dougscores()
     seed_users()
     seed_reviews()
     seed_vehicles()
+    seed_dougscores()
 
 
 # Creates the `flask seed undo` command
@@ -32,3 +35,4 @@ def undo():
     undo_users()
     undo_reviews()
     undo_vehicles()
+    undo_dougscores()

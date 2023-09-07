@@ -21,16 +21,15 @@ function LandingPage() {
 		<>
 			<h1>LandingPage</h1>
 			{isLoaded &&
-				Object.values(allVehicles).map(({ id, year, make, model, trim, vehicle_country, dougscore }) => (
-                    <>
-                        <h4>{id}</h4>
-                        <h4>{year}</h4>
-                        <h4>{make}</h4>
-                        <h4>{model}</h4>
-                        <h4>{trim}</h4>
-                        <h4>{vehicle_country}</h4>
-                        <h4>{dougscore}</h4>
-                    </>
+				Object.values(allVehicles).map((vehicle) => (
+					<div key={vehicle.id}>
+						<h2>Year: {vehicle.year}</h2>
+						<h2>Make: {vehicle.make}</h2>
+						<h4>Model: {vehicle.model}</h4>
+						<h4>Trim: {vehicle.trim}</h4>
+						<h4>Country: {vehicle.vehicle_country}</h4>
+                        <h2>Dougscore: {vehicle.dougscore.daily_comfort}</h2>
+					</div>
 				))}
 		</>
 	);
