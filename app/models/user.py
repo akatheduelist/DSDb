@@ -42,6 +42,5 @@ class User(db.Model, UserMixin):
             'gender': self.gender,
             'dob': self.dob,
             'country': self.country,
-            'profile_image': self.profile_image,
-            'reviews': self.reviews
+            'profile_image': self.profile_image
         }
