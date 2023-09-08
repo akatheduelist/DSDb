@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getVehicle, getVehicleReviews } from "../../store/vehicle";
-import ReviewFormModal from "../ReviewFormModal";
 import OpenModalButton from "../OpenModalButton";
+import ReviewFormModal from "../ReviewFormModal";
+import DeleteItemModal from "../DeleteItemModal"
 
 function VehicleDetails() {
 	const dispatch = useDispatch();
@@ -44,7 +45,17 @@ function VehicleDetails() {
 						<h3>review: {review}</h3>
 						<OpenModalButton
 							buttonText="Update Review"
-							modalComponent={<ReviewFormModal vehicleId={vehicleId} isEdit={true} reviewId={id} />}
+							modalComponent={
+								<ReviewFormModal
+									vehicleId={vehicleId}
+									isEdit={true}
+									reviewId={id}
+								/>
+							}
+						/>
+						<OpenModalButton
+							buttonText="Delete Review"
+							modalComponent={<DeleteItemModal reviewId={id} />}
 						/>
 					</div>
 				))}
