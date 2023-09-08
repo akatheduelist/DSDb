@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getVehicle, getVehicleReviews } from "../../store/vehicle";
+import { getVehicleReviews } from "../../store/vehicle";
 import { useModal } from "../../context/Modal";
 import "./ReviewForm.css";
 
