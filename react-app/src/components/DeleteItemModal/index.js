@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
-import { deleteVehicleReview } from "../../store/vehicle";
+import { deleteVehicleReview, deleteVehicleQuirk, getVehicleQuirks } from "../../store/vehicle";
 
-function DeleteItemModal({ reviewId }) {
+function DeleteItemModal({ reviewId, quirkId }) {
 	const dispatch = useDispatch();
 	const currentUser = useSelector((state) => state.session.user);
 	const [errors, setErrors] = useState([]);
@@ -11,7 +11,9 @@ function DeleteItemModal({ reviewId }) {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		dispatch(deleteVehicleReview(reviewId)).then(closeModal());
+        if (reviewId) dispatch(deleteVehicleReview(reviewId));
+        if (quirkId) dispatch(deleteVehicleQuirk(quirkId));
+        closeModal()
 	};
 
 	return (
