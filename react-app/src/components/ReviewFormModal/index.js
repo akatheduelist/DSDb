@@ -1,14 +1,16 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector, connect } from "react-redux";
 import { getVehicleReviews } from "../../store/vehicle";
 import { useModal } from "../../context/Modal";
 import "./ReviewForm.css";
 
-function ReviewFormModal({ vehicleId }) {
+function ReviewFormModal({ vehicleId, isEdit=false, reviewId }) {
 	const dispatch = useDispatch();
 	const currentUser = useSelector((state) => state.session.user);
-	const [rating, setRating] = useState(1);
-	const [review, setReview] = useState("");
+    const currentReview = useSelector((state) => state.vehicle.vehicleReviews.find(review => review.id === reviewId))
+	const [rating, setRating] = useState(isEdit ? currentReview.rating : 1);
+	const [review, setReview] = useState(isEdit ? currentReview.review : "");
+    // const [isEdit, setIsEdit] = useState(false);
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
 
@@ -34,6 +36,7 @@ function ReviewFormModal({ vehicleId }) {
 
 	return (
 		<>
+            {console.log("isEdit ==> ", isEdit)}
 			<h1>TITLE</h1>
 			<form onSubmit={handleSubmit}>
 				{/* {errors && (

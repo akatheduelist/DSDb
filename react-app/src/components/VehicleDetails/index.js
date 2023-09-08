@@ -42,6 +42,10 @@ function VehicleDetails() {
 					<div key={id}>
 						<h3>rating: {rating}</h3>
 						<h3>review: {review}</h3>
+						<OpenModalButton
+							buttonText="Update Review"
+							modalComponent={<ReviewFormModal vehicleId={vehicleId} isEdit={true} reviewId={id} />}
+						/>
 					</div>
 				))}
 		</>
