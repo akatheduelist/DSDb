@@ -43,3 +43,11 @@ def vehicle_review(id):
         db.session.commit()
         return review.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@vehicle_routes.route('/<int:id>/reviews')
+def vehicle_reviews(id):
+    """
+    Query for a vehicle review by vehicle_id and returns that vehicle review in a dictionary
+    """
+    reviews = Review.query.filter_by(vehicle_id=id)
+    return [review.to_dict() for review in reviews]
