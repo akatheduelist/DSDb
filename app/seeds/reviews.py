@@ -1,4 +1,4 @@
-from app.models import db, Review, User, environment, SCHEMA
+from app.models import db, Review, User, Vehicle, environment, SCHEMA
 from sqlalchemy.sql import text
 from faker import Faker
 from faker.providers import lorem, python
@@ -10,11 +10,14 @@ fake.add_provider(python)
 def fake_reviews():
     users = User.query.all()
     num_of_users = len(users)
-    for _ in range(40):
+    vehicles = Vehicle.query.all()
+    num_of_vehicles = len(vehicles)
+    for _ in range(120):
         yield Review(
             rating = fake.pyint(min_value=1, max_value=10),
             review = fake.paragraph(),
-            user_id = fake.pyint(min_value=1, max_value=num_of_users)
+            user_id = fake.pyint(min_value=1, max_value=num_of_users),
+            vehicle_id = fake.pyint(min_value=1, max_value=num_of_vehicles)
         )
 
 # Adds sample reviews from faker information

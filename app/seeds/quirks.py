@@ -12,7 +12,7 @@ def fake_quirks():
     num_of_users = len(users)
     vehicles = Vehicle.query.all()
     num_of_vehicles = len(vehicles)
-    for _ in range(60):
+    for _ in range(120):
         yield Quirk(
             quirk = fake.paragraph(),
             user_id = fake.pyint(min_value=1, max_value=num_of_users),
