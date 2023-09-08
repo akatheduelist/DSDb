@@ -1,6 +1,7 @@
 // constants
 const READ_ALL_VEHICLES = "session/READ_ALL_VEHICLES";
 const READ_VEHICLE = "session/READ_VEHICLE";
+const READ_VEHICLE_REVIEWS = "session/READ_VEHICLE_REVIEWS"
 // const REMOVE_VEHICLE = "session/REMOVE_VEHICLE";
 
 const readAllVehicles = (vehicles) => {
@@ -17,6 +18,14 @@ const readVehicle = (vehicle) => {
         vehicle
 	};
 };
+
+
+const readVehicleReviews = (reviews) => {
+    return {
+        type: READ_VEHICLE_REVIEWS,
+        reviews
+    }
+}
 
 // const removeVehicle = () => ({
 // 	type: REMOVE_VEHICLE,
@@ -49,6 +58,18 @@ export const getVehicle = (vehicleId) => async (dispatch) => {
 	}
 };
 
+export const getVehicleReviews = (vehicleId) => async (dispatch) => {
+    const response = await fetch(`/api/vehicles/${vehicleId}/reviews`);
+    if (response.ok) {
+        const data = await response.json();
+        if (data.errors) {
+            return;
+        }
+
+        dispatch(readVehicleReviews(data))
+    }
+}
+
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
         case READ_ALL_VEHICLES:
@@ -63,8 +84,13 @@ export default function reducer(state = initialState, action) {
         case READ_VEHICLE:
             return {
                 ...state,
-                singleVehicle: action.vehicle,
+                currentVehicle: action.vehicle,
             };
+        case READ_VEHICLE_REVIEWS:
+            return {
+                ...state,
+                vehicleReviews: action.reviews
+            }
         // case REMOVE_VEHICLE:
 		// 	return { vehicle: null };
 		default:

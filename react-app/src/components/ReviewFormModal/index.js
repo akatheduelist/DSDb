@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getVehicle, getVehicleReviews } from "../../store/vehicle";
 import { useModal } from "../../context/Modal";
 import "./ReviewForm.css";
 
-function ReviewFormModal() {
+function ReviewFormModal({ vehicleId }) {
 	const dispatch = useDispatch();
 	const currentUser = useSelector((state) => state.session.user);
 	const [rating, setRating] = useState(1);
@@ -13,10 +14,7 @@ function ReviewFormModal() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		// TO-DO Move to store
-        // TO-DO Getparam id
-		const id = 11;
-		const data = await fetch(`/api/vehicles/${id}/reviews`, {
+		const data = await fetch(`/api/vehicles/${vehicleId}/reviews`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -29,7 +27,8 @@ function ReviewFormModal() {
 		if (data.errors) {
 			setErrors(data.errors);
 		} else {
-			closeModal();
+            dispatch(getVehicleReviews(vehicleId))
+			.then(closeModal());
 		}
 	};
 
