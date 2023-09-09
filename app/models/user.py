@@ -21,6 +21,7 @@ class User(db.Model, UserMixin):
 
     reviews = db.relationship("Review", back_populates="user")
     quirks = db.relationship("Quirk", back_populates="user")
+    vehicle_images = db.relationship("VehicleImage", back_populates="user")
 
     @property
     def password(self):

@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from .auth_routes import validation_errors_to_error_messages
-from app.models import db, Vehicle, Review, Quirk
+from app.models import db, Vehicle, Review, Quirk, VehicleImage
 from app.forms import ReviewForm
 
 vehicle_routes = Blueprint('vehicles', __name__)
@@ -22,6 +22,7 @@ def vehicle(id):
     Query for a vehicle by id and returns that vehicle in a dictionary
     """
     vehicle = Vehicle.query.get(id)
+    # print(jsonify(vehicle.vehicle_images))
     return vehicle.to_dict()
 
 @vehicle_routes.route('/<int:id>/reviews', methods=["POST"])
@@ -60,3 +61,12 @@ def vehicle_quirks(id):
     """
     quirks = Quirk.query.filter_by(vehicle_id=id)
     return [quirk.to_dict() for quirk in quirks]
+
+
+@vehicle_routes.route('/<int:id>/images')
+def vehicle_images(id):
+    """
+    Query for a vehicle images by vehicle_id and returns that vehicle images in a dictionary
+    """
+    images = VehicleImage.query.filter_by(vehicle_id=id)
+    return [image.to_dict() for image in images]
