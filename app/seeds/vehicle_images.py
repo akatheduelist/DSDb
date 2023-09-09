@@ -14,7 +14,7 @@ def fake_vehicle_images():
     num_of_vehicles = len(vehicles)
     for _ in range(240):
         yield VehicleImage(
-            image_url = fake.image_url(),
+            image_url = fake.image_url(width=640, height=480),
             user_id = fake.pyint(min_value=1, max_value=num_of_users),
             vehicle_id = fake.pyint(min_value=1, max_value=num_of_vehicles)
         )

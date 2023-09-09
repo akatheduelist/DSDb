@@ -72,7 +72,7 @@ export const getAllVehicles = () => async (dispatch) => {
 export const getVehicle = (vehicleId) => async (dispatch) => {
 	const response = await fetch(`/api/vehicles/${vehicleId}`);
 	if (response.ok) {
-		const vehicleData = await response.json();
+		const data = await response.json();
 		if (data.errors) {
 			return;
 		}
