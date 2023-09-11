@@ -164,38 +164,20 @@ export default function reducer(state = initialState, action) {
 				vehicleQuirks: action.quirks,
 			};
 		case REMOVE_VEHICLE_REVIEW:
-			const newState = {
+			return {
 				...state,
                 currentVehicle: {
                     ...state.currentVehicle,
                     reviews: state.currentVehicle.reviews.filter((review) => review.id !== action.review.id),
                 }
-				// currentVehicle: {
-                //     ...state.vehicle
-                //     state.currentVehicle.reviews: state.currentVehicle.reviews.filter((review) => review.id !== action.review.id),
-                // }
-                // case REMOVE_USER:
-                //     newState = Object.assign({}, state);
-                //     newState.user = null;
-                //     return newState;
-			};
-            // newState.currentVehicle.reviews.filter((review) => review.id == action.review.id) = null;
-            // return {
-            //     ...state,
-            //     thisObject: state.thisObject.filter( obj => obj.id !== id ),
-            //   }
-            // case REMOVE_PRODUCT_FROM_CART:
-            //     return {...state,
-            //       [productId]: {
-            //         // check if property exists
-            //         ...(state?.[productId] ?? {}),
-            //         [varient]: null
-            //      }
-            return newState;	
+            };
         case REMOVE_VEHICLE_QUIRK:
 			return {
 				...state,
-				vehicleQuirks: state.vehicleQuirks.filter((quirk) => quirk.id !== action.quirk.id),
+                currentVehicle: {
+                    ...state.currentVehicle,
+                    quirks: state.currentVehicle.quirks.filter((quirk) => quirk.id !== action.quirk.id),
+                }
 			};
 		// case REMOVE_VEHICLE:
 		// 	return { vehicle: null };
