@@ -2,12 +2,23 @@ from app.models import db, DougScore, Vehicle, environment, SCHEMA
 from sqlalchemy.sql import text
 from faker import Faker
 from faker.providers import python, internet
+import csv
+import os
+script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
+rel_path = "20230905_dougscore.csv"
+abs_file_path = os.path.join(script_dir, rel_path)
 
 fake = Faker()
 fake.add_provider(python)
 fake.add_provider(internet)
 
 def fake_dougscores():
+    with open(abs_file_path, 'r') as csv_file:
+        reader = csv.reader(csv_file)
+
+        for row in reader:
+            print(row)
+
     vehicles = Vehicle.query.all()
     for vehicle in vehicles:
         yield DougScore(
