@@ -12,8 +12,10 @@ function VehicleDetails() {
 	const { vehicleId } = useParams();
 	const vehicle = useSelector((state) => state.vehicle.currentVehicle);
 	const sessionUser = useSelector((state) => state.session.user);
+	const [newQuirk, setNewQuirk] = useState(false);
+	const [newQuirkData, setNewQuirkData] = useState("");
 	const [editQuirk, setEditQuirk] = useState(false);
-    const [updateQuirkId, setUpdateQuirkId] = useState()
+	const [updateQuirkId, setUpdateQuirkId] = useState();
 	const [updateQuirk, setUpdateQuirk] = useState("");
 	const [errors, setErrors] = useState([]);
 	const [vehicleIsLoaded, setVehicleIsLoaded] = useState(false);
@@ -24,22 +26,41 @@ function VehicleDetails() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const data = await fetch(`/api/quirks/${updateQuirkId}`, {
-			method: "PUT",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				user_id: sessionUser.id,
-                vehicle_id: vehicleId,
-                quirk: updateQuirk
-			}),
-		});
-		if (data.errors) {
-			setErrors(data.errors);
+		// TO-DO Move to dispatch
+		if (editQuirk) {
+			const data = await fetch(`/api/quirks/${updateQuirkId}`, {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					user_id: sessionUser.id,
+					vehicle_id: vehicleId,
+					quirk: updateQuirk,
+				}),
+			});
+			if (data.errors) {
+				setErrors(data.errors);
+			} else {
+				dispatch(getVehicle(vehicleId));
+				setEditQuirk(!editQuirk);
+			}
 		} else {
-			dispatch(getVehicle(vehicleId))
-            setEditQuirk(!editQuirk)
+			const data = await fetch(`/api/vehicles/${vehicleId}/quirks`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					quirk: newQuirkData,
+				}),
+			});
+			if (data.errors) {
+				setErrors(data.errors);
+			} else {
+				dispatch(getVehicle(vehicleId));
+				setNewQuirk(!newQuirk);
+			}
 		}
 	};
 
@@ -61,11 +82,29 @@ function VehicleDetails() {
 			</div>
 			{vehicleIsLoaded &&
 				Object.values(vehicle.images).map(({ id, image_url }) => (
-                    <div key={id}>
+					<div key={id}>
 						<img src={image_url} />
 					</div>
 				))}
 			<h1>Quirks and Features</h1>
+			<button
+				onClick={() => {
+					setNewQuirk(!newQuirk);
+				}}
+			>
+				New Quirk or Feature
+			</button>
+			{vehicleIsLoaded && newQuirk ? (
+				<div>
+					<form onSubmit={handleSubmit}>
+						<input
+							value={newQuirkData}
+							onChange={(e) => setNewQuirkData(e.target.value)}
+						></input>
+						<button type="submit">Submit</button>
+					</form>
+				</div>
+			) : null}
 			{vehicleIsLoaded &&
 				Object.values(vehicle.quirks).map(({ id, quirk }) => (
 					<div key={id}>
@@ -73,19 +112,27 @@ function VehicleDetails() {
 							quirk:
 							{editQuirk && updateQuirkId === id ? (
 								<form onSubmit={handleSubmit}>
-                                    <input
-                                        id={id}
-                                        value={updateQuirk}
-                                        onChange={(e) => setUpdateQuirk(e.target.value)}
-                                    ></input>
-                                    <button type="submit">Submit</button>
-                                </form>
+									<input
+										id={id}
+										value={updateQuirk}
+										onChange={(e) => setUpdateQuirk(e.target.value)}
+									></input>
+									<button type="submit">Submit</button>
+								</form>
 							) : (
 								quirk
 							)}
 						</h3>
-						<button onClick={() => {setEditQuirk(!editQuirk); setUpdateQuirkId(id); setUpdateQuirk(quirk);}}>Update Quirk</button>
-                        <OpenModalButton
+						<button
+							onClick={() => {
+								setEditQuirk(!editQuirk);
+								setUpdateQuirkId(id);
+								setUpdateQuirk(quirk);
+							}}
+						>
+							Update Quirk
+						</button>
+						<OpenModalButton
 							buttonText="Delete Quirk"
 							modalComponent={<DeleteItemModal quirkId={id} />}
 						/>

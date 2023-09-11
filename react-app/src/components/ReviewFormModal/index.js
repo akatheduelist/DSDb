@@ -15,6 +15,7 @@ function ReviewFormModal({ vehicleId, isEdit=false, reviewId }) {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+        // TO-DO Move to dispatch store
         if (!isEdit) {
             const data = await fetch(`/api/vehicles/${vehicleId}/reviews`, {
                 method: "POST",
