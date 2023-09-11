@@ -7,7 +7,7 @@ import { getAllVehicles } from "../../store/vehicle";
 function LandingPage() {
 	const dispatch = useDispatch();
 	const allVehicles = useSelector((state) => state.vehicle.allVehicles);
-	const currentUser = useSelector((state) => state.session.user);
+	const sessionUser = useSelector((state) => state.session.user);
 	const [errors, setErrors] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(false);
 

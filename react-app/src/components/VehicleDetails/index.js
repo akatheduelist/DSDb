@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, useParams, Redirect } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getVehicle, getVehicleReviews, getVehicleQuirks } from "../../store/vehicle";
+import { getVehicle } from "../../store/vehicle";
 import OpenModalButton from "../OpenModalButton";
 import ReviewFormModal from "../ReviewFormModal";
 import DeleteItemModal from "../DeleteItemModal";
@@ -75,10 +75,20 @@ function VehicleDetails() {
 				<h1>Model: {vehicle?.model}</h1>
 				<h1>Trim: {vehicle?.trim}</h1>
 				<h1>Dougscore: {vehicle?.dougscore.dougscore_total}</h1>
-				<OpenModalButton
-					buttonText="New Review"
-					modalComponent={<ReviewFormModal vehicleId={vehicleId} />}
-				/>
+                <p>daily_comfort: {vehicle?.dougscore.daily_comfort}</p>
+                <p>daily_features: {vehicle?.dougscore.daily_features}</p>
+                <p>daily_practicality: {vehicle?.dougscore.daily_practicality}</p>
+                <p>daily_quality: {vehicle?.dougscore.daily_quality}</p>
+                <p>daily_total: {vehicle?.dougscore.daily_total}</p>
+                <p>weekend_acceleration: {vehicle?.dougscore.weekend_acceleration}</p>
+                <p>weekend_coolfactor: {vehicle?.dougscore.weekend_coolfactor}</p>
+                <p>weekend_funfactor: {vehicle?.dougscore.weekend_funfactor}</p>
+                <p>weekend_handling: {vehicle?.dougscore.weekend_handling}</p>
+                <p>weekend_styling: {vehicle?.dougscore.weekend_styling}</p>
+                <p>weekend_total: {vehicle?.dougscore.weekend_total}</p>
+                <p>video_link: {vehicle?.dougscore.video_link}</p>
+                <p>location_id: {vehicle?.dougscore.location_id}</p>
+                
 			</div>
 			{vehicleIsLoaded &&
 				Object.values(vehicle.images).map(({ id, image_url }) => (
@@ -140,6 +150,10 @@ function VehicleDetails() {
 				))}
 
 			<h1>Reviews</h1>
+			<OpenModalButton
+				buttonText="New Review"
+				modalComponent={<ReviewFormModal vehicleId={vehicleId} />}
+			/>
 			{vehicleIsLoaded &&
 				Object.values(vehicle.reviews).map(({ id, rating, review }) => (
 					<div key={id}>

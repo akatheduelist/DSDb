@@ -1,1 +1,11 @@
 /* TODO Add site wide styles */
+body {
+    font-family: Roboto;
+    font-size: 16px;
+    font-stretch: 100%;
+    letter-spacing: .5px;
+    line-height: 24px;
+    color: #ffffff;
+    margin: 0px;
+    background-color: #000000;
+}
