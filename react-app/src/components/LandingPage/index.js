@@ -6,7 +6,7 @@ import { getAllVehicles } from "../../store/vehicle";
 import TopTen from "./TopTen";
 import PageGrid from "./PageGrid";
 import FeaturedToday from "./FeaturedToday";
-import Header from "./Header"
+import Header from "./Header";
 
 function LandingPage() {
 	const dispatch = useDispatch();
@@ -23,10 +23,12 @@ function LandingPage() {
 
 	return (
 		<>
-            <Header />
-            <PageGrid />
-            <FeaturedToday />
-            <TopTen />
+			<Header />
+			<div className="landing-page-content-container">
+				<PageGrid />
+				<FeaturedToday />
+				<TopTen />
+			</div>
 			{/* {isLoaded &&
 				Object.values(allVehicles).map((vehicle) => (
 					<div key={vehicle.id}>

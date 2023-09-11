@@ -1,0 +1,11 @@
+.landing-page-content-container {
+    margin: 0px auto;
+    max-width: 1024px;
+}
+
+.page-grid-container {
+    display: grid;
+    flex-wrap: wrap;
+    width: 100%;
+    grid-template-columns: repeat(3, minmax(0, 33.33%))
+}

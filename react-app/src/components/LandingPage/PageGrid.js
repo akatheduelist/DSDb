@@ -1,7 +1,11 @@
+import "./LandingPage.css";
+
 function PageGrid() {
     return (
         <>
-            <h1>Page Grid</h1>
+            <div className="page-grid-container">
+                <h1>PageGrid</h1>
+            </div>
         </>
     )
 }
