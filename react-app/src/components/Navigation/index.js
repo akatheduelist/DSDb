@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
+import logo from "../../images/dsdb_logo.svg"
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector((state) => state.session.user);
@@ -11,7 +12,7 @@ function Navigation({ isLoaded }) {
 		<nav className="nav-bar">
 			<div className="nav-bar-content">
                     {/* NavLink Image? */}
-					<a href="/"><img src="https://placehold.co/64x32.png" /></a>
+					<a href="/"><img src={logo} /></a>
 					<span>Menu</span>
 				<div class="nav-bar-search-container">
 						<input class="nav-bar-search-input" placeholder="Search DSDb"></input>
