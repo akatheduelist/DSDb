@@ -23,19 +23,10 @@ function LandingPage() {
 
 	return (
 		<>
-			<div className="landing-page-content-container">
 			    <Header />
-				<PageGrid />
+				<PageGrid allVehicles={allVehicles} isLoaded={isLoaded} />
 				<FeaturedToday />
 				<TopTen />
-			</div>
-			{/* {isLoaded &&
-				Object.values(allVehicles).map((vehicle) => (
-					<div key={vehicle.id}>
-						<a href={`/vehicles/${vehicle.id}`}>{vehicle.year} {vehicle.make} {vehicle.model} {vehicle.trim} {vehicle.vehicle_country}</a>
-						<span>Dougscore: {vehicle.dougscore.dougscore_total}</span>
-					</div>
-				))} */}
 		</>
 	);
 }

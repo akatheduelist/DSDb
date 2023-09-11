@@ -20,6 +20,7 @@ function App() {
 		<>
 			<Navigation isLoaded={isLoaded} />
 			{isLoaded && (
+                <div className="content-container">
 				<Switch>
 					<Route exact path="/">
 						<LandingPage />
@@ -37,6 +38,7 @@ function App() {
 						<QuirksFormPage />
 					</Route>
 				</Switch>
+                </div>
 			)}
 		</>
 	);

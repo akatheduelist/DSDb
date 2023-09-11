@@ -11,14 +11,11 @@ function Navigation({ isLoaded }) {
 		<nav className="nav-bar">
 			<div className="nav-bar-content">
                     {/* NavLink Image? */}
-					<img src="https://placehold.co/64x32.png" />
+					<a href="/"><img src="https://placehold.co/64x32.png" /></a>
 					<span>Menu</span>
 				<div class="nav-bar-search-container">
 						<input class="nav-bar-search-input" placeholder="Search DSDb"></input>
 				</div>
-				{/* <div class="nav-bar-dsdbpro">
-					<span>DSDb Pro</span>
-				</div> */}
 				<div class="nav-bar-separator"></div>
 				<div class="nav-bar-user">
 					<ul>
