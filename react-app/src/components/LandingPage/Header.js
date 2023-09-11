@@ -1,9 +1,11 @@
 function Header() {
     return (
         <>
-            <div>
-                
-            </div>
+            <header className="header-container">
+                    <div className="header-image">
+
+                    </div>
+            </header>
         </>
     )
 }

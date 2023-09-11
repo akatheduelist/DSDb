@@ -23,8 +23,8 @@ function LandingPage() {
 
 	return (
 		<>
-			<Header />
 			<div className="landing-page-content-container">
+			    <Header />
 				<PageGrid />
 				<FeaturedToday />
 				<TopTen />
