@@ -27,16 +27,9 @@ class Vehicle(db.Model):
             'model': self.model,
             'trim': self.trim,
             'vehicle_country': self.vehicle_country,
-            'dougscore': {
-                'dougscore_id': self.dougscore.id,
-                'dougscore_total': self.dougscore.dougscore_total
-            },
-            'images': []
+            'dougscore': self.dougscore.to_dict(),
+            'images': [image.to_dict() for image in self.vehicle_images],
+            'reviews': [review.to_dict() for review in self.reviews],
+            'quirks': [quirk.to_dict() for quirk in self.quirks]
         }
-        for image in self.vehicle_images:
-            vehicle['images'].append({
-                'image_id': image.id,
-                'image_url': image.image_url,
-                'image_user_id': image.user_id,
-                })
         return vehicle

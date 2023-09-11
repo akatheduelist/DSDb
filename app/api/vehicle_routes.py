@@ -22,7 +22,6 @@ def vehicle(id):
     Query for a vehicle by id and returns that vehicle in a dictionary
     """
     vehicle = Vehicle.query.get(id)
-    # print(jsonify(vehicle.vehicle_images))
     return vehicle.to_dict()
 
 @vehicle_routes.route('/<int:id>/reviews', methods=["POST"])

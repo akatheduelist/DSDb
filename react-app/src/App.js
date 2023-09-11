@@ -7,6 +7,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import LandingPage from "./components/LandingPage";
 import Navigation from "./components/Navigation";
 import VehicleDetails from "./components/VehicleDetails";
+import QuirksFormPage from "./components/QuirksFormPage";
 
 function App() {
 	const dispatch = useDispatch();
@@ -31,6 +32,9 @@ function App() {
 					</Route>
 					<Route exact path="/vehicles/:vehicleId">
 						<VehicleDetails />
+					</Route>
+                    <Route exact path="/vehicles/:vehicleId/quirks">
+						<QuirksFormPage />
 					</Route>
 				</Switch>
 			)}
