@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import db, Review
 
@@ -22,6 +22,26 @@ def review(id):
     """
     review = Review.query.get(id)
     return review.to_dict()
+
+
+# TO-DO User validation and return errors
+@review_routes.route('/<int:id>', methods=["PUT"])
+@login_required
+def update_review(id):
+    """
+    Create a new review associated with a specific vehicle
+    """
+    request_data = request.get_json()
+    # form['csrf_token'].data = request.cookies['csrf_token']
+    review = Review.query.get(id)
+    # review.id = id
+    review.review = request_data['review']
+    review.rating = request_data['rating']
+    review.user_id = request_data['user_id']
+    review.vehicle_id = request_data['vehicle_id']
+    db.session.commit()
+    return "Success"
+    # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 @review_routes.route('/<int:id>', methods=["DELETE"])
