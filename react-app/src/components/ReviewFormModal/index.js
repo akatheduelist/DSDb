@@ -7,7 +7,7 @@ import "./ReviewForm.css";
 function ReviewFormModal({ vehicleId, isEdit=false, reviewId }) {
 	const dispatch = useDispatch();
 	const currentUser = useSelector((state) => state.session.user);
-    const currentReview = useSelector((state) => state.vehicle.vehicleReviews.find(review => review.id === reviewId))
+    const currentReview = useSelector((state) => state.vehicle.currentVehicle.reviews.find(review => review.id === reviewId))
 	const [rating, setRating] = useState(isEdit ? currentReview.rating : 1);
 	const [review, setReview] = useState(isEdit ? currentReview.review : "");
     // const [isEdit, setIsEdit] = useState(false);
