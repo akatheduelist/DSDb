@@ -164,10 +164,19 @@ export default function reducer(state = initialState, action) {
 				vehicleQuirks: action.quirks,
 			};
 		case REMOVE_VEHICLE_REVIEW:
-			return {
-				...state,
-				vehicleReviews: state.vehicleReviews.filter((review) => review.id !== action.review.id),
-			};		
+			const newState = {
+				...state
+				// currentVehicle: {
+                //     ...state.vehicle
+                //     state.currentVehicle.reviews: state.currentVehicle.reviews.filter((review) => review.id !== action.review.id),
+                // }
+                // case REMOVE_USER:
+                //     newState = Object.assign({}, state);
+                //     newState.user = null;
+                //     return newState;
+			};
+            // newState.currentVehicle.reviews.filter((review) => review.id == action.review.id) = null;
+            return newState;	
         case REMOVE_VEHICLE_QUIRK:
 			return {
 				...state,
