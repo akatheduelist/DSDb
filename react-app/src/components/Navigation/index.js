@@ -12,7 +12,7 @@ function Navigation({ isLoaded }) {
 		<nav className="nav-bar">
 			<div className="nav-bar-content">
                     {/* NavLink Image? */}
-					<a href="/"><img src={logo} /></a>
+					<a href="/"><img className="nav-bar-logo" src={logo} /></a>
 					<span>Menu</span>
 				<div class="nav-bar-search-container">
 						<input class="nav-bar-search-input" placeholder="Search DSDb"></input>

@@ -26,6 +26,11 @@
     padding: 0px 12px;
 }
 
+.nav-bar-logo {
+    width: 64px;
+    height: 32px;
+}
+
 .nav-bar-search-container {
     display: flex;
     align-items: center;
