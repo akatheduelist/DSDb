@@ -21,7 +21,7 @@ class DougScore(db.Model):
     daily_total = db.Column(db.Integer, nullable=False)
     dougscore_total = db.Column(db.Integer, nullable=False)
     video_link = db.Column(db.String(255), nullable=False)
-    location_id = db.Column(db.Integer, nullable=False)
+    filming_location = db.Column(db.String(255))
     vehicle_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("vehicles.id")), nullable=False)
 
     vehicle = db.relationship("Vehicle", back_populates="dougscore")
@@ -42,6 +42,6 @@ class DougScore(db.Model):
             'daily_total': self.daily_total,
             'dougscore_total': self.dougscore_total,
             'video_link': self.video_link,
-            'location_id': self.location_id,
+            'filming_location': self.filming_location,
             'vehicle_id': self.vehicle_id
         }

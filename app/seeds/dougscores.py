@@ -9,12 +9,15 @@ fake = Faker()
 fake.add_provider(python)
 fake.add_provider(internet)
 
-# Adds sample dougscores from faker information
 def seed_dougscores():
+    # Get the local path where the seed file exists on the system
     seed_dir = os.path.dirname(__file__)
-    rel_path = "20230905_dougscore.csv"
-    abs_file_path = os.path.join(seed_dir, rel_path)
-    with open(abs_file_path, 'r') as csv_file:
+    # Notate the relative path to the CSV file to be parsed
+    seed_file = "20230905_dougscore.csv"
+    # Concat the local path with the relative path to the file
+    seed_file_path = os.path.join(seed_dir, seed_file)
+    # Open seed file and parse out columns of each row to corresponding attribute
+    with open(seed_file_path, 'r') as csv_file:
         reader = csv.reader(csv_file)
         for row in reader:
             # print(row)
@@ -23,7 +26,7 @@ def seed_dougscores():
                 make = row[1],
                 model = row[2],
                 trim = 'N/A',
-                vehicle_country = fake.country_code(),
+                vehicle_country = row[20],
                 )
             dougscore = DougScore(
                 vehicle = vehicle,
@@ -41,7 +44,7 @@ def seed_dougscores():
                 daily_total = row[14],
                 dougscore_total = row[15],
                 video_link = row[17],
-                location_id = fake.pyint(min_value=1, max_value=10),
+                filming_location = row[18]+", "+row[19]
                 )
             db.session.add(vehicle)
             db.session.add(dougscore)
