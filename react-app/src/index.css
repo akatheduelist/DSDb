@@ -1,6 +1,7 @@
-/* TODO Add site wide styles */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
 body {
-    font-family: Roboto;
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
     font-stretch: 100%;
     letter-spacing: .5px;
@@ -32,4 +33,10 @@ body {
 
 .overflow-auto {
     overflow: auto;
+}
+
+.title {
+    font-size: 32px;
+    color: #4BD593;
+    font-weight: 500;
 }
