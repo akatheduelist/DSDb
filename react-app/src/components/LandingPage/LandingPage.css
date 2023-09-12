@@ -79,7 +79,9 @@
 }
 
 .grid-card-container {
-    width: 400px;
-    height: 400px;
+    display: flex;
+    flex-direction: column;
+    width: 394px;
+    height: 313px;
     border: 1px solid pink;
 }

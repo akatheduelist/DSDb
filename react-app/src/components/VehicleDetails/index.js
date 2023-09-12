@@ -5,6 +5,7 @@ import { getVehicle } from "../../store/vehicle";
 import OpenModalButton from "../OpenModalButton";
 import ReviewFormModal from "../ReviewFormModal";
 import DeleteItemModal from "../DeleteItemModal";
+import "./VehicleDetails.css";
 
 function VehicleDetails() {
 	const dispatch = useDispatch();
@@ -12,6 +13,8 @@ function VehicleDetails() {
 	const { vehicleId } = useParams();
 	const vehicle = useSelector((state) => state.vehicle.currentVehicle);
 	const sessionUser = useSelector((state) => state.session.user);
+    const [yourRating, setYourRating] = useState(0);
+    const [numOfReviews, setNumOfReviews] = useState(0);
 	const [newQuirk, setNewQuirk] = useState(false);
 	const [newQuirkData, setNewQuirkData] = useState("");
 	const [editQuirk, setEditQuirk] = useState(false);
@@ -21,8 +24,16 @@ function VehicleDetails() {
 	const [vehicleIsLoaded, setVehicleIsLoaded] = useState(false);
 
 	useEffect(() => {
-		dispatch(getVehicle(vehicleId)).then(() => setVehicleIsLoaded(true));
+		dispatch(getVehicle(vehicleId))
+        .then(() => setVehicleIsLoaded(true));
 	}, [dispatch]);
+
+    useEffect(() =>{
+        if (vehicle) {
+            setNumOfReviews(vehicle.reviews.length)
+            setYourRating(vehicle.reviews.find((review) => review.user_id === sessionUser.id).rating)
+        }
+    }, [vehicleIsLoaded])
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -69,12 +80,32 @@ function VehicleDetails() {
 	return (
 		<>
 			<div className="grey-background">
-				<h1>VehicleDetails id: {vehicleId}</h1>
-				<h1>Year: {vehicle?.year}</h1>
-				<h1>Make: {vehicle?.make}</h1>
-				<h1>Model: {vehicle?.model}</h1>
-				<h1>Trim: {vehicle?.trim}</h1>
-				<h1>Dougscore: {vehicle?.dougscore.dougscore_total}</h1>
+				{vehicleIsLoaded && (
+					<div className="vehicle-details-header">
+						<div className="vehicle-details-title">
+							<span className="big-title">
+								{vehicle?.make} {vehicle?.model}
+							</span>
+						</div>
+						<div className="vehicle-details-dougscore">
+							<div className="rating-title">DOUGS RATING</div>
+							<span className="medium-header">{vehicle?.dougscore.dougscore_total}/10</span>
+						</div>
+						<div className="vehicle-header-your-rating">
+							<div className="rating-title">YOUR RATING</div>
+							{vehicle.reviews.find((review) => review.user_id === sessionUser.id) ? (
+								<span className="medium-header">{yourRating}</span>
+							) : (
+								<span>* RATE</span>
+							)}
+						</div>
+						<div className="vehicle-header-popularity">
+							<div className="rating-title">POPULARITY</div>
+							{vehicle.reviews ? <span>{numOfReviews}</span> : <span>Not enough data...</span>}
+						</div>
+					</div>
+				)}
+				<h1>Dougscore: </h1>
 				<p>daily_comfort: {vehicle?.dougscore.daily_comfort}</p>
 				<p>daily_features: {vehicle?.dougscore.daily_features}</p>
 				<p>daily_practicality: {vehicle?.dougscore.daily_practicality}</p>
@@ -119,9 +150,7 @@ function VehicleDetails() {
 				) : null}
 				{vehicleIsLoaded &&
 					Object.values(vehicle.quirks).map(({ id, quirk, user_id }) => (
-						<div
-							key={id}
-						>
+						<div key={id}>
 							<h3>
 								quirk:
 								{editQuirk && updateQuirkId === id ? (
@@ -137,22 +166,23 @@ function VehicleDetails() {
 									quirk
 								)}
 							</h3>
-                            {sessionUser && sessionUser.id === user_id ?
-                            <>
-							<button
-								onClick={() => {
-									setEditQuirk(!editQuirk);
-									setUpdateQuirkId(id);
-									setUpdateQuirk(quirk);
-								}}
-							>
-								Update Quirk
-							</button>
-							<OpenModalButton
-								buttonText="Delete Quirk"
-								modalComponent={<DeleteItemModal quirkId={id} />}
-							/>
-                            </> : null} 
+							{sessionUser && sessionUser.id === user_id ? (
+								<>
+									<button
+										onClick={() => {
+											setEditQuirk(!editQuirk);
+											setUpdateQuirkId(id);
+											setUpdateQuirk(quirk);
+										}}
+									>
+										Update Quirk
+									</button>
+									<OpenModalButton
+										buttonText="Delete Quirk"
+										modalComponent={<DeleteItemModal quirkId={id} />}
+									/>
+								</>
+							) : null}
 						</div>
 					))}
 			</div>
@@ -168,23 +198,24 @@ function VehicleDetails() {
 						<div key={id}>
 							<h3>rating: {rating}</h3>
 							<h3>review: {review}</h3>
-                            {sessionUser && sessionUser.id === user_id ? 
-							<>
-                            <OpenModalButton
-								buttonText="Update Review"
-								modalComponent={
-									<ReviewFormModal
-										vehicleId={vehicleId}
-										isEdit={true}
-										reviewId={id}
+							{sessionUser && sessionUser.id === user_id ? (
+								<>
+									<OpenModalButton
+										buttonText="Update Review"
+										modalComponent={
+											<ReviewFormModal
+												vehicleId={vehicleId}
+												isEdit={true}
+												reviewId={id}
+											/>
+										}
 									/>
-								}
-							/>
-							<OpenModalButton
-								buttonText="Delete Review"
-								modalComponent={<DeleteItemModal reviewId={id} />}
-							/>
-                            </> : null}
+									<OpenModalButton
+										buttonText="Delete Review"
+										modalComponent={<DeleteItemModal reviewId={id} />}
+									/>
+								</>
+							) : null}
 						</div>
 					))}
 			</div>
