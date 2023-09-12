@@ -7,8 +7,8 @@
     height: 1500px;
     background: linear-gradient(90deg, rgba(0,0,0,1), rgba(0,0,0,0) 12%),
                 linear-gradient(270deg, rgba(0,0,0,1), rgba(0,0,0,0) 12%),
-                linear-gradient(0deg, rgba(0,0,0,1), rgba(241, 241, 241, 0) 22%),
-                url("https://cdn.motor1.com/images/mgl/vxJoKA/s1/doug-demuro.jpg");
+                linear-gradient(0deg, rgba(0,0,0,1), rgba(241, 241, 241, 0) 22%);
+                /* url("https://cdn.motor1.com/images/mgl/vxJoKA/s1/doug-demuro.jpg"); */
     background-size: cover;
     background-repeat: no-repeat;
 }

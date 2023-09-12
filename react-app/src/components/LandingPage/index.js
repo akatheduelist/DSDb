@@ -26,7 +26,7 @@ function LandingPage() {
 
 	return (
 		<>
-			<div className="landing-page-container">
+			<div className="landing-page-container" />
 				<Header />
 				{isLoaded && (
 					<PageGrid
@@ -37,7 +37,6 @@ function LandingPage() {
 				)}
 				<FeaturedToday />
 				<TopTen />
-			</div>
 		</>
 	);
 }
