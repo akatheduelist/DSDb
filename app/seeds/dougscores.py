@@ -4,47 +4,48 @@ from faker import Faker
 from faker.providers import python, internet
 import csv
 import os
-script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
-rel_path = "20230905_dougscore.csv"
-abs_file_path = os.path.join(script_dir, rel_path)
 
 fake = Faker()
 fake.add_provider(python)
 fake.add_provider(internet)
 
-def fake_dougscores():
-    with open(abs_file_path, 'r') as csv_file:
-        reader = csv.reader(csv_file)
-
-        for row in reader:
-            print(row)
-
-    vehicles = Vehicle.query.all()
-    for vehicle in vehicles:
-        yield DougScore(
-            weekend_styling = fake.pyint(min_value=1, max_value=10),
-            weekend_acceleration = fake.pyint(min_value=1, max_value=10),
-            weekend_handling = fake.pyint(min_value=1, max_value=10),
-            weekend_funfactor = fake.pyint(min_value=1, max_value=10),
-            weekend_coolfactor = fake.pyint(min_value=1, max_value=10),
-            weekend_total = fake.pyint(min_value=5, max_value=50),
-            daily_features = fake.pyint(min_value=1, max_value=10),
-            daily_comfort = fake.pyint(min_value=1, max_value=10),
-            daily_quality = fake.pyint(min_value=1, max_value=10),
-            daily_practicality = fake.pyint(min_value=1, max_value=10),
-            daily_value = fake.pyint(min_value=1, max_value=10),
-            daily_total = fake.pyint(min_value=5, max_value=50),
-            dougscore_total = fake.pyint(min_value=10, max_value=100),
-            video_link = fake.url(),
-            location_id = fake.pyint(min_value=1, max_value=10),
-            vehicle_id = vehicle.id
-        )
-
 # Adds sample dougscores from faker information
 def seed_dougscores():
-    dougscores = list(fake_dougscores())
-    [db.session.add(dougscore) for dougscore in dougscores]
-    db.session.commit()
+    seed_dir = os.path.dirname(__file__)
+    rel_path = "20230905_dougscore.csv"
+    abs_file_path = os.path.join(seed_dir, rel_path)
+    with open(abs_file_path, 'r') as csv_file:
+        reader = csv.reader(csv_file)
+        for row in reader:
+            # print(row)
+            vehicle = Vehicle(
+                year = row[0],
+                make = row[1],
+                model = row[2],
+                trim = 'N/A',
+                vehicle_country = fake.country_code(),
+                )
+            dougscore = DougScore(
+                vehicle = vehicle,
+                weekend_styling = row[3],
+                weekend_acceleration = row[4],
+                weekend_handling = row[5],
+                weekend_funfactor = row[6],
+                weekend_coolfactor = row[7],
+                weekend_total = row[8],
+                daily_features = row[9],
+                daily_comfort = row[10],
+                daily_quality = row[11],
+                daily_practicality = row[12],
+                daily_value = row[13],
+                daily_total = row[14],
+                dougscore_total = row[15],
+                video_link = row[17],
+                location_id = fake.pyint(min_value=1, max_value=10),
+                )
+            db.session.add(vehicle)
+            db.session.add(dougscore)
+            db.session.commit()
 
 
 # Uses a raw SQL query to TRUNCATE or DELETE the vehicles table. SQLAlchemy doesn't
@@ -55,8 +56,10 @@ def seed_dougscores():
 # it will reset the primary keys for you as well.
 def undo_dougscores():
     if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.vehicles RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.dougscores RESTART IDENTITY CASCADE;")
     else:
+        db.session.execute(text("DELETE FROM vehicles"))
         db.session.execute(text("DELETE FROM dougscores"))
         
     db.session.commit()

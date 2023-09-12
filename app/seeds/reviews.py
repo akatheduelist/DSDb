@@ -12,13 +12,14 @@ def fake_reviews():
     num_of_users = len(users)
     vehicles = Vehicle.query.all()
     num_of_vehicles = len(vehicles)
-    for _ in range(120):
-        yield Review(
-            rating = fake.pyint(min_value=1, max_value=10),
-            review = fake.paragraph(),
-            user_id = fake.pyint(min_value=1, max_value=num_of_users),
-            vehicle_id = fake.pyint(min_value=1, max_value=num_of_vehicles)
-        )
+    for vehicle in vehicles:
+        for _ in range(4):
+            yield Review(
+                rating = fake.pyint(min_value=1, max_value=10),
+                review = fake.paragraph(),
+                user_id = fake.pyint(min_value=1, max_value=num_of_users),
+                vehicle_id = vehicle.id
+            )
 
 # Adds sample reviews from faker information
 def seed_reviews():
