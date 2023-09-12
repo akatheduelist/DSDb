@@ -1,13 +1,8 @@
 from app.models import db, DougScore, Vehicle, environment, SCHEMA
 from sqlalchemy.sql import text
-from faker import Faker
-from faker.providers import python, internet
 import csv
 import os
 
-fake = Faker()
-fake.add_provider(python)
-fake.add_provider(internet)
 
 def seed_dougscores():
     # Get the local path where the seed file exists on the system
