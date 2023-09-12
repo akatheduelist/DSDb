@@ -12,7 +12,7 @@ class Vehicle(db.Model):
     make = db.Column(db.String(40), nullable=False)
     model = db.Column(db.String(40), nullable=False)
     trim = db.Column(db.String(40))
-    vehicle_country = db.Column(db.String(2))
+    vehicle_country = db.Column(db.String(40))
 
     dougscore = db.relationship("DougScore", uselist=False, back_populates="vehicle")
     quirks = db.relationship("Quirk", back_populates="vehicle")

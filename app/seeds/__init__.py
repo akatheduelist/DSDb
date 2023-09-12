@@ -1,7 +1,6 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .reviews import seed_reviews, undo_reviews
-from .vehicles import seed_vehicles, undo_vehicles
 from .dougscores import seed_dougscores, undo_dougscores
 from .quirks import seed_quirks, undo_quirks
 from .vehicle_images import seed_vehicle_images, undo_vehicle_images

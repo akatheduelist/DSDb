@@ -11,7 +11,6 @@ def fake_reviews():
     users = User.query.all()
     num_of_users = len(users)
     vehicles = Vehicle.query.all()
-    num_of_vehicles = len(vehicles)
     for vehicle in vehicles:
         for _ in range(4):
             yield Review(

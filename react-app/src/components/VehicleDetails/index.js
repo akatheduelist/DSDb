@@ -87,7 +87,7 @@ function VehicleDetails() {
 				<p>weekend_styling: {vehicle?.dougscore.weekend_styling}</p>
 				<p>weekend_total: {vehicle?.dougscore.weekend_total}</p>
 				<p>video_link: {vehicle?.dougscore.video_link}</p>
-				<p>location_id: {vehicle?.dougscore.location_id}</p>
+				<p>filming_location: {vehicle?.dougscore.filming_location}</p>
 			</div>
 			<div className="grey-background">
 				{vehicleIsLoaded &&

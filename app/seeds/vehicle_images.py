@@ -1,35 +1,30 @@
-from app.models import db, VehicleImage, User, Vehicle, DougScore, environment, SCHEMA
+from app.models import db, VehicleImage, User, Vehicle, environment, SCHEMA
 from sqlalchemy.sql import text
 from faker import Faker
 from faker.providers import internet, python
-import re
 
 fake = Faker()
 fake.add_provider(internet)
 fake.add_provider(python)
 
-
-
-def fake_vehicle_images():
+# Adds sample vehicle_images from faker information
+def seed_vehicle_images():
     users = User.query.all()
     num_of_users = len(users)
     vehicles = Vehicle.query.all()
     for vehicle in vehicles:
-        # youtube_link = vehicle.dougscore.video_link
-        # youtube_id = re.findall(r"(?<=\=)(.*?)(?=\?)",youtube_link)
-        # print("YOUTUBE ID ==> ", youtube_id)
-        for _ in range(4):
-            yield VehicleImage(
-                image_url = fake.image_url(width=640, height=480),
-                user_id = fake.pyint(min_value=1, max_value=num_of_users),
-                vehicle_id = vehicle.id
-            )
-
-# Adds sample vehicle_images from faker information
-def seed_vehicle_images():
-    vehicle_images = list(fake_vehicle_images())
-    [db.session.add(vehicle_image) for vehicle_image in vehicle_images]
-    db.session.commit()
+        # EX: https://www.youtube.com/watch?v=_UKBxM7m7qo becomes _UKBxM7m7qo
+        youtube_id = vehicle.dougscore.video_link[32:43]
+        # EX: _UKBxM7m7qo becomes _UKBxM7m7qo becomes "https://img.youtube.com/vi/_UKBxM7m7qo/maxresdefault.jpg"
+        youtube_thumbnail = "https://img.youtube.com/vi/"+youtube_id+"/maxresdefault.jpg"
+        # Add the youtube thumbnail to each vehicle in the database and assign to a fake user
+        vehicle_image = VehicleImage(
+            image_url = youtube_thumbnail,
+            user_id = fake.pyint(min_value=1, max_value=num_of_users),
+            vehicle_id = vehicle.id
+        )
+        db.session.add(vehicle_image)
+        db.session.commit()
 
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't

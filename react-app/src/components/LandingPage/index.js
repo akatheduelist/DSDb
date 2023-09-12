@@ -14,6 +14,9 @@ function LandingPage() {
 	const sessionUser = useSelector((state) => state.session.user);
 	const [errors, setErrors] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(false);
+	const randomVehicle = isLoaded
+		? Object.values(allVehicles)[Math.floor(Math.random() * Object.values(allVehicles).length)]
+		: null;
 
 	useEffect(() => {
 		dispatch(getAllVehicles()).then(() => setIsLoaded(true));
@@ -23,10 +26,16 @@ function LandingPage() {
 
 	return (
 		<>
-			    <Header />
-				<PageGrid allVehicles={allVehicles} isLoaded={isLoaded} />
-				<FeaturedToday />
-				<TopTen />
+			<Header />
+			{isLoaded && (
+				<PageGrid
+					allVehicles={allVehicles}
+					isLoaded={isLoaded}
+					randomVehicle={randomVehicle}
+				/>
+			)}
+			<FeaturedToday />
+			<TopTen />
 		</>
 	);
 }
