@@ -12,7 +12,7 @@ def vehicles():
     """
     Query for all vehicles and returns them in a list of vehicle dictionaries
     """
-    vehicles = Vehicle.query.limit(12).all()
+    vehicles = Vehicle.query.limit(20).all()
     return {'vehicles': [vehicle.to_dict() for vehicle in vehicles]}
 
 
