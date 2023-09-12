@@ -11,27 +11,29 @@ function DeleteItemModal({ reviewId, quirkId }) {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-        if (reviewId) dispatch(deleteVehicleReview(reviewId));
-        if (quirkId) dispatch(deleteVehicleQuirk(quirkId));
-        closeModal()
+		if (reviewId) dispatch(deleteVehicleReview(reviewId));
+		if (quirkId) dispatch(deleteVehicleQuirk(quirkId));
+		closeModal();
 	};
 
 	return (
 		<>
-			<h1>DELETE ITEM</h1>
-			{errors && (
+			<div className="light-grey-background">
+				<h1>DELETE ITEM</h1>
+				{errors && (
 					<ul>
 						{errors.map((error, idx) => (
 							<li key={idx}>{error}</li>
 						))}
 					</ul>
 				)}
-			<p>Are you sure you want to delete your Review?</p>
-			<p>
-				Once pressing "confirm", your review will be removed from DSDb. Changes may take a couple of hours to
-				complete.
-			</p>
-			<button onClick={handleSubmit}>Confirm</button>
+				<p>Are you sure you want to delete your Review?</p>
+				<p>
+					Once pressing "confirm", your review will be removed from DSDb. Changes may take a couple of hours
+					to complete.
+				</p>
+				<button onClick={handleSubmit}>Confirm</button>
+			</div>
 		</>
 	);
 }

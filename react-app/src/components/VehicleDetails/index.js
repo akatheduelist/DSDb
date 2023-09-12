@@ -27,7 +27,7 @@ function VehicleDetails() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		// TO-DO Move to dispatch
-		if (editQuirk) {
+		if (editQuirk && sessionUser) {
 			const data = await fetch(`/api/quirks/${updateQuirkId}`, {
 				method: "PUT",
 				headers: {
@@ -137,7 +137,7 @@ function VehicleDetails() {
 									quirk
 								)}
 							</h3>
-                            {sessionUser.id === user_id ?
+                            {sessionUser && sessionUser.id === user_id ?
                             <>
 							<button
 								onClick={() => {
@@ -168,7 +168,7 @@ function VehicleDetails() {
 						<div key={id}>
 							<h3>rating: {rating}</h3>
 							<h3>review: {review}</h3>
-                            {sessionUser.id === user_id ? 
+                            {sessionUser && sessionUser.id === user_id ? 
 							<>
                             <OpenModalButton
 								buttonText="Update Review"
