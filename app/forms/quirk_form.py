@@ -4,5 +4,5 @@ from wtforms.validators import DataRequired, ValidationError
 
 class QuirkForm(FlaskForm):
     quirk = StringField('quirk', validators=[DataRequired()])
-    user_id = IntegerField('user_id', validators=[DataRequired()])
-    vehicle_id = IntegerField('vehicle_id', validators=[DataRequired()])
+    user_id = IntegerField('user_id')
+    vehicle_id = IntegerField('vehicle_id')

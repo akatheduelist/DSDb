@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   class="ipc-logo drawer-logo"
+   width="98"
+   height="56"
+   viewBox="0 0 64 32"
+   version="1.1"
+   id="svg82"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs86" />
+  <g
+     fill="#F5C518"
+     id="g70"
+     style="fill:#009b00;fill-opacity:1">
+    <rect
+       x="0"
+       y="0"
+       width="100%"
+       height="100%"
+       rx="4"
+       fill="#F5C518"
+       id="rect68"
+       style="fill:#009b00;fill-opacity:1" />
+  </g>
+  <g
+     transform="translate(7.4545511,7.2012365)"
+     fill="#000000"
+     fill-rule="nonzero"
+     id="g80"
+     style="fill:#ffffff;fill-opacity:1">
+    <text
+       xml:space="preserve"
+       style="font-size:22.6395px;font-family:RockoFLF;-inkscape-font-specification:RockoFLF;letter-spacing:0px;fill:#ffffff;fill-opacity:1;stroke-width:0.653061"
+       x="-1.1171749"
+       y="18.091492"
+       id="text423"><tspan
+         id="tspan421"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.6395px;font-family:Impact;-inkscape-font-specification:Impact;fill:#ffffff;fill-opacity:1;stroke-width:0.653061"
+         x="-1.1171749"
+         y="18.091492"><tspan
+   style="font-size:23.5102px"
+   id="tspan1178">DSDb</tspan> </tspan></text>
+  </g>
+</svg>

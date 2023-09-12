@@ -1,23 +1,29 @@
-from app.models import db, VehicleImage, User, Vehicle, environment, SCHEMA
+from app.models import db, VehicleImage, User, Vehicle, DougScore, environment, SCHEMA
 from sqlalchemy.sql import text
 from faker import Faker
 from faker.providers import internet, python
+import re
 
 fake = Faker()
 fake.add_provider(internet)
 fake.add_provider(python)
 
+
+
 def fake_vehicle_images():
     users = User.query.all()
     num_of_users = len(users)
     vehicles = Vehicle.query.all()
-    num_of_vehicles = len(vehicles)
-    for _ in range(240):
-        yield VehicleImage(
-            image_url = fake.image_url(width=640, height=480),
-            user_id = fake.pyint(min_value=1, max_value=num_of_users),
-            vehicle_id = fake.pyint(min_value=1, max_value=num_of_vehicles)
-        )
+    for vehicle in vehicles:
+        # youtube_link = vehicle.dougscore.video_link
+        # youtube_id = re.findall(r"(?<=\=)(.*?)(?=\?)",youtube_link)
+        # print("YOUTUBE ID ==> ", youtube_id)
+        for _ in range(4):
+            yield VehicleImage(
+                image_url = fake.image_url(width=640, height=480),
+                user_id = fake.pyint(min_value=1, max_value=num_of_users),
+                vehicle_id = vehicle.id
+            )
 
 # Adds sample vehicle_images from faker information
 def seed_vehicle_images():

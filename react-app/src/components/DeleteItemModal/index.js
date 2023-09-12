@@ -5,7 +5,7 @@ import { deleteVehicleReview, deleteVehicleQuirk, getVehicleQuirks } from "../..
 
 function DeleteItemModal({ reviewId, quirkId }) {
 	const dispatch = useDispatch();
-	const currentUser = useSelector((state) => state.session.user);
+	const sessionUser = useSelector((state) => state.session.user);
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
 
@@ -19,13 +19,13 @@ function DeleteItemModal({ reviewId, quirkId }) {
 	return (
 		<>
 			<h1>DELETE ITEM</h1>
-			{/* {errors && (
+			{errors && (
 					<ul>
 						{errors.map((error, idx) => (
 							<li key={idx}>{error}</li>
 						))}
 					</ul>
-				)} */}
+				)}
 			<p>Are you sure you want to delete your Review?</p>
 			<p>
 				Once pressing "confirm", your review will be removed from DSDb. Changes may take a couple of hours to
