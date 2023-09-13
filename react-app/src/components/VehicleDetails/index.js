@@ -79,19 +79,22 @@ function VehicleDetails() {
 
 	return (
 		<>
-			<div className="grey-background">
 				{vehicleIsLoaded && (
+                    <>
 					<div className="vehicle-details-header">
 						<div className="vehicle-details-title">
 							<span className="big-title">
 								{vehicle?.make} {vehicle?.model}
 							</span>
+                            <span>
+                                {vehicle?.year} <span>&#183;</span> {vehicle?.vehicle_country}
+                            </span>
 						</div>
-						<div className="vehicle-details-dougscore">
+						<div className="vehicle-header-rating">
 							<div className="rating-title">DOUGS RATING</div>
 							<span className="medium-header">{vehicle?.dougscore.dougscore_total}/10</span>
 						</div>
-						<div className="vehicle-header-your-rating">
+						<div className="vehicle-header-rating">
 							<div className="rating-title">YOUR RATING</div>
 							{vehicle.reviews.find((review) => review.user_id === sessionUser.id) ? (
 								<span className="medium-header">{yourRating}</span>
@@ -99,11 +102,28 @@ function VehicleDetails() {
 								<span>* RATE</span>
 							)}
 						</div>
-						<div className="vehicle-header-popularity">
+						<div className="vehicle-header-rating">
 							<div className="rating-title">POPULARITY</div>
 							{vehicle.reviews ? <span>{numOfReviews}</span> : <span>Not enough data...</span>}
 						</div>
 					</div>
+                    <div className="vehicle-header-details">
+                        <div className="header-details-poster">
+                            poster
+                        </div>
+                        <div className="header-details-video-pane">
+                            <img className="video-pane-thumbnail" src={vehicle?.images[0].image_url} />
+                        </div>
+                        <div className="header-details-photos-and-videos">
+                            <div className="header-details-pv">
+                                ## VIDEOS
+                            </div>
+                            <div className="header-details-pv">
+                                ## PHOTOS
+                            </div>
+                        </div>
+                    </div>
+                    </>
 				)}
 				<h1>Dougscore: </h1>
 				<p>daily_comfort: {vehicle?.dougscore.daily_comfort}</p>
@@ -119,7 +139,7 @@ function VehicleDetails() {
 				<p>weekend_total: {vehicle?.dougscore.weekend_total}</p>
 				<p>video_link: {vehicle?.dougscore.video_link}</p>
 				<p>filming_location: {vehicle?.dougscore.filming_location}</p>
-			</div>
+
 			<div className="grey-background">
 				{vehicleIsLoaded &&
 					Object.values(vehicle.images).map(({ id, image_url }) => (
