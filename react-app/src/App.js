@@ -20,25 +20,36 @@ function App() {
 		<>
 			<Navigation isLoaded={isLoaded} />
 			{isLoaded && (
-                <div className="content-container">
-				<Switch>
-					<Route exact path="/">
-						<LandingPage />
-					</Route>
-					<Route path="/login">
-						<LoginFormPage />
-					</Route>
-					<Route path="/signup">
-						<SignupFormPage />
-					</Route>
-					<Route exact path="/vehicles/:vehicleId">
-						<VehicleDetails />
-					</Route>
-                    <Route exact path="/vehicles/:vehicleId/quirks">
-						<QuirksFormPage />
-					</Route>
-				</Switch>
-                </div>
+				<div className="landing-page-container">
+					<div className="content-container">
+						<Switch>
+							<Route
+								exact
+								path="/"
+							>
+								<LandingPage />
+							</Route>
+							<Route path="/login">
+								<LoginFormPage />
+							</Route>
+							<Route path="/signup">
+								<SignupFormPage />
+							</Route>
+							<Route
+								exact
+								path="/vehicles/:vehicleId"
+							>
+								<VehicleDetails />
+							</Route>
+							<Route
+								exact
+								path="/vehicles/:vehicleId/quirks"
+							>
+								<QuirksFormPage />
+							</Route>
+						</Switch>
+					</div>
+				</div>
 			)}
 		</>
 	);

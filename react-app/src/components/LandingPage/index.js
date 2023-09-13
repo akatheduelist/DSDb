@@ -25,8 +25,6 @@ function LandingPage() {
 
 	return (
 		<>
-			<div className="landing-page-container" />
-				<Header />
 				{isLoaded && (
 					<PageGrid
 						allVehicles={allVehicles}
@@ -34,7 +32,6 @@ function LandingPage() {
 						randomVehicle={randomVehicle}
 					/>
 				)}
-				<TopTen />
 		</>
 	);
 }
