@@ -73,13 +73,14 @@ function VehicleDetails() {
 				<>
 					<div
 						style={{
-							backgroundImage: `url(${vehicle.images[1].image_url})`,
+							backgroundImage: vehicle.images[1] ? `url(${vehicle.images[1].image_url})` : `none`,
 							backgrounddosition: `center center`,
 							backgroundRepeat: `no-repeat`,
 							backgroundSize: `cover`,
 						}}
+                        className="vehicle-details-header-container"
 					>
-						<div style={{background:`#1f1f1f90`, backdropFilter: `blur(40px) saturate(100%)`}}>
+						<div style={{background:`#1f1f1f90`, backdropFilter: `blur(40px) saturate(100%)`, width: `100%`, height: `100%`, display: `flex`, flexDirection: `column`, justifyContent: `center`}}>
 							<div className="vehicle-details-header">
 								<div className="vehicle-details-title">
 									<span className="big-title">
@@ -141,22 +142,41 @@ function VehicleDetails() {
 							</div>
 						</div>
 					</div>
+                    <div className="vehicle-details-header-description">
+                        <div className="tags">
+                            TAG TAG TAG
+                        </div>
+                        <div className="description">
+                            DESCRIPTION
+                        </div>
+                        <div>
+                            WRITER
+                        </div>
+                        <div>
+                            DIRECTOR
+                        </div>
+                        <div>
+                            STARS
+                        </div>
+                    <h1>Dougscore: </h1>
+                    <p>daily_comfort: {vehicle?.dougscore.daily_comfort}</p>
+                    <p>daily_features: {vehicle?.dougscore.daily_features}</p>
+                    <p>daily_practicality: {vehicle?.dougscore.daily_practicality}</p>
+                    <p>daily_quality: {vehicle?.dougscore.daily_quality}</p>
+                    <p>daily_total: {vehicle?.dougscore.daily_total}</p>
+                    <p>weekend_acceleration: {vehicle?.dougscore.weekend_acceleration}</p>
+                    <p>weekend_coolfactor: {vehicle?.dougscore.weekend_coolfactor}</p>
+                    <p>weekend_funfactor: {vehicle?.dougscore.weekend_funfactor}</p>
+                    <p>weekend_handling: {vehicle?.dougscore.weekend_handling}</p>
+                    <p>weekend_styling: {vehicle?.dougscore.weekend_styling}</p>
+                    <p>weekend_total: {vehicle?.dougscore.weekend_total}</p>
+                    <p>video_link: {vehicle?.dougscore.video_link}</p>
+                    <p>filming_location: {vehicle?.dougscore.filming_location}</p>
+                    </div>
 				</>
 			)}
-			<h1>Dougscore: </h1>
-			<p>daily_comfort: {vehicle?.dougscore.daily_comfort}</p>
-			<p>daily_features: {vehicle?.dougscore.daily_features}</p>
-			<p>daily_practicality: {vehicle?.dougscore.daily_practicality}</p>
-			<p>daily_quality: {vehicle?.dougscore.daily_quality}</p>
-			<p>daily_total: {vehicle?.dougscore.daily_total}</p>
-			<p>weekend_acceleration: {vehicle?.dougscore.weekend_acceleration}</p>
-			<p>weekend_coolfactor: {vehicle?.dougscore.weekend_coolfactor}</p>
-			<p>weekend_funfactor: {vehicle?.dougscore.weekend_funfactor}</p>
-			<p>weekend_handling: {vehicle?.dougscore.weekend_handling}</p>
-			<p>weekend_styling: {vehicle?.dougscore.weekend_styling}</p>
-			<p>weekend_total: {vehicle?.dougscore.weekend_total}</p>
-			<p>video_link: {vehicle?.dougscore.video_link}</p>
-			<p>filming_location: {vehicle?.dougscore.filming_location}</p>
+
+
 
 			<div className="grey-background">
 				{vehicleIsLoaded &&

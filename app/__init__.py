@@ -11,6 +11,7 @@ from .api.review_routes import review_routes
 from .api.vehicle_routes import vehicle_routes
 from .api.dougscore_routes import dougscore_routes
 from .api.quirk_routes import quirk_routes
+from .api.tag_routes import tag_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -36,6 +37,7 @@ app.register_blueprint(review_routes, url_prefix='/api/reviews')
 app.register_blueprint(vehicle_routes, url_prefix='/api/vehicles')
 app.register_blueprint(dougscore_routes, url_prefix='/api/dougscores')
 app.register_blueprint(quirk_routes, url_prefix='/api/quirks')
+app.register_blueprint(tag_routes, url_prefix='/api/tags')
 db.init_app(app)
 Migrate(app, db)
 
