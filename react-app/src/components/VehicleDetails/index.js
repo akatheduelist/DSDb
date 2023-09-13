@@ -13,8 +13,6 @@ function VehicleDetails() {
 	const { vehicleId } = useParams();
 	const vehicle = useSelector((state) => state.vehicle.currentVehicle);
 	const sessionUser = useSelector((state) => state.session.user);
-	const [yourRating, setYourRating] = useState(0);
-	const [numOfReviews, setNumOfReviews] = useState(0);
 	const [newQuirk, setNewQuirk] = useState(false);
 	const [newQuirkData, setNewQuirkData] = useState("");
 	const [editQuirk, setEditQuirk] = useState(false);
@@ -26,14 +24,6 @@ function VehicleDetails() {
 	useEffect(() => {
 		dispatch(getVehicle(vehicleId)).then(() => setVehicleIsLoaded(true));
 	}, [dispatch]);
-
-    // TO-DO Refactor better
-	useEffect(() => {
-		if (vehicleIsLoaded) {
-			setNumOfReviews(vehicle.reviews.length);
-			setYourRating(vehicle.reviews.find((review) => review.user_id === sessionUser.id).rating);
-		}
-	}, []);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -97,14 +87,14 @@ function VehicleDetails() {
 						<div className="vehicle-header-rating">
 							<div className="rating-title">YOUR RATING</div>
 							{sessionUser && vehicle.reviews.find((review) => review.user_id === sessionUser.id) ? (
-								<span className="medium-header">{yourRating}</span>
+								<span className="medium-header">{vehicle.reviews.find((review) => review.user_id === sessionUser.id).rating}</span>
 							) : (
 								<span>* RATE</span>
 							)}
 						</div>
 						<div className="vehicle-header-rating">
 							<div className="rating-title">POPULARITY</div>
-							{vehicle.reviews ? <span>{numOfReviews}</span> : <span>Not enough data...</span>}
+							{vehicle.reviews ? <span>{vehicle.reviews.length}</span> : <span>Not enough data...</span>}
 						</div>
 					</div>
 					<div className="vehicle-header-details">
