@@ -13,8 +13,8 @@ function VehicleDetails() {
 	const { vehicleId } = useParams();
 	const vehicle = useSelector((state) => state.vehicle.currentVehicle);
 	const sessionUser = useSelector((state) => state.session.user);
-    const [yourRating, setYourRating] = useState(0);
-    const [numOfReviews, setNumOfReviews] = useState(0);
+	const [yourRating, setYourRating] = useState(0);
+	const [numOfReviews, setNumOfReviews] = useState(0);
 	const [newQuirk, setNewQuirk] = useState(false);
 	const [newQuirkData, setNewQuirkData] = useState("");
 	const [editQuirk, setEditQuirk] = useState(false);
@@ -24,16 +24,16 @@ function VehicleDetails() {
 	const [vehicleIsLoaded, setVehicleIsLoaded] = useState(false);
 
 	useEffect(() => {
-		dispatch(getVehicle(vehicleId))
-        .then(() => setVehicleIsLoaded(true));
+		dispatch(getVehicle(vehicleId)).then(() => setVehicleIsLoaded(true));
 	}, [dispatch]);
 
-    useEffect(() =>{
-        if (vehicle) {
-            setNumOfReviews(vehicle.reviews.length)
-            setYourRating(vehicle.reviews.find((review) => review.user_id === sessionUser.id).rating)
-        }
-    }, [vehicleIsLoaded])
+    // TO-DO Refactor better
+	useEffect(() => {
+		if (vehicleIsLoaded) {
+			setNumOfReviews(vehicle.reviews.length);
+			setYourRating(vehicle.reviews.find((review) => review.user_id === sessionUser.id).rating);
+		}
+	}, []);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -79,16 +79,16 @@ function VehicleDetails() {
 
 	return (
 		<>
-				{vehicleIsLoaded && (
-                    <>
+			{vehicleIsLoaded && (
+				<>
 					<div className="vehicle-details-header">
 						<div className="vehicle-details-title">
 							<span className="big-title">
 								{vehicle?.make} {vehicle?.model}
 							</span>
-                            <span>
-                                {vehicle?.year} <span>&#183;</span> {vehicle?.vehicle_country}
-                            </span>
+							<span>
+								{vehicle?.year} <span>&#183;</span> {vehicle?.vehicle_country}
+							</span>
 						</div>
 						<div className="vehicle-header-rating">
 							<div className="rating-title">DOUGS RATING</div>
@@ -96,7 +96,7 @@ function VehicleDetails() {
 						</div>
 						<div className="vehicle-header-rating">
 							<div className="rating-title">YOUR RATING</div>
-							{vehicle.reviews.find((review) => review.user_id === sessionUser.id) ? (
+							{sessionUser && vehicle.reviews.find((review) => review.user_id === sessionUser.id) ? (
 								<span className="medium-header">{yourRating}</span>
 							) : (
 								<span>* RATE</span>
@@ -107,38 +107,48 @@ function VehicleDetails() {
 							{vehicle.reviews ? <span>{numOfReviews}</span> : <span>Not enough data...</span>}
 						</div>
 					</div>
-                    <div className="vehicle-header-details">
-                        <div className="header-details-poster">
-                            poster
-                        </div>
-                        <div className="header-details-video-pane">
-                            <img className="video-pane-thumbnail" src={vehicle?.images[0].image_url} />
-                        </div>
-                        <div className="header-details-photos-and-videos">
-                            <div className="header-details-pv">
-                                ## VIDEOS
-                            </div>
-                            <div className="header-details-pv">
-                                ## PHOTOS
-                            </div>
-                        </div>
-                    </div>
-                    </>
-				)}
-				<h1>Dougscore: </h1>
-				<p>daily_comfort: {vehicle?.dougscore.daily_comfort}</p>
-				<p>daily_features: {vehicle?.dougscore.daily_features}</p>
-				<p>daily_practicality: {vehicle?.dougscore.daily_practicality}</p>
-				<p>daily_quality: {vehicle?.dougscore.daily_quality}</p>
-				<p>daily_total: {vehicle?.dougscore.daily_total}</p>
-				<p>weekend_acceleration: {vehicle?.dougscore.weekend_acceleration}</p>
-				<p>weekend_coolfactor: {vehicle?.dougscore.weekend_coolfactor}</p>
-				<p>weekend_funfactor: {vehicle?.dougscore.weekend_funfactor}</p>
-				<p>weekend_handling: {vehicle?.dougscore.weekend_handling}</p>
-				<p>weekend_styling: {vehicle?.dougscore.weekend_styling}</p>
-				<p>weekend_total: {vehicle?.dougscore.weekend_total}</p>
-				<p>video_link: {vehicle?.dougscore.video_link}</p>
-				<p>filming_location: {vehicle?.dougscore.filming_location}</p>
+					<div className="vehicle-header-details">
+						<div className="header-details-poster">
+							{vehicle.images[1] ? (
+                                <>
+                                <img
+                                    className="header-poster-img"
+                                    src={vehicle.images[1].image_url}
+                                />
+                                <div className="header-poster-img-text">
+                                    {vehicle.make} &nbsp;
+                                    {vehicle.model}
+                                </div>
+                                </>
+							) : null}
+						</div>
+						<div className="header-details-video-pane">
+							<img
+								className="video-pane-thumbnail"
+								src={vehicle?.images[0].image_url}
+							/>
+						</div>
+						<div className="header-details-photos-and-videos">
+							<div className="header-details-pv">## VIDEOS</div>
+							<div className="header-details-pv">## PHOTOS</div>
+						</div>
+					</div>
+				</>
+			)}
+			<h1>Dougscore: </h1>
+			<p>daily_comfort: {vehicle?.dougscore.daily_comfort}</p>
+			<p>daily_features: {vehicle?.dougscore.daily_features}</p>
+			<p>daily_practicality: {vehicle?.dougscore.daily_practicality}</p>
+			<p>daily_quality: {vehicle?.dougscore.daily_quality}</p>
+			<p>daily_total: {vehicle?.dougscore.daily_total}</p>
+			<p>weekend_acceleration: {vehicle?.dougscore.weekend_acceleration}</p>
+			<p>weekend_coolfactor: {vehicle?.dougscore.weekend_coolfactor}</p>
+			<p>weekend_funfactor: {vehicle?.dougscore.weekend_funfactor}</p>
+			<p>weekend_handling: {vehicle?.dougscore.weekend_handling}</p>
+			<p>weekend_styling: {vehicle?.dougscore.weekend_styling}</p>
+			<p>weekend_total: {vehicle?.dougscore.weekend_total}</p>
+			<p>video_link: {vehicle?.dougscore.video_link}</p>
+			<p>filming_location: {vehicle?.dougscore.filming_location}</p>
 
 			<div className="grey-background">
 				{vehicleIsLoaded &&
