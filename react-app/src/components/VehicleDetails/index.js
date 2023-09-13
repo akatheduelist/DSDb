@@ -6,6 +6,7 @@ import { getTags } from "../../store/tags";
 import OpenModalButton from "../OpenModalButton";
 import ReviewFormModal from "../ReviewFormModal";
 import DeleteItemModal from "../DeleteItemModal";
+import Reviews from "./Reviews";
 import "./VehicleDetails.css";
 
 function VehicleDetails() {
@@ -268,7 +269,7 @@ function VehicleDetails() {
 						<div>WRITER</div>
 						<div>DIRECTOR</div>
 						<div>STARS</div>
-						<h1>Dougscore: </h1>
+						{/* <h1>Dougscore: </h1>
 						<p>daily_comfort: {vehicle?.dougscore.daily_comfort}</p>
 						<p>daily_features: {vehicle?.dougscore.daily_features}</p>
 						<p>daily_practicality: {vehicle?.dougscore.daily_practicality}</p>
@@ -281,109 +282,99 @@ function VehicleDetails() {
 						<p>weekend_styling: {vehicle?.dougscore.weekend_styling}</p>
 						<p>weekend_total: {vehicle?.dougscore.weekend_total}</p>
 						<p>video_link: {vehicle?.dougscore.video_link}</p>
-						<p>filming_location: {vehicle?.dougscore.filming_location}</p>
+						<p>filming_location: {vehicle?.dougscore.filming_location}</p> */}
 					</div>
 				</>
 			)}
 
-			<div className="grey-background">
-				{vehicleIsLoaded &&
+			<div className="page-grid-container white-background">
+				{/* {vehicleIsLoaded &&
 					Object.values(vehicle.images).map(({ id, image_url }) => (
 						<div key={id}>
 							<img src={image_url} />
 						</div>
-					))}
-			</div>
-			<h1>Quirks and Features</h1>
-			<button
-				onClick={() => {
-					setNewQuirk(!newQuirk);
-				}}
-			>
-				New Quirk or Feature
-			</button>
-			<div className="grey-background">
-				{vehicleIsLoaded && newQuirk ? (
-					<div>
-						<form onSubmit={handleSubmit}>
-							<input
-								value={newQuirkData}
-								onChange={(e) => setNewQuirkData(e.target.value)}
-							></input>
-							<button type="submit">Submit</button>
-						</form>
+					))} */}
+				<div className="details-container">
+					<div className="details-title">
+						<h1>Photos #-- </h1>
 					</div>
-				) : null}
-				{vehicleIsLoaded &&
-					Object.values(vehicle.quirks).map(({ id, quirk, user_id }) => (
-						<div key={id}>
-							<h3>
-								quirk:
-								{editQuirk && updateQuirkId === id ? (
-									<form onSubmit={handleSubmit}>
-										<input
-											id={id}
-											value={updateQuirk}
-											onChange={(e) => setUpdateQuirk(e.target.value)}
-										></input>
-										<button type="submit">Submit</button>
-									</form>
-								) : (
-									quirk
-								)}
-							</h3>
-							{sessionUser && sessionUser.id === user_id ? (
-								<>
-									<button
-										onClick={() => {
-											setEditQuirk(!editQuirk);
-											setUpdateQuirkId(id);
-											setUpdateQuirk(quirk);
-										}}
-									>
-										Update Quirk
-									</button>
-									<OpenModalButton
-										buttonText="Delete Quirk"
-										modalComponent={<DeleteItemModal quirkId={id} />}
-									/>
-								</>
-							) : null}
-						</div>
-					))}
-			</div>
+					<div className="details-content photos-carosel">PHOTOS CAROSEL</div>
+					<div className="details-title">
+						<span className="title">UserReviews #--</span>
+						<OpenModalButton
+							buttonText="+ New Review"
+							buttonClass="no-button green-link"
+							modalComponent={<ReviewFormModal vehicleId={vehicleId} />}
+						/>
+					</div>
+					<Reviews
+						OpenModalButton={OpenModalButton}
+						vehicle={vehicle}
+						vehicleId={vehicleId}
+						vehicleIsLoaded={vehicleIsLoaded}
+						sessionUser={sessionUser}
+						DeleteItemModal={DeleteItemModal}
+					/>
 
-			<h1>Reviews</h1>
-			<OpenModalButton
-				buttonText="New Review"
-				modalComponent={<ReviewFormModal vehicleId={vehicleId} />}
-			/>
-			<div className="grey-background">
-				{vehicleIsLoaded &&
-					Object.values(vehicle.reviews).map(({ id, rating, review, user_id }) => (
-						<div key={id}>
-							<h3>rating: {rating}</h3>
-							<h3>review: {review}</h3>
-							{sessionUser && sessionUser.id === user_id ? (
-								<>
-									<OpenModalButton
-										buttonText="Update Review"
-										modalComponent={
-											<ReviewFormModal
-												vehicleId={vehicleId}
-												isEdit={true}
-												reviewId={id}
-											/>
-										}
-									/>
-									<OpenModalButton
-										buttonText="Delete Review"
-										modalComponent={<DeleteItemModal reviewId={id} />}
-									/>
-								</>
-							) : null}
+					<h1>Quirks and Features</h1>
+				</div>
+				<button
+					onClick={() => {
+						setNewQuirk(!newQuirk);
+					}}
+				>
+					New Quirk or Feature
+				</button>
+				<div className="grey-background">
+					{vehicleIsLoaded && newQuirk ? (
+						<div>
+							<form onSubmit={handleSubmit}>
+								<input
+									value={newQuirkData}
+									onChange={(e) => setNewQuirkData(e.target.value)}
+								></input>
+								<button type="submit">Submit</button>
+							</form>
 						</div>
-					))}
+					) : null}
+					{vehicleIsLoaded &&
+						Object.values(vehicle.quirks).map(({ id, quirk, user_id }) => (
+							<div key={id}>
+								<h3>
+									quirk:
+									{editQuirk && updateQuirkId === id ? (
+										<form onSubmit={handleSubmit}>
+											<input
+												id={id}
+												value={updateQuirk}
+												onChange={(e) => setUpdateQuirk(e.target.value)}
+											></input>
+											<button type="submit">Submit</button>
+										</form>
+									) : (
+										quirk
+									)}
+								</h3>
+								{sessionUser && sessionUser.id === user_id ? (
+									<>
+										<button
+											onClick={() => {
+												setEditQuirk(!editQuirk);
+												setUpdateQuirkId(id);
+												setUpdateQuirk(quirk);
+											}}
+										>
+											Update Quirk
+										</button>
+										<OpenModalButton
+											buttonText="Delete Quirk"
+											modalComponent={<DeleteItemModal quirkId={id} />}
+										/>
+									</>
+								) : null}
+							</div>
+						))}
+				</div>
 			</div>
 		</>
 	);

@@ -21,6 +21,11 @@ body {
     background-color: #1a1a1a;
 }
 
+.white-background {
+    background-color: #ffffff;
+    color: #000000;
+}
+
 .light-grey-background {
     background-color: #f3f3f3;
     color: #0f1111;
@@ -42,10 +47,25 @@ body {
 
 .title {
     font-size: 32px;
-    color: #4BD593;
     font-weight: 500;
 }
 
 .big-title {
     font-size: 48px;
+}
+
+.green-text {
+    color: #4BD593;
+}
+
+.green-link {
+    color: #4BD593;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.no-button {
+    border: none;
+    background: none;
+    cursor: pointer;
 }

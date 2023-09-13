@@ -89,3 +89,13 @@
     justify-content: baseline;
     padding: 15px;
 }
+
+.details-container {
+	grid-column: span 2;
+}
+
+.details-title {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+}
