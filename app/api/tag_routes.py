@@ -13,7 +13,7 @@ def tags():
     Query for all tags and returns them in a list of user dictionaries
     """
     tags = Tag.query.all()
-    return {'tags': [tag.to_dict() for tag in tags]}
+    return {'vehicle_tags': [tag.to_dict() for tag in tags]}
 
 
 @tag_routes.route('/<int:id>')

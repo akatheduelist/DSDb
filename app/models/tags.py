@@ -1,4 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from .vehicle_tags import vehicle_tags
 
 class Tag(db.Model):
     __tablename__ = 'tags'
@@ -8,11 +9,9 @@ class Tag(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     tag = db.Column(db.String(255), nullable=False)
-    # user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
     # vehicle_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("vehicles.id")))
 
-    # user = db.relationship("User", back_populates="tags")
-    # vehicle = db.relationship("Vehicle", back_populates="tags")
+    vehicles = db.relationship("Vehicle", secondary=vehicle_tags, back_populates="tags")
 
     def to_dict(self):
         return {

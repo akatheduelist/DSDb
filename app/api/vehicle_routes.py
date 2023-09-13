@@ -107,3 +107,22 @@ def vehicle_images(id):
     """
     images = VehicleImage.query.filter_by(vehicle_id=id)
     return [image.to_dict() for image in images]
+
+
+@vehicle_routes.route('/<int:id>/tags', methods=["POST"])
+@login_required
+def post_vehicle_tag(id):
+    """
+    Create a new tag associated with a specific vehicle
+    """
+    form = TagForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        print(form.data)
+        vehicle = Vehicle.query.get(id)
+        tag = Tag.query.get(form.data['tag_id'])
+        vehicle.tags.append(tag)
+        # db.session.add(vehicle_tag)
+        db.session.commit()
+        return "Success"
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401

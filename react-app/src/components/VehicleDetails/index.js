@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getVehicle } from "../../store/vehicle";
+import { getTags } from "../../store/tags";
 import OpenModalButton from "../OpenModalButton";
 import ReviewFormModal from "../ReviewFormModal";
 import DeleteItemModal from "../DeleteItemModal";
@@ -12,19 +13,25 @@ function VehicleDetails() {
 	const history = useHistory();
 	const { vehicleId } = useParams();
 	const vehicle = useSelector((state) => state.vehicle.currentVehicle);
+	const tags = useSelector((state) => state.tags);
 	const sessionUser = useSelector((state) => state.session.user);
 	const [newQuirk, setNewQuirk] = useState(false);
 	const [newQuirkData, setNewQuirkData] = useState("");
+    const [newTag, setNewTag] = useState(false);
+    const [newTagData, setNewTagData] = useState("")
 	const [editQuirk, setEditQuirk] = useState(false);
 	const [updateQuirkId, setUpdateQuirkId] = useState();
 	const [updateQuirk, setUpdateQuirk] = useState("");
-    const [editDescription, setEditDescription] = useState(false);
-    const [updateDescription, setUpdateDescription] = useState("")
+	const [editDescription, setEditDescription] = useState(false);
+	const [updateDescription, setUpdateDescription] = useState("");
+	const [editTags, setEditTags] = useState(true);
 	const [errors, setErrors] = useState([]);
 	const [vehicleIsLoaded, setVehicleIsLoaded] = useState(false);
+	const [tagsIsLoaded, setTagsIsLoaded] = useState(false);
 
 	useEffect(() => {
 		dispatch(getVehicle(vehicleId)).then(() => setVehicleIsLoaded(true));
+		dispatch(getTags()).then(() => setTagsIsLoaded(true));
 	}, [dispatch]);
 
 	const handleSubmit = async (e) => {
@@ -87,7 +94,29 @@ function VehicleDetails() {
 				setEditDescription(!editDescription);
 			}
 		}
-	};    
+	};
+
+    const handleTag = async (e) => {
+		e.preventDefault();
+		// TO-DO Move to dispatch
+		if (newTag && sessionUser) {
+			const data = await fetch(`/api/vehicles/${vehicleId}/tags`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					tag_id: newTagData,
+				}),
+			});
+			if (data.errors) {
+				setErrors(data.errors);
+			} else {
+				dispatch(getVehicle(vehicleId));
+				setNewTag(!newTag);
+			}
+		}
+	};
 
 	// if (sessionUser) return <Redirect to="/" />;
 
@@ -177,7 +206,26 @@ function VehicleDetails() {
 						</div>
 					</div>
 					<div className="vehicle-details-header-description">
-						<div className="tags">TAG TAG TAG</div>
+						<div className="tags">
+							{vehicleIsLoaded && editTags ? (
+								<>
+									<form onSubmit={handleTag}>
+                                        {console.log(newTagData)}
+										<select value={newTagData} onChange={(e) => setNewTagData(e.target.value)}>
+                                            <option value="" disabled>
+                                                Select a tag
+                                            </option>
+											{Object.values(tags.vehicle_tags).map(({ tag, id }) => (
+												<option key={id} value={id}>{tag}</option>
+											))}
+										</select>
+                                        <button type="submit">Submit</button>
+									</form>
+								</>
+							) : (
+								Object.values(vehicle.tags).map(({ tag, id }) => <div key={id}>{tag}</div>)
+							)}
+						</div>
 						<div className="description">
 							{vehicleIsLoaded && editDescription ? (
 								<div>
@@ -189,17 +237,20 @@ function VehicleDetails() {
 										<button type="submit">Submit</button>
 									</form>
 								</div>
-							) : vehicle.description}
+							) : (
+								vehicle.description
+							)}
 						</div>
-                        {vehicleIsLoaded && sessionUser ? (
-									<button
-										onClick={() => {
-											setEditDescription(!editDescription);
-											setUpdateDescription(vehicle.description);
-										}}
-									>
-										Update Description
-									</button>) : null}
+						{vehicleIsLoaded && sessionUser ? (
+							<button
+								onClick={() => {
+									setEditDescription(!editDescription);
+									setUpdateDescription(vehicle.description);
+								}}
+							>
+								Update Description
+							</button>
+						) : null}
 						<div>WRITER</div>
 						<div>DIRECTOR</div>
 						<div>STARS</div>

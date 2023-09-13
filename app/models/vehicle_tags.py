@@ -2,7 +2,6 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 vehicle_tags = db.Table(
     'vehicle_tags',
-    # db.Model.metatdata,
     db.Column("tag_id", db.Integer, db.ForeignKey(add_prefix_for_prod("tags.id")), primary_key=True),
     db.Column("vehicle_id", db.Integer, db.ForeignKey(add_prefix_for_prod("vehicles.id")), primary_key=True)
 )

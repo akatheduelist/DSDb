@@ -25,7 +25,7 @@ class Vehicle(db.Model):
     vehicle_images = db.relationship("VehicleImage", back_populates="vehicle")
     
     # Many-to-Many Relationships
-    tags = db.relationship("Tag", secondary=vehicle_tags, backref="vehicle")
+    tags = db.relationship("Tag", secondary=vehicle_tags, back_populates="vehicles")
 
     def to_dict(self):
         vehicle = {
