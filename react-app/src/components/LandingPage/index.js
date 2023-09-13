@@ -5,7 +5,6 @@ import "./LandingPage.css";
 import { getAllVehicles } from "../../store/vehicle";
 import TopTen from "./TopTen";
 import PageGrid from "./PageGrid";
-import FeaturedToday from "./FeaturedToday";
 import Header from "./Header";
 
 function LandingPage() {
@@ -35,7 +34,6 @@ function LandingPage() {
 						randomVehicle={randomVehicle}
 					/>
 				)}
-				<FeaturedToday />
 				<TopTen />
 		</>
 	);

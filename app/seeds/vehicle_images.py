@@ -2,10 +2,12 @@ from app.models import db, VehicleImage, User, Vehicle, environment, SCHEMA
 from sqlalchemy.sql import text
 from faker import Faker
 from faker.providers import internet, python
+import requests
 
 fake = Faker()
 fake.add_provider(internet)
 fake.add_provider(python)
+
 
 # Adds sample vehicle_images from faker information
 def seed_vehicle_images():
@@ -13,18 +15,38 @@ def seed_vehicle_images():
     num_of_users = len(users)
     vehicles = Vehicle.query.all()
     for vehicle in vehicles:
-        # EX: https://www.youtube.com/watch?v=_UKBxM7m7qo becomes _UKBxM7m7qo
-        youtube_id = vehicle.dougscore.video_link[32:43]
-        # EX: _UKBxM7m7qo becomes _UKBxM7m7qo becomes "https://img.youtube.com/vi/_UKBxM7m7qo/maxresdefault.jpg"
-        youtube_thumbnail = "https://img.youtube.com/vi/"+youtube_id+"/maxresdefault.jpg"
-        # Add the youtube thumbnail to each vehicle in the database and assign to a fake user
-        vehicle_image = VehicleImage(
-            image_url = youtube_thumbnail,
-            user_id = fake.pyint(min_value=1, max_value=num_of_users),
-            vehicle_id = vehicle.id
-        )
-        db.session.add(vehicle_image)
-        db.session.commit()
+        print(len(vehicle.vehicle_images))
+        if len(vehicle.vehicle_images) < 1:
+            # EX: https://www.youtube.com/watch?v=_UKBxM7m7qo becomes _UKBxM7m7qo
+            youtube_id = vehicle.dougscore.video_link[32:43]
+            # EX: _UKBxM7m7qo becomes _UKBxM7m7qo becomes "https://img.youtube.com/vi/_UKBxM7m7qo/maxresdefault.jpg"
+            youtube_thumbnail = "https://img.youtube.com/vi/"+youtube_id+"/maxresdefault.jpg"
+            # Add the youtube thumbnail to each vehicle in the database and assign to a fake user
+            vehicle_image1 = VehicleImage(
+                image_url = youtube_thumbnail,
+                user_id = fake.pyint(min_value=1, max_value=num_of_users),
+                vehicle_id = vehicle.id
+            )
+            db.session.add(vehicle_image1)
+            db.session.commit()
+        if len(vehicle.vehicle_images) < 2:
+            response = requests.get(f"https://api.unsplash.com/search/photos?client_id=OsLCtgt819go9Q71ENBYUh5-DK7kiWPBiy8mwXUatq0&query={vehicle.make}+{vehicle.model}&orientation=portrait&per_page=1",timeout=10)
+            print(response.status_code)
+            if response.status_code == 200:
+                data = response.json()
+                print(vehicle.year, vehicle.make, vehicle.model)
+                for result in data['results']:
+                    print(result['urls']['small'])
+                    vehicle_image2 = VehicleImage(
+                    image_url = result['urls']['small'],
+                    user_id = fake.pyint(min_value=1, max_value=num_of_users),
+                    vehicle_id = vehicle.id
+                    )
+                    db.session.add(vehicle_image2)
+                    db.session.commit()
+        
+        # curl -H "Authorization: P1pkLH74FE57JMOoPC6flp1xJ3mClk8WqVl4VZkD3S8JPuGw5Np6aU5Z" \
+        # "https://api.pexels.com/v1/search?query=nature&per_page=1"
 
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't

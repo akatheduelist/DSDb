@@ -1,3 +1,4 @@
+import GridCard from "./GridCard";
 import "./LandingPage.css";
 
 function PageGrid({ allVehicles, isLoaded, randomVehicle }) {
@@ -10,13 +11,18 @@ function PageGrid({ allVehicles, isLoaded, randomVehicle }) {
 							{isLoaded && (
 								<div className="page-grid-top-hero-video">
 									<a href={`vehicles/${randomVehicle.id}`}>
-										<img className="image-cover" src={randomVehicle.images[0].image_url} />
+										<img
+											className="image-cover"
+											src={randomVehicle.images[0].image_url}
+										/>
 									</a>
 								</div>
 							)}
 						</div>
-						<div className="page-grid-top-right grey-background overflow-auto">
-							<h2>Up next</h2>
+						<div className="page-grid-top-right overflow-auto">
+							<div className="page-grid-title">
+								<span className="title">Up next</span>
+							</div>
 							{isLoaded &&
 								Object.values(allVehicles).map((vehicle) => (
 									<div key={vehicle.id}>
@@ -27,6 +33,19 @@ function PageGrid({ allVehicles, isLoaded, randomVehicle }) {
 										<span>Dougscore: {vehicle.dougscore.dougscore_total}</span>
 									</div>
 								))}
+						</div>
+					</div>
+				</div>
+				<div className="page-grid-content">
+					<div className="page-grid-top">
+						<div className="page-grid-top-image">
+							<div className="page-grid-title">
+								<span className="title">Featured Today</span>
+                                <div>
+
+                                <GridCard />
+                                </div>
+							</div>
 						</div>
 					</div>
 				</div>
