@@ -17,14 +17,13 @@ function VehicleDetails() {
 	const sessionUser = useSelector((state) => state.session.user);
 	const [newQuirk, setNewQuirk] = useState(false);
 	const [newQuirkData, setNewQuirkData] = useState("");
-    const [newTag, setNewTag] = useState(false);
-    const [newTagData, setNewTagData] = useState("")
+	const [newTag, setNewTag] = useState(false);
+	const [newTagData, setNewTagData] = useState("");
 	const [editQuirk, setEditQuirk] = useState(false);
 	const [updateQuirkId, setUpdateQuirkId] = useState();
 	const [updateQuirk, setUpdateQuirk] = useState("");
 	const [editDescription, setEditDescription] = useState(false);
 	const [updateDescription, setUpdateDescription] = useState("");
-	const [editTags, setEditTags] = useState(true);
 	const [errors, setErrors] = useState([]);
 	const [vehicleIsLoaded, setVehicleIsLoaded] = useState(false);
 	const [tagsIsLoaded, setTagsIsLoaded] = useState(false);
@@ -96,7 +95,7 @@ function VehicleDetails() {
 		}
 	};
 
-    const handleTag = async (e) => {
+	const handleTag = async (e) => {
 		e.preventDefault();
 		// TO-DO Move to dispatch
 		if (newTag && sessionUser) {
@@ -207,24 +206,39 @@ function VehicleDetails() {
 					</div>
 					<div className="vehicle-details-header-description">
 						<div className="tags">
-							{vehicleIsLoaded && editTags ? (
+							{vehicleIsLoaded && newTag ? (
 								<>
 									<form onSubmit={handleTag}>
-                                        {console.log(newTagData)}
-										<select value={newTagData} onChange={(e) => setNewTagData(e.target.value)}>
-                                            <option value="" disabled>
-                                                Select a tag
-                                            </option>
+										{console.log(newTagData)}
+										<select
+											value={newTagData}
+											onChange={(e) => setNewTagData(e.target.value)}
+										>
+											<option disabled>Select a tag</option>
 											{Object.values(tags.vehicle_tags).map(({ tag, id }) => (
-												<option key={id} value={id}>{tag}</option>
+												<option
+													key={id}
+													value={id}
+												>
+													{tag}
+												</option>
 											))}
 										</select>
-                                        <button type="submit">Submit</button>
+										<button type="submit">Submit</button>
 									</form>
 								</>
 							) : (
 								Object.values(vehicle.tags).map(({ tag, id }) => <div key={id}>{tag}</div>)
 							)}
+							{sessionUser ? (
+								<button
+									onClick={() => {
+										setNewTag(!newTag);
+									}}
+								>
+									Add Tag
+								</button>
+							) : null}
 						</div>
 						<div className="description">
 							{vehicleIsLoaded && editDescription ? (
