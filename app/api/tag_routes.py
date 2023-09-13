@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from .auth_routes import validation_errors_to_error_messages
 from app.models import db, Tag
-# from app.forms import TagForm
+from app.forms import TagForm
 
 tag_routes = Blueprint('tags', __name__)
 
@@ -54,3 +54,20 @@ def delete_tag(id):
     db.session.delete(tag)
     db.session.commit()
     return tag.to_dict()
+
+@tag_routes.route('/', methods=["POST"])
+@login_required
+def post_tag():
+    """
+    Create a new tag
+    """
+    form = TagForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        tag = Tag(
+            tag=form.data['tag'],
+            )
+        db.session.add(tag)
+        db.session.commit()
+        return tag.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401

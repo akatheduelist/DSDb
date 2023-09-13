@@ -13,7 +13,7 @@ class Vehicle(db.Model):
     make = db.Column(db.String(40), nullable=False)
     model = db.Column(db.String(40), nullable=False)
     trim = db.Column(db.String(40))
-    description: db.Column(db.Text)
+    description = db.Column(db.Text())
     vehicle_country = db.Column(db.String(40))
 
     # One-to-One Relationships

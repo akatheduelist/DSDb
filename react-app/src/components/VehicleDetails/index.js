@@ -18,6 +18,8 @@ function VehicleDetails() {
 	const [editQuirk, setEditQuirk] = useState(false);
 	const [updateQuirkId, setUpdateQuirkId] = useState();
 	const [updateQuirk, setUpdateQuirk] = useState("");
+    const [editDescription, setEditDescription] = useState(false);
+    const [updateDescription, setUpdateDescription] = useState("")
 	const [errors, setErrors] = useState([]);
 	const [vehicleIsLoaded, setVehicleIsLoaded] = useState(false);
 
@@ -65,6 +67,28 @@ function VehicleDetails() {
 		}
 	};
 
+	const handleDescription = async (e) => {
+		e.preventDefault();
+		// TO-DO Move to dispatch
+		if (editDescription && sessionUser) {
+			const data = await fetch(`/api/vehicles/${vehicleId}`, {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					description: updateDescription,
+				}),
+			});
+			if (data.errors) {
+				setErrors(data.errors);
+			} else {
+				dispatch(getVehicle(vehicleId));
+				setEditDescription(!editDescription);
+			}
+		}
+	};    
+
 	// if (sessionUser) return <Redirect to="/" />;
 
 	return (
@@ -78,9 +102,19 @@ function VehicleDetails() {
 							backgroundRepeat: `no-repeat`,
 							backgroundSize: `cover`,
 						}}
-                        className="vehicle-details-header-container"
+						className="vehicle-details-header-container"
 					>
-						<div style={{background:`#1f1f1f90`, backdropFilter: `blur(40px) saturate(100%)`, width: `100%`, height: `100%`, display: `flex`, flexDirection: `column`, justifyContent: `center`}}>
+						<div
+							style={{
+								background: `#1f1f1f90`,
+								backdropFilter: `blur(40px) saturate(100%)`,
+								width: `100%`,
+								height: `100%`,
+								display: `flex`,
+								flexDirection: `column`,
+								justifyContent: `center`,
+							}}
+						>
 							<div className="vehicle-details-header">
 								<div className="vehicle-details-title">
 									<span className="big-title">
@@ -142,41 +176,50 @@ function VehicleDetails() {
 							</div>
 						</div>
 					</div>
-                    <div className="vehicle-details-header-description">
-                        <div className="tags">
-                            TAG TAG TAG
-                        </div>
-                        <div className="description">
-                            DESCRIPTION
-                        </div>
-                        <div>
-                            WRITER
-                        </div>
-                        <div>
-                            DIRECTOR
-                        </div>
-                        <div>
-                            STARS
-                        </div>
-                    <h1>Dougscore: </h1>
-                    <p>daily_comfort: {vehicle?.dougscore.daily_comfort}</p>
-                    <p>daily_features: {vehicle?.dougscore.daily_features}</p>
-                    <p>daily_practicality: {vehicle?.dougscore.daily_practicality}</p>
-                    <p>daily_quality: {vehicle?.dougscore.daily_quality}</p>
-                    <p>daily_total: {vehicle?.dougscore.daily_total}</p>
-                    <p>weekend_acceleration: {vehicle?.dougscore.weekend_acceleration}</p>
-                    <p>weekend_coolfactor: {vehicle?.dougscore.weekend_coolfactor}</p>
-                    <p>weekend_funfactor: {vehicle?.dougscore.weekend_funfactor}</p>
-                    <p>weekend_handling: {vehicle?.dougscore.weekend_handling}</p>
-                    <p>weekend_styling: {vehicle?.dougscore.weekend_styling}</p>
-                    <p>weekend_total: {vehicle?.dougscore.weekend_total}</p>
-                    <p>video_link: {vehicle?.dougscore.video_link}</p>
-                    <p>filming_location: {vehicle?.dougscore.filming_location}</p>
-                    </div>
+					<div className="vehicle-details-header-description">
+						<div className="tags">TAG TAG TAG</div>
+						<div className="description">
+							{vehicleIsLoaded && editDescription ? (
+								<div>
+									<form onSubmit={handleDescription}>
+										<textarea
+											value={updateDescription}
+											onChange={(e) => setUpdateDescription(e.target.value)}
+										/>
+										<button type="submit">Submit</button>
+									</form>
+								</div>
+							) : vehicle.description}
+						</div>
+                        {vehicleIsLoaded && sessionUser ? (
+									<button
+										onClick={() => {
+											setEditDescription(!editDescription);
+											setUpdateDescription(vehicle.description);
+										}}
+									>
+										Update Description
+									</button>) : null}
+						<div>WRITER</div>
+						<div>DIRECTOR</div>
+						<div>STARS</div>
+						<h1>Dougscore: </h1>
+						<p>daily_comfort: {vehicle?.dougscore.daily_comfort}</p>
+						<p>daily_features: {vehicle?.dougscore.daily_features}</p>
+						<p>daily_practicality: {vehicle?.dougscore.daily_practicality}</p>
+						<p>daily_quality: {vehicle?.dougscore.daily_quality}</p>
+						<p>daily_total: {vehicle?.dougscore.daily_total}</p>
+						<p>weekend_acceleration: {vehicle?.dougscore.weekend_acceleration}</p>
+						<p>weekend_coolfactor: {vehicle?.dougscore.weekend_coolfactor}</p>
+						<p>weekend_funfactor: {vehicle?.dougscore.weekend_funfactor}</p>
+						<p>weekend_handling: {vehicle?.dougscore.weekend_handling}</p>
+						<p>weekend_styling: {vehicle?.dougscore.weekend_styling}</p>
+						<p>weekend_total: {vehicle?.dougscore.weekend_total}</p>
+						<p>video_link: {vehicle?.dougscore.video_link}</p>
+						<p>filming_location: {vehicle?.dougscore.filming_location}</p>
+					</div>
 				</>
 			)}
-
-
 
 			<div className="grey-background">
 				{vehicleIsLoaded &&

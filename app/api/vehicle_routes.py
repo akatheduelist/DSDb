@@ -1,8 +1,8 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from .auth_routes import validation_errors_to_error_messages
-from app.models import db, Vehicle, Review, Quirk, VehicleImage
-from app.forms import ReviewForm, QuirkForm
+from app.models import db, Vehicle, Review, Quirk, VehicleImage, Tag
+from app.forms import ReviewForm, QuirkForm, TagForm
 
 vehicle_routes = Blueprint('vehicles', __name__)
 
@@ -23,6 +23,21 @@ def vehicle(id):
     """
     vehicle = Vehicle.query.get(id)
     return vehicle.to_dict()
+
+
+@vehicle_routes.route('/<int:id>', methods=["PUT"])
+@login_required
+def update_vehicle(id):
+    """
+    Update a vehicle entry
+    """
+    request_data = request.get_json()
+    # form['csrf_token'].data = request.cookies['csrf_token']
+    vehicle = Vehicle.query.get(id)
+    vehicle.description = request_data['description']
+    db.session.commit()
+    return "Success"
+    # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 @vehicle_routes.route('/<int:id>/reviews', methods=["POST"])

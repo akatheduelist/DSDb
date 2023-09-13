@@ -21,6 +21,7 @@ def seed_dougscores():
                 make = row[1],
                 model = row[2],
                 trim = 'N/A',
+                description = "Apollonius of Perga astonishment from which we spring not a sunrise but a galaxyrise trillion hearts of the stars. Something incredible is waiting to be known quasar invent the universe inconspicuous motes of rock and gas at the edge of forever realm of the galaxies? Globular star cluster vastness is bearable only through love made in the interiors of collapsing stars gathered by gravity something incredible is waiting to be known courage of our questions and billions upon billions upon billions upon billions upon billions upon billions upon billions.",
                 vehicle_country = row[20],
                 )
             dougscore = DougScore(
