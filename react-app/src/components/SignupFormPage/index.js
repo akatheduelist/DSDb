@@ -11,7 +11,7 @@ function SignupFormPage() {
 	const [name, setName] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
-	const [errors, setErrors] = useState([]);
+	const [errors, setErrors] = useState({});
 
 	if (sessionUser) return <Redirect to="/" />;
 
@@ -21,9 +21,11 @@ function SignupFormPage() {
 			const data = await dispatch(signUp(name, email, password));
 			if (data) {
 				setErrors(data);
+                console.log(errors)
 			}
 		} else {
-			setErrors(["Confirm Password field must be the same as the Password field"]);
+            const confirmPassword = {...errors, "confirm_password": "Confirm Password field must be the same as the Password field"}
+			setErrors(confirmPassword);
 		}
 	};
 
@@ -31,11 +33,6 @@ function SignupFormPage() {
 		<>
 			<h1>Sign Up</h1>
 			<form onSubmit={handleSubmit}>
-				<ul>
-					{errors.map((error, idx) => (
-						<li key={idx}>{error}</li>
-					))}
-				</ul>
 				<label>
 					Your name
 					<input
@@ -44,6 +41,7 @@ function SignupFormPage() {
 						onChange={(e) => setName(e.target.value)}
 						required
 					/>
+					{errors.name ? <span>{errors.name}</span> : null}
 				</label>
 				<label>
 					Email
@@ -53,6 +51,7 @@ function SignupFormPage() {
 						onChange={(e) => setEmail(e.target.value)}
 						required
 					/>
+					{errors.email ? <span>{errors.email}</span> : null}
 				</label>
 				<label>
 					Password
@@ -62,6 +61,7 @@ function SignupFormPage() {
 						onChange={(e) => setPassword(e.target.value)}
 						required
 					/>
+					{errors.password ? <span>{errors.password}</span> : null}
 				</label>
 				<label>
 					Re-enter Password
@@ -71,6 +71,8 @@ function SignupFormPage() {
 						onChange={(e) => setConfirmPassword(e.target.value)}
 						required
 					/>
+					{errors.password ? <span>{errors.password}</span> : null}
+                    {errors.confirm_password ? <span>{errors.confirm_password}</span> : null}
 				</label>
 				<button type="submit">Create your DSDb account</button>
 			</form>
