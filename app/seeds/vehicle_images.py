@@ -31,12 +31,9 @@ def seed_vehicle_images():
             db.session.commit()
         if len(vehicle.vehicle_images) < 2:
             response = requests.get(f"https://api.unsplash.com/search/photos?client_id=OsLCtgt819go9Q71ENBYUh5-DK7kiWPBiy8mwXUatq0&query={vehicle.make}+{vehicle.model}&orientation=portrait&per_page=1",timeout=10)
-            print(response.status_code)
             if response.status_code == 200:
                 data = response.json()
-                print(vehicle.year, vehicle.make, vehicle.model)
                 for result in data['results']:
-                    print(result['urls']['small'])
                     vehicle_image2 = VehicleImage(
                     image_url = result['urls']['small'],
                     user_id = fake.pyint(min_value=1, max_value=num_of_users),
@@ -44,9 +41,6 @@ def seed_vehicle_images():
                     )
                     db.session.add(vehicle_image2)
                     db.session.commit()
-        
-        # curl -H "Authorization: P1pkLH74FE57JMOoPC6flp1xJ3mClk8WqVl4VZkD3S8JPuGw5Np6aU5Z" \
-        # "https://api.pexels.com/v1/search?query=nature&per_page=1"
 
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't

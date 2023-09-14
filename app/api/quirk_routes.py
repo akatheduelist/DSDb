@@ -25,23 +25,23 @@ def quirk(id):
     return quirk.to_dict()
 
 
-# TO-DO User validation and return errors
 @quirk_routes.route('/<int:id>', methods=["PUT"])
 @login_required
 def update_quirk(id):
     """
     Create a new quirk associated with a specific vehicle
     """
-    request_data = request.get_json()
-    # form['csrf_token'].data = request.cookies['csrf_token']
-    quirk = Quirk.query.get(id)
-    quirk.id = id
-    quirk.quirk = request_data['quirk']
-    quirk.user_id = request_data['user_id']
-    quirk.vehicle_id = request_data['vehicle_id']
-    db.session.commit()
-    return "Success"
-    # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    form = QuirkForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        quirk = Quirk.query.get(id)
+        quirk.id = id
+        quirk.quirk = form.data['quirk']
+        quirk.user_id = form.data['user_id']
+        quirk.vehicle_id = form.data['vehicle_id']
+        db.session.commit()
+        return quirk.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 @quirk_routes.route('/<int:id>', methods=["DELETE"])

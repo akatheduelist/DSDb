@@ -15,7 +15,6 @@ def seed_dougscores():
     with open(seed_file_path, 'r') as csv_file:
         reader = csv.reader(csv_file)
         for row in reader:
-            # print(row)
             vehicle = Vehicle(
                 year = row[0],
                 make = row[1],

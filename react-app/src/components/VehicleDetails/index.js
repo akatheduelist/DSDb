@@ -25,7 +25,7 @@ function VehicleDetails() {
 	const [updateQuirk, setUpdateQuirk] = useState("");
 	const [editDescription, setEditDescription] = useState(false);
 	const [updateDescription, setUpdateDescription] = useState("");
-	const [errors, setErrors] = useState([]);
+	const [errors, setErrors] = useState({});
 	const [vehicleIsLoaded, setVehicleIsLoaded] = useState(false);
 	const [tagsIsLoaded, setTagsIsLoaded] = useState(false);
 
@@ -38,7 +38,7 @@ function VehicleDetails() {
 		e.preventDefault();
 		// TO-DO Move to dispatch
 		if (editQuirk && sessionUser) {
-			const data = await fetch(`/api/quirks/${updateQuirkId}`, {
+			const editQuirk = await fetch(`/api/quirks/${updateQuirkId}`, {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
@@ -49,14 +49,17 @@ function VehicleDetails() {
 					quirk: updateQuirk,
 				}),
 			});
+			const data = await editQuirk.json();
 			if (data.errors) {
 				setErrors(data.errors);
 			} else {
 				dispatch(getVehicle(vehicleId));
 				setEditQuirk(!editQuirk);
 			}
-		} else {
-			const data = await fetch(`/api/vehicles/${vehicleId}/quirks`, {
+		}
+
+		if (!editQuirk && sessionUser) {
+			const newQuirk = await fetch(`/api/vehicles/${vehicleId}/quirks`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -65,6 +68,7 @@ function VehicleDetails() {
 					quirk: newQuirkData,
 				}),
 			});
+            const data = newQuirk.json()
 			if (data.errors) {
 				setErrors(data.errors);
 			} else {
@@ -304,7 +308,12 @@ function VehicleDetails() {
 						<OpenModalButton
 							buttonText="+ New Review"
 							buttonClass="no-button green-link"
-							modalComponent={<ReviewFormModal vehicleId={vehicleId} vehicle={vehicle} />}
+							modalComponent={
+								<ReviewFormModal
+									vehicleId={vehicleId}
+									vehicle={vehicle}
+								/>
+							}
 						/>
 					</div>
 					<Reviews
@@ -333,6 +342,7 @@ function VehicleDetails() {
 										onChange={(e) => setNewQuirkData(e.target.value)}
 									></input>
 									<button type="submit">Submit</button>
+                                    {errors?.quirk ? <span>{errors.quirk}</span> : null}
 								</form>
 							</div>
 						) : null}
@@ -349,6 +359,7 @@ function VehicleDetails() {
 													onChange={(e) => setUpdateQuirk(e.target.value)}
 												></input>
 												<button type="submit">Submit</button>
+												{errors?.quirk ? <span>{errors.quirk}</span> : null}
 											</form>
 										) : (
 											quirk
