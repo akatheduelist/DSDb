@@ -11,8 +11,8 @@ function DeleteItemModal({ reviewId, quirkId }) {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (reviewId) dispatch(deleteVehicleReview(reviewId));
-		if (quirkId) dispatch(deleteVehicleQuirk(quirkId));
+		if (reviewId) dispatch(deleteVehicleReview(reviewId)).then(closeModal());
+		if (quirkId) dispatch(deleteVehicleQuirk(quirkId)).then(closeModal());
 		closeModal();
 	};
 

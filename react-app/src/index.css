@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
 
 * {
     box-sizing: border-box;
@@ -19,6 +19,14 @@ a {
     cursor: pointer;
 }
 
+.amazon-echo {
+    font-family: 'PT Sans', sans-serif;
+}
+
+.fa-x {
+    font-size: 16px;
+}
+
 .content-container {
     display: flex;
     flex-direction: column;
@@ -31,6 +39,10 @@ a {
 
 .dark-grey-background {
     background-color: #0B0B0B;
+}
+
+.mid-grey-background {
+    background-color: #1F1F1F;
 }
 
 .grey-background {

@@ -29,7 +29,7 @@ def quirk(id):
 @login_required
 def update_quirk(id):
     """
-    Create a new quirk associated with a specific vehicle
+    Updates a quirk associated with a specific vehicle
     """
     form = QuirkForm()
     form['csrf_token'].data = request.cookies['csrf_token']
