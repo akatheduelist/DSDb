@@ -39,6 +39,7 @@ def seed_dougscores():
                 daily_value = row[13],
                 daily_total = row[14],
                 dougscore_total = row[15],
+                video_time = row[16],
                 video_link = row[17],
                 filming_location = row[18]+", "+row[19]
                 )

@@ -20,6 +20,7 @@ class DougScore(db.Model):
     daily_value = db.Column(db.Integer, nullable=False)
     daily_total = db.Column(db.Integer, nullable=False)
     dougscore_total = db.Column(db.Integer, nullable=False)
+    video_time = db.Column(db.String(8), nullable=False)
     video_link = db.Column(db.String(255), nullable=False)
     filming_location = db.Column(db.String(255))
     vehicle_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("vehicles.id")), nullable=False)
@@ -41,6 +42,7 @@ class DougScore(db.Model):
             'daily_value': self.daily_value,
             'daily_total': self.daily_total,
             'dougscore_total': self.dougscore_total,
+            'video_time': self.video_time,
             'video_link': self.video_link,
             'filming_location': self.filming_location,
             'vehicle_id': self.vehicle_id
