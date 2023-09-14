@@ -3,8 +3,8 @@
 	z-index: -1;
 	top: 0;
 	left: 0;
-	width: 1920px;
-	height: 1000px;
+	width: 100%;
+	height: 600px;
 	background: linear-gradient(90deg, #000, transparent 12%), linear-gradient(270deg, #000, transparent 12%),
 		linear-gradient(0deg, #000, transparent 22%),
 		url(https://i.ytimg.com/vi/G2P03XBnAqk/maxresdefault.jpg);
@@ -40,42 +40,36 @@
 }
 
 .page-grid-top {
-	position: relative;
-	margin: 8px auto;
+	/* position: relative; */
 	display: flex;
 	justify-content: center;
 	max-width: 1280px;
 	max-height: 547px;
+	margin: 8px auto;
 	background: rgb(0, 0, 0);
 }
 
 .page-grid-top-image {
+    display: inline-flex;
+    justify-content: center;
 	flex: 846 1 0%;
-	margin: 0px 8px;
-	position: relative;
 	overflow: hidden;
-	width: 849px;
-	height: 547px;
+	/* width: 849px;
+	height: 547px; */
 }
 
 .page-grid-top-hero-video {
-	width: 100%;
-	height: 100%;
+	width: 96%;
+	height: 96%;
 }
 
 .page-grid-top-right {
-	flex: 402 1 0%;
-	margin: 0px 8px 0px 4px;
-	position: relative;
-	overflow: hidden;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-}
-
-.page-grid-title {
-    margin: 24px 0px;
-    padding: 0px 24px;
+	flex: 402 1 0%;
+	margin: 0px 8px 0px 4px;
+	overflow: hidden;
 }
 
 .grid-card-container {
@@ -84,4 +78,17 @@
     width: 394px;
     height: 313px;
     border: 1px solid pink;
+}
+
+.up-next-card-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.up-next-card {
+    display: inline-flex;
+    justify-content: space-around;
+    padding: 0px 16px;
+    margin-top: 10px;
 }

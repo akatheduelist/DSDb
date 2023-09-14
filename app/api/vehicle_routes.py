@@ -1,8 +1,8 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from .auth_routes import validation_errors_to_error_messages
-from app.models import db, Vehicle, Review, Quirk, VehicleImage
-from app.forms import ReviewForm, QuirkForm
+from app.models import db, Vehicle, Review, Quirk, VehicleImage, Tag
+from app.forms import ReviewForm, QuirkForm, TagForm
 
 vehicle_routes = Blueprint('vehicles', __name__)
 
@@ -23,6 +23,21 @@ def vehicle(id):
     """
     vehicle = Vehicle.query.get(id)
     return vehicle.to_dict()
+
+
+@vehicle_routes.route('/<int:id>', methods=["PUT"])
+@login_required
+def update_vehicle(id):
+    """
+    Update a vehicle entry
+    """
+    request_data = request.get_json()
+    # form['csrf_token'].data = request.cookies['csrf_token']
+    vehicle = Vehicle.query.get(id)
+    vehicle.description = request_data['description']
+    db.session.commit()
+    return "Success"
+    # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 @vehicle_routes.route('/<int:id>/reviews', methods=["POST"])
@@ -92,3 +107,22 @@ def vehicle_images(id):
     """
     images = VehicleImage.query.filter_by(vehicle_id=id)
     return [image.to_dict() for image in images]
+
+
+@vehicle_routes.route('/<int:id>/tags', methods=["POST"])
+@login_required
+def post_vehicle_tag(id):
+    """
+    Create a new tag associated with a specific vehicle
+    """
+    form = TagForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        print(form.data)
+        vehicle = Vehicle.query.get(id)
+        tag = Tag.query.get(form.data['tag_id'])
+        vehicle.tags.append(tag)
+        # db.session.add(vehicle_tag)
+        db.session.commit()
+        return "Success"
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
