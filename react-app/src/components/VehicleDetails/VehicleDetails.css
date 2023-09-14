@@ -99,3 +99,15 @@
     justify-content: space-between;
     width: 100%;
 }
+
+.details-user-reviews-container {
+    margin: 1.5rem 1rem;
+}
+
+.details-user-reviews {
+    width: 48rem;
+    margin-bottom: 24px;
+    padding: 16px;
+    border: 1px solid pink;
+}
+
