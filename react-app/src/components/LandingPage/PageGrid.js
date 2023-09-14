@@ -19,20 +19,34 @@ function PageGrid({ allVehicles, isLoaded, randomVehicle }) {
 								</div>
 							)}
 						</div>
-						<div className="page-grid-top-right overflow-auto">
-							<div className="page-grid-title">
-								<span className="title">Up next</span>
+						<div className="page-grid-top-right overflow-hidden">
+							<span
+								style={{ marginBottom: `1rem` }}
+								className="small-title green-text"
+							>
+								Up next
+							</span>
+							<div className="dark-grey-background">
+								{/* {isLoaded &&
+									Object.values(allVehicles).map((vehicle) => (
+										<div
+											className="up-next-card"
+											key={vehicle.id}
+										>
+											<a href={`/vehicles/${vehicle.id}`}>
+												{vehicle.year} {vehicle.make} {vehicle.model} {vehicle.trim}{" "}
+												{vehicle.vehicle_country}
+											</a>
+											<span>Dougscore: {vehicle.dougscore.dougscore_total}</span>
+										</div>
+									))} */}
 							</div>
-							{isLoaded &&
-								Object.values(allVehicles).map((vehicle) => (
-									<div key={vehicle.id}>
-										<a href={`/vehicles/${vehicle.id}`}>
-											{vehicle.year} {vehicle.make} {vehicle.model} {vehicle.trim}{" "}
-											{vehicle.vehicle_country}
-										</a>
-										<span>Dougscore: {vehicle.dougscore.dougscore_total}</span>
-									</div>
-								))}
+							<span
+								style={{ marginTop: `1rem`, paddingLeft: `16px`, paddingTop: `16px` }}
+								className="small-title green-text"
+							>
+								Browse vehicles &#8250;
+							</span>
 						</div>
 					</div>
 				</div>
@@ -41,10 +55,9 @@ function PageGrid({ allVehicles, isLoaded, randomVehicle }) {
 						<div className="page-grid-top-image">
 							<div className="page-grid-title">
 								<span className="title">Featured Today</span>
-                                <div>
-
-                                <GridCard />
-                                </div>
+								<div>
+									<GridCard />
+								</div>
 							</div>
 						</div>
 					</div>
