@@ -4,7 +4,7 @@ import { getVehicle } from "../../store/vehicle";
 import { useModal } from "../../context/Modal";
 import "./ReviewForm.css";
 
-function ReviewFormModal({ vehicleId, isEdit = false, reviewId }) {
+function ReviewFormModal({ vehicle, vehicleId, isEdit = false, reviewId }) {
 	const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state.session.user);
 	const currentReview = useSelector((state) =>
@@ -18,23 +18,27 @@ function ReviewFormModal({ vehicleId, isEdit = false, reviewId }) {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		// TO-DO Move to dispatch store
-		if (!isEdit) {
-			const data = await fetch(`/api/vehicles/${vehicleId}/reviews`, {
-				method: "POST",
+		if (!isEdit && sessionUser) {
+            const newReview = await fetch(`/api/vehicles/${vehicleId}/reviews`, {
+                method: "POST",
 				headers: {
-					"Content-Type": "application/json",
+                    "Content-Type": "application/json",
 				},
 				body: JSON.stringify({
-					rating,
+                    rating,
 					review,
 				}),
 			});
+            const data = await newReview.json();
 			if (data.errors) {
 				setErrors(data.errors);
 			} else {
 				dispatch(getVehicle(vehicleId)).then(closeModal());
 			}
-		} else {
+		}
+
+		if (isEdit && sessionUser) {
+            console.log("PUT")
 			const data = await fetch(`/api/reviews/${currentReview.id}`, {
 				method: "PUT",
 				headers: {
@@ -47,7 +51,7 @@ function ReviewFormModal({ vehicleId, isEdit = false, reviewId }) {
 					review,
 				}),
 			});
-			if (data.errors) {
+			if (data) {
 				setErrors(data.errors);
 			} else {
 				dispatch(getVehicle(vehicleId)).then(closeModal());
@@ -58,36 +62,39 @@ function ReviewFormModal({ vehicleId, isEdit = false, reviewId }) {
 	return (
 		<>
 			<div className="light-grey-background">
-				<h1>TITLE</h1>
+				<span>
+					{vehicle?.year} {vehicle?.make} {vehicle?.model}
+				</span>
+                {!sessionUser && <span>You must be logged in to post a review.</span>}
 				<form onSubmit={handleSubmit}>
-					{/* {errors && (
-					<ul>
-						{errors.map((error, idx) => (
-							<li key={idx}>{error}</li>
-						))}
-					</ul>
-				)} */}
-					<label>
-						YOUR RATING
-						<input
-							type="number"
-							min="1"
-							max="10"
-							value={rating}
-							onChange={(e) => setRating(e.target.value)}
-							required
-						/>
-					</label>
-					<label>
-						YOUR REVIEW
-						<input
-							type="text"
-							value={review}
-							onChange={(e) => setReview(e.target.value)}
-							required
-						/>
-					</label>
-					<button type="submit">Submit</button>
+					<label hidden>YOUR RATING</label>
+					<input
+						type="number"
+						min="1"
+						max="10"
+						value={rating}
+						onChange={(e) => setRating(e.target.value)}
+						required
+					/>
+					{errors?.rating ? <span>{errors.rating}</span> : null}
+					<span>YOUR REVIEW</span>
+					{/* <label hidden>Review Headline</label>
+					<input
+						type="text"
+						placeholder="Write a headline for your review here"
+					/>
+					{errors?.headline ? <span>{errors.headline}</span> : null} */}
+					<span>Required characters: 600</span>
+					<label hidden>YOUR REVIEW</label>
+					<textarea
+						value={review}
+						placeholder="Write your review here"
+						onChange={(e) => setReview(e.target.value)}
+						required
+					/>
+					{errors?.review ? <span>{errors.review}</span> : null}
+					<button type="submit" disabled={!sessionUser}>Submit</button>
+                    {!sessionUser && <span>You must be logged in to post a review.</span>}
 				</form>
 			</div>
 		</>

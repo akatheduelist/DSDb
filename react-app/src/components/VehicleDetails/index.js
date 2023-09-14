@@ -304,7 +304,7 @@ function VehicleDetails() {
 						<OpenModalButton
 							buttonText="+ New Review"
 							buttonClass="no-button green-link"
-							modalComponent={<ReviewFormModal vehicleId={vehicleId} />}
+							modalComponent={<ReviewFormModal vehicleId={vehicleId} vehicle={vehicle} />}
 						/>
 					</div>
 					<Reviews
