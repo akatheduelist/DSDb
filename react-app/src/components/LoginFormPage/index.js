@@ -10,7 +10,7 @@ function LoginFormPage() {
 	const sessionUser = useSelector((state) => state.session.user);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [errors, setErrors] = useState([]);
+	const [errors, setErrors] = useState({});
 
 	if (sessionUser) return <Redirect to="/" />;
 
@@ -33,7 +33,6 @@ function LoginFormPage() {
 						/>
 					</a>
 				</div>
-				{console.log(errors)}
 				{Object.values(errors).length && (
 					<div className="error-box bottom-spacing center">
 						<div>
