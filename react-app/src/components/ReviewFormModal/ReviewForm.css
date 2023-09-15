@@ -9,6 +9,9 @@
 }
 
 .review-modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     height: 92%;
     padding: 0.5rem;
 }
@@ -24,5 +27,14 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
+}
 
+.rating-stars {
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    width: 20.5rem;
+}
+
+.review-modal-content-bottom {
+    flex-grow: 2;
 }

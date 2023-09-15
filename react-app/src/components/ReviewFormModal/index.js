@@ -13,6 +13,8 @@ function ReviewFormModal({ vehicle, vehicleId, isEdit = false, reviewId }) {
 	const [rating, setRating] = useState(isEdit ? currentReview.rating : 1);
 	const [review, setReview] = useState(isEdit ? currentReview.review : "");
 	const [errors, setErrors] = useState([]);
+	// const [starRating, setStarRating] = useState(0);
+	const [hover, setHover] = useState(0);
 	const { closeModal } = useModal();
 
 	useEffect(() => {
@@ -78,56 +80,103 @@ function ReviewFormModal({ vehicle, vehicleId, isEdit = false, reviewId }) {
 					></i>
 				</div>
 				<div className="review-modal-content white-background">
-					<div className="review-modal-title">
+					<div className="review-modal-title light-grey-background">
 						<img
 							style={{ width: `4rem` }}
 							src={vehicle?.images[1]?.image_url}
 						/>
-                        <div style={{width: `70%`}}>
-						<span style={{ fontSize: `18px`, fontWeight: `500`}} className="amazon-echo">{vehicle?.make} {vehicle?.model}</span><span>({vehicle?.year})</span>
-                        <hr style={{ marginTop: `.7rem`, marginBottom: `.5rem`, width: `90%`}} />
-                        <span className="small-title amazon-echo">Add an Item</span>
-                        </div>
+						<div style={{ width: `70%` }}>
+							<span
+								style={{ fontSize: `18px`, fontWeight: `500` }}
+								className="amazon-echo"
+							>
+								{vehicle?.make} {vehicle?.model}
+							</span>
+							<span>({vehicle?.year})</span>
+							<hr style={{ marginTop: `.7rem`, marginBottom: `.5rem`, width: `90%` }} />
+							<span className="small-title amazon-echo">Add an Item</span>
+						</div>
 						<span>Test</span>
 					</div>
-                    <div>
-                        <span style={{ fontSize: `14px`}} className="amazon-echo">YOUR RATING</span>
-                    </div>
-					{!sessionUser && <span>You must be logged in to post a review.</span>}
+					<div
+						style={{ width: `100%` }}
+						className="light-grey-background"
+					>
+						<span
+							style={{ fontSize: `14px` }}
+							className="amazon-echo"
+						>
+							YOUR RATING
+						</span>
+					</div>
 					<form onSubmit={handleSubmit}>
 						<label hidden>YOUR RATING</label>
-						<input
-							type="number"
-							min="1"
-							max="10"
-							value={rating}
-							onChange={(e) => setRating(e.target.value)}
-							required
-						/>
-						{errors?.rating ? <span>{errors.rating}</span> : null}
-						<span>YOUR REVIEW</span>
+						<div className="rating-stars margin-vertical">
+							{[...Array(10)].map((star, idx) => {
+								idx += 1;
+								return (
+									<button
+										type="button"
+										key={idx}
+										style={{
+											border: `none`,
+											background: `none`,
+											cursor: `pointer`,
+											fontSize: `18px`,
+										}}
+										className={idx <= (hover || rating) ? "on" : "off"}
+										onClick={() => setRating(idx)}
+										onMouseEnter={() => setHover(idx)}
+										onMouseLeave={() => setHover(rating)}
+									>
+										<span className="star">&#9733;</span>
+									</button>
+								);
+							})}
+							<span>{hover}</span>
+						</div>
+						{errors?.rating ? <span className="small-bold amazon-echo error">{errors.rating}</span> : null}
 						{/* <label hidden>Review Headline</label>
-					<input
-						type="text"
-						placeholder="Write a headline for your review here"
-					/>
-					{errors?.headline ? <span>{errors.headline}</span> : null} */}
-						<span>Required characters: 600</span>
+                        <input
+                            type="text"
+                            placeholder="Write a headline for your review here"
+                        />
+                        {errors?.headline ? <span>{errors.headline}</span> : null} */}
+						<div
+							style={{ width: `100%` }}
+							className="light-grey-background"
+						>
+							<span
+								style={{ fontSize: `14px` }}
+								className="amazon-echo"
+							>
+								YOUR REVIEW
+							</span>
+						</div>
+						<div className="right-text">
+							<span className="small-bold amazon-echo error">Required characters: 600</span>
+						</div>
 						<label hidden>YOUR REVIEW</label>
 						<textarea
 							value={review}
+							style={{ height: `24rem` }}
+							className="amazon-echo"
 							placeholder="Write your review here"
 							onChange={(e) => setReview(e.target.value)}
 							required
 						/>
-						{errors?.review ? <span>{errors.review}</span> : null}
+						<br /> 
+                        {!sessionUser && (
+							<span className="small-bold amazon-echo error">You must be logged in to post a review.</span>
+						)}
+						{errors?.review ? <span className="small-bold amazon-echo error">{errors.review}</span> : null}
 						<button
+                            className="small-bold amazon-echo"
 							type="submit"
 							disabled={!sessionUser}
 						>
 							Submit
 						</button>
-						{!sessionUser && <span>You must be logged in to post a review.</span>}
 					</form>
 				</div>
 				<div></div>

@@ -19,8 +19,60 @@ a {
     cursor: pointer;
 }
 
+input, textarea {
+    /* resize: none; */
+    font-family: 'PT Sans', sans-serif;
+    border: 1px solid #a6a6a6;
+    width: 100%;
+    resize: vertical;
+    padding: 5px;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(15,17,17,.15) inset;
+}
+
+form > button {
+    width: 100%;
+    padding: 6px;
+    cursor: pointer;
+    background-color: #FFFFFF;
+    border: 1px solid #a6a6a6;
+    box-shadow: 0 1px 2px rgba(15,17,17,.15) inset;
+
+}
+
+form > button:hover {
+    background-color: #F7FAFA;
+}
+
+.margin-vertical {
+    margin: 7px 0px;
+}
+
+.on {
+    color: #009B00;
+    padding: none;
+}
+
+.off {
+    color: #cccccc;
+    padding: none;
+}
+
 .amazon-echo {
     font-family: 'PT Sans', sans-serif;
+}
+
+.small-bold {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.right-text {
+    text-align: right;
+}
+
+.error {
+    color: #FF0000;
 }
 
 .fa-x {
