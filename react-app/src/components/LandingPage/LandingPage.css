@@ -86,8 +86,8 @@
     background: linear-gradient(0deg, transparent 0%, transparent 50%, rgb(33 33 33 / 70%) 78%, #302a27 100%);}
 
 .up-next-card {
-    display: inline-flex;
-    justify-content: space-around;
+    display: flex;
+    justify-content: flex-start;
     padding: 0px 16px;
     margin-top: 10px;
 }
