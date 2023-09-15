@@ -1,0 +1,16 @@
+.signup-component-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+}
+
+.signup-form {
+    color: #000000;
+    padding: 14px 18px;
+    display: block;
+    border-radius: 4px;
+    border: 1px #DDDDDD solid;
+    background-color: #FFFFFF;
+    width: 352px;
+    margin: 10px auto;
+}

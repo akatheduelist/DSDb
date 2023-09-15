@@ -14,16 +14,16 @@ def user_exists(form, field):
 
 class SignUpForm(FlaskForm):
     name = StringField('full_name', validators=[
-                        DataRequired(message="You must provide a name to continue."),
-                        Length(min=2, max=99, message="Name must be between %(min)d and %(max)d characters long.")
+                        DataRequired(message="Enter your name"),
+                        Length(min=2, max=99, message="Name must be between %(min)d and %(max)d characters long")
                         ])
     email = StringField('email', validators=[
-                        DataRequired(message="You must provide a valid email address to continue."), 
-                        Email(message="Email format is not correct."), 
-                        Length(min=8, max=128, message="Email must be between %(min)d and %(max)d characters long."), 
+                        DataRequired(message="Enter your email"), 
+                        Email(message="Enter a valid email address"), 
+                        Length(min=8, max=128, message="Email must be between %(min)d and %(max)d characters long"), 
                         user_exists
                         ])
     password = StringField('password', validators=[
-                        DataRequired(message="You must provide a password to continue."), 
-                        Length(min=9, max=128, message="Password must be between %(min)d and %(max)d characters long."),
+                        DataRequired(message="Enter your password."), 
+                        Length(min=8, max=128, message="Password must be at least %(min)d characters."),
                         ])
