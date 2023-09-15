@@ -19,7 +19,7 @@ function App() {
 	return (
 		<>
 			<Navigation isLoaded={isLoaded} />
-            <div className="landing-page-container" />
+            {/* <div className="landing-page-container" /> */}
 			{isLoaded && (
 				<div className="content-container">
 					<Switch>

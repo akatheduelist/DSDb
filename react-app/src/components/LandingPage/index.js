@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import "./LandingPage.css";
 import { getAllVehicles } from "../../store/vehicle";
 import TopTen from "./TopTen";
