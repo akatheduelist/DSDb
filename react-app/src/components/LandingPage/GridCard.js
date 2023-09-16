@@ -1,19 +1,83 @@
-function GridCard() {
+import { useState } from "react";
+import Slider from "react-slick";
+import { useHistory } from "react-router-dom"
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "./LandingPage.css";
+
+export default function GridCard({ allVehicles }, isLoaded, Redirect) {
+    const history = useHistory()
+	const [sliderPosition, setSliderPosition] = useState(null);
+
+	const settings = {
+		arrows: false,
+		slidesToShow: 3,
+		slidesToScroll: 1,
+		infinite: false,
+		vertical: true,
+		responsive: [
+			{
+				breakpoint: 1024,
+				settings: {
+					slidesToShow: 2,
+				},
+			},
+			{
+				breakpoint: 800,
+				settings: {
+					slidesToShow: 1,
+				},
+			},
+		],
+	};
+
 	return (
 		<>
-			<div className="grid-card-container">
-				<div className="grid-card-images">
-                    
-                </div>
-                <div className="grid-card-title">
-                    <span>Top Total Dougscore</span>
-                </div>
-                <div className="grid-card-text">
-                    <span>See more</span>
-                </div>
-			</div>
+			<button className="no-button" onClick={sliderPosition?.slickPrev}><i style={{ fontSize: `22px`}} class="cursor-pointer green-text fa-solid fa-caret-up"></i></button>
+			<Slider
+				ref={setSliderPosition}
+				{...settings}
+			>
+				{isLoaded &&
+					Object.values(allVehicles).map((vehicle) => (
+						<div>
+							<div
+								className="up-next-card"
+								key={vehicle.id}
+							>
+								<img
+									style={{ width: `5rem`, borderRadius: `1px` }}
+									src={vehicle?.images[1]?.image_url}
+								/>
+								<div style={{ paddingLeft: `1rem`, paddingTop: `1rem` }}>
+									<div
+										style={{ display: `inline-flex`, alignItems: `flex-end` }}
+										className="bottom-spacing"
+									>
+										<i
+											style={{ fontSize: `34px`, fontWeight: `200` }}
+											class="cursor-pointer fa-regular fa-circle-play"
+											onClick={() => {
+												<Redirect to={vehicle?.dougscore?.video_link} />;
+											}}
+										/>
+										<span style={{ marginLeft: `8px` }}>{vehicle?.dougscore?.video_time}</span>
+									</div>
+									<div
+										className="cursor-pointer"
+										onClick={() => history.push(`/vehicles/${vehicle?.id}`)}
+									>
+										<span>
+											{vehicle.year} {vehicle.make} {vehicle.model}{" "}
+										</span>
+									</div>
+									Dougscore: {vehicle.dougscore.dougscore_total}
+								</div>
+							</div>
+						</div>
+					))}
+			</Slider>
+			<button className="no-button" onClick={sliderPosition?.slickNext}><i style={{ fontSize: `22px`}} class="cursor-pointer green-text fa-solid fa-caret-down"></i></button>
 		</>
 	);
 }
-
-export default GridCard;

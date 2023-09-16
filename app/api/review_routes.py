@@ -1,6 +1,8 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import db, Review
+from app.forms import ReviewForm
+from .auth_routes import validation_errors_to_error_messages
 
 review_routes = Blueprint('reviews', __name__)
 
@@ -24,24 +26,24 @@ def review(id):
     return review.to_dict()
 
 
-# TO-DO User validation and return errors
 @review_routes.route('/<int:id>', methods=["PUT"])
 @login_required
 def update_review(id):
     """
-    Create a new review associated with a specific vehicle
+    Updates a review associated with a specific vehicle
     """
-    request_data = request.get_json()
-    # form['csrf_token'].data = request.cookies['csrf_token']
-    review = Review.query.get(id)
-    # review.id = id
-    review.review = request_data['review']
-    review.rating = request_data['rating']
-    review.user_id = request_data['user_id']
-    review.vehicle_id = request_data['vehicle_id']
-    db.session.commit()
-    return "Success"
-    # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    form = ReviewForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        review = Review.query.get(id)
+        review.id = id
+        review.rating = form.data['rating']
+        review.review = form.data['review']
+        review.user_id = form.data['user_id']
+        review.vehicle_id = form.data['vehicle_id']
+        db.session.commit()
+        return review.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 @review_routes.route('/<int:id>', methods=["DELETE"])

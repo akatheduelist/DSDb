@@ -11,7 +11,6 @@ function Navigation({ isLoaded }) {
 	return (
 		<nav className="nav-bar">
 			<div className="nav-bar-content">
-                    {/* NavLink Image? */}
 					<a href="/"><img className="nav-bar-logo" src={logo} /></a>
 					<span>Menu</span>
 				<div class="nav-bar-search-container">

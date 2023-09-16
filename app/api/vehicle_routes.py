@@ -48,7 +48,7 @@ def vehicle_review(id):
     """
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
+    if request.method == 'POST' and form.validate_on_submit():
         review = Review(
             rating=form.data['rating'],
             review=form.data['review'],
@@ -59,7 +59,7 @@ def vehicle_review(id):
         db.session.commit()
         return review.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-
+    
 
 @vehicle_routes.route('/<int:id>/reviews')
 def vehicle_reviews(id):

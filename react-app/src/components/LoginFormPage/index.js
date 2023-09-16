@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
+import logo from "../../images/dsdb_logo.svg";
 import "./LoginForm.css";
 
 function LoginFormPage() {
@@ -9,7 +10,7 @@ function LoginFormPage() {
 	const sessionUser = useSelector((state) => state.session.user);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [errors, setErrors] = useState([]);
+	const [errors, setErrors] = useState({});
 
 	if (sessionUser) return <Redirect to="/" />;
 
@@ -23,42 +24,99 @@ function LoginFormPage() {
 
 	return (
 		<>
-			<h1>Log In</h1>
-			<form onSubmit={handleSubmit}>
-				<ul>
-					{errors.map((error, idx) => (
-						<li key={idx}>{error}</li>
-					))}
-				</ul>
-				<label>
-					Email
-					<input
-						type="text"
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					Password
-					<input
-						type="password"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-						required
-					/>
-				</label>
-				<button type="submit">Sign In</button>
-				<button
-					type="submit"
-					onClick={() => {
-						setEmail("demo@aa.io");
-						setPassword("password");
-					}}
+			<div className="signup-component-container">
+				<div className="signup-top-logo center">
+					<a href="/">
+						<img
+							style={{ width: `107px` }}
+							src={logo}
+						/>
+					</a>
+				</div>
+				{Object.values(errors).length && (
+					<div className="error-box bottom-spacing center">
+						<div>
+							<i
+								style={{ fontSize: `32px` }}
+								className="error fa-solid fa-triangle-exclamation"
+							></i>
+						</div>
+						<div style={{ paddingLeft: `13px` }}>
+							<span
+								style={{ fontSize: `22px` }}
+								className="error"
+							>
+								There was a problem
+							</span>
+							<ul>
+								{Object.values(errors)?.map((error, idx) => (
+									<li
+										style={{ fontSize: `14px` }}
+										className="arial"
+										key={idx}
+									>
+										{error}
+									</li>
+								))}
+							</ul>
+						</div>
+					</div>
+				)}
+				<form
+					className="signup-form"
+					onSubmit={handleSubmit}
+					noValidate
 				>
-					Demo User
-				</button>
-			</form>
+					<h1>Sign in</h1>
+					<label>
+						Email
+						<input
+							type="text"
+							className="bottom-spacing"
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+							required
+						/>
+						{/* {errors.email ? <span>{errors.email}</span> : null} */}
+					</label>
+					<label>
+						Password
+						<input
+							type="password"
+							className="bottom-spacing"
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+							required
+						/>
+					</label>
+					<button
+						className="green-background bottom-spacing"
+						type="submit"
+					>
+						Sign In
+					</button>
+					<button
+						className="green-background bottom-spacing"
+						type="submit"
+						onClick={() => {
+							setEmail("demo@aa.io");
+							setPassword("password");
+						}}
+					>
+						Demo User
+					</button>
+					<br />
+					<div style={{textAlign: `center`}}>
+						<span
+							style={{ fontSize: `14px` }}
+							className="arial"
+						>
+							New to DSDb?
+						</span>
+					</div>
+					<button type="submit">Create your DSDb account</button>
+				</form>
+			</div>
 		</>
 	);
 }

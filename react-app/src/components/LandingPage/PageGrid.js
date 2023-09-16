@@ -1,22 +1,21 @@
 import GridCard from "./GridCard";
 import "./LandingPage.css";
 
-function PageGrid({ allVehicles, isLoaded, randomVehicle }) {
+function PageGrid({ history, allVehicles, isLoaded, randomVehicle }) {
 	return (
 		<>
 			<div className="page-grid-container">
 				<div className="page-grid-content">
 					<div className="page-grid-top">
-						<div className="page-grid-top-image">
+						<div
+							className="page-grid-top-image cursor-pointer border-radius"
+							onClick={() => history.push(`/vehicles/${randomVehicle?.id}`)}
+						>
 							{isLoaded && (
-								<div className="page-grid-top-hero-video">
-									<a href={`vehicles/${randomVehicle.id}`}>
-										<img
-											className="image-cover"
-											src={randomVehicle.images[0].image_url}
-										/>
-									</a>
-								</div>
+								<img
+									className="page-grid-top-hero-video"
+									src={randomVehicle.images[0].image_url}
+								/>
 							)}
 						</div>
 						<div className="page-grid-top-right">
@@ -26,31 +25,8 @@ function PageGrid({ allVehicles, isLoaded, randomVehicle }) {
 							>
 								Up next
 							</span>
-							<div className="up-next-card-container dark-grey-background overflow-hidden">
-								{isLoaded &&
-									Object.values(allVehicles).map((vehicle) => (
-										<div
-											className="up-next-card"
-											key={vehicle.id}
-										>
-											<div style={{ display:`flex`, flexDirection: `column`, justifyContent: `flex-end`}}>
-												<img
-													style={{ width: `5rem` }}
-													src={vehicle?.images[1]?.image_url}
-												/>
-											</div>
-											<div style={{ paddingLeft: `1rem`, paddingTop: `1rem`}}>
-												<div>
-                                                    <a href={vehicle?.dougscore?.video_link}>PLAY</a> {vehicle?.dougscore?.video_time}
-                                                </div>
-                                                <a href={`/vehicles/${vehicle.id}`}>
-													{vehicle.year} {vehicle.make} {vehicle.model} {vehicle.trim}{" "}
-													{vehicle.vehicle_country}
-												</a>
-												Dougscore: {vehicle.dougscore.dougscore_total}
-											</div>
-										</div>
-									))}
+							<div className="up-next-card-container overflow-hidden border-radius">
+								<GridCard allVehicles={allVehicles} />
 							</div>
 							<span
 								style={{ paddingLeft: `16px`, paddingTop: `16px` }}
@@ -61,15 +37,12 @@ function PageGrid({ allVehicles, isLoaded, randomVehicle }) {
 						</div>
 					</div>
 				</div>
+
 				<div className="page-grid-content">
 					<div className="page-grid-top">
-						<div className="page-grid-top-image">
-							<div className="page-grid-title">
-								<span className="title">Featured Today</span>
-								<div>
-									<GridCard />
-								</div>
-							</div>
+						<div className="page-grid-title">
+							<span className="title">Featured Today</span>
+							<div></div>
 						</div>
 					</div>
 				</div>

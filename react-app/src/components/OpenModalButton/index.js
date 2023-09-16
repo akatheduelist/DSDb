@@ -9,7 +9,6 @@ function OpenModalButton({
     buttonStyle,
     buttonClass
 }) {
-    console.log("Style", buttonStyle)
 	const { setModalContent, setOnModalClose } = useModal();
 
 	const onClick = () => {
