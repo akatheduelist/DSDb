@@ -26,6 +26,11 @@ h1, h2, h3 {
 	font-weight: 400;
 }
 
+ul {
+    list-style-type: none;
+    padding: 0px;
+}
+
 input,
 textarea {
 	/* resize: none; */
