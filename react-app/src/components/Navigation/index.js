@@ -21,9 +21,9 @@ function Navigation({ isLoaded }) {
 					<ul>
 						{isLoaded && sessionUser ? (
 							<li>
-								<ProfileButton user={sessionUser} />
+								<ProfileButton user={sessionUser}>ME</ProfileButton>
 							</li>
-						) : <button style={{ fontSize: `14px`}} className="no-button white-text mid-bold" onClick={() => <Redirect to="/signin" />}>Signin</button>}
+						) : <NavLink to="/login" style={{ fontSize: `14px`}} className="white-text mid-bold">Signin</NavLink>}
 					</ul>
 				</div>
 			</div>
