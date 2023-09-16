@@ -41,8 +41,16 @@ function ProfileButton({ user }) {
 
 	return (
 		<>
-			<button style={{ fontSize: `14px`}} className="no-button white-text mid-bold" onClick={openMenu}>
-				{user.username}
+			<button
+				style={{ fontSize: `14px` }}
+				className="no-button white-text mid-bold"
+				onClick={openMenu}
+			>
+				<i
+					style={{ fontSize: `18px` }}
+					class="fa-solid fa-circle-user"
+				/>{" "}
+				{user.username} <i class="fa-solid fa-caret-down" />
 			</button>
 			<ul
 				className={ulClassName}
@@ -50,11 +58,13 @@ function ProfileButton({ user }) {
 			>
 				{user ? (
 					<>
-						<li>{user.full_name}</li>
-						<li>{user.email}</li>
-						<li>
-							<button onClick={handleLogout}>Log Out</button>
-						</li>
+						<div className="user-menu border-radius">
+							<li className="cursor-pointer hover-background">{user.full_name}</li>
+							<li className="cursor-pointer hover-background">{user.email}</li>
+							<li className="cursor-pointer hover-background" onClick={handleLogout}>
+								Sign out
+							</li>
+						</div>
 					</>
 				) : (
 					<>

@@ -28,6 +28,7 @@ function Navigation({ isLoaded }) {
 						placeholder="Search DSDb"
 					></input>
 				</div>
+                <span  className="hover-background cursor-pointer border-radius" style={{ padding: `8px 16px`, fontSize: `17px`, fontFamily: `impact` }}>DSDb<span className="green-text">Pro</span></span>
 				<div class="nav-bar-separator"></div>
 				<div>
                 <span className="hover-background cursor-pointer border-radius" style={{ padding: `8px 16px`, fontSize: `15px` }}>
