@@ -251,7 +251,7 @@ function VehicleHeader({ vehicle, sessionUser }) {
 									</form>
 								</>
 							) : null}
-							{sessionUser ? (
+							{sessionUser && !newTag ? (
 								<button
 									style={{ marginLeft: `1rem` }}
 									className="no-button white-text small-bold"
@@ -263,31 +263,30 @@ function VehicleHeader({ vehicle, sessionUser }) {
 								</button>
 							) : null}
 						</div>
-						<div className="description">
+						<div className="vehicle-header-description">
 							{editDescription ? (
-								<div>
-									<form onSubmit={handleDescription}>
+									<form style={{ display: `inline-flex`, alignItems: `flex-end`}} onSubmit={handleDescription}>
 										<textarea
+                                            style={{ width: `40.5rem` }}
 											value={updateDescription}
 											onChange={(e) => setUpdateDescription(e.target.value)}
 										/>
-										<button type="submit">Submit</button>
+										<button style={{width: `4rem`, height: `2rem`, margin: `0px 6px`}} className="green-background small-bold" type="submit">Submit</button>
 									</form>
-								</div>
-							) : (
-								vehicle.description
-							)}
-						</div>
-						{sessionUser ? (
-							<button
-								onClick={() => {
-									setEditDescription(!editDescription);
-									setUpdateDescription(vehicle.description);
-								}}
+							) : <span>{vehicle?.description}</span> }
+						{sessionUser && !editDescription ? (
+                            <button
+                            className="no-button white-text small-bold"
+                            onClick={() => {
+                                setEditDescription(!editDescription);
+                                setUpdateDescription(vehicle.description);
+                            }}
 							>
-								Update Description
+								Update Desc
 							</button>
 						) : null}
+                        </div>
+                        </div>
 						<div>WRITER</div>
 						<div>DIRECTOR</div>
 						<div>STARS</div>
@@ -305,7 +304,6 @@ function VehicleHeader({ vehicle, sessionUser }) {
 						<p>weekend_total: {vehicle?.dougscore.weekend_total}</p>
 						<p>video_link: {vehicle?.dougscore.video_link}</p>
                     <p>filming_location: {vehicle?.dougscore.filming_location}</p> */}
-					</div>
 				</div>
 			</div>
 		</>

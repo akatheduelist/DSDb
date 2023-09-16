@@ -104,6 +104,7 @@
     flex-direction: column;
     justify-content: baseline;
     padding: 0px 15px;
+    width: 66%;
 }
 
 .vehicle-header-tags {
@@ -118,6 +119,15 @@
     border-radius: 30px;
     margin: 0px .2rem;
     font-size: 14px;
+}
+
+.vehicle-header-description {
+    display: inline-flex;
+    align-items: flex-start;
+    margin: .5rem 1rem;
+    padding-bottom: .7rem;
+    border-bottom: 1px solid #ffffff60;
+    font-size: 16px;
 }
 
 .details-container {
