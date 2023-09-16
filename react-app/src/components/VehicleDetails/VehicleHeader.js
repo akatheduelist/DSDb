@@ -55,6 +55,7 @@ function VehicleHeader({ vehicle, sessionUser }) {
 			if (data.errors) {
 				setErrors(data.errors);
 			} else {
+                {console.log(vehicle?.tags)}
 				dispatch(getVehicle(vehicle?.id));
 				setNewTag(!newTag);
 			}
@@ -207,15 +208,30 @@ function VehicleHeader({ vehicle, sessionUser }) {
 
 					<div className="vehicle-header-description-container">
 						<div className="vehicle-header-tags">
+							{Object.values(vehicle?.tags).map(({ tag, id }) => (
+								<div
+									className="hover-background"
+									key={id}
+								>
+									{tag}
+								</div>
+							))}
 							{newTag ? (
 								<>
-									<form onSubmit={handleTag}>
-										{console.log(newTagData)}
+									<form
+										style={{ display: `inline-flex`, alignItems: `center`, paddingLeft: `12px` }}
+										onSubmit={handleTag}
+									>
 										<select
 											value={newTagData}
 											onChange={(e) => setNewTagData(e.target.value)}
 										>
-											<option disabled>Select a tag</option>
+											<option
+												style={{ height: `100%` }}
+												disabled
+											>
+												Select a tag
+											</option>
 											{Object.values(tags.vehicle_tags).map(({ tag, id }) => (
 												<option
 													key={id}
@@ -225,16 +241,20 @@ function VehicleHeader({ vehicle, sessionUser }) {
 												</option>
 											))}
 										</select>
-										<button type="submit">Submit</button>
+										<button
+											style={{ marginLeft: `4px` }}
+											className="green-background small-bold"
+											type="submit"
+										>
+											Submit
+										</button>
 									</form>
 								</>
-							) : (
-								Object.values(vehicle.tags).map(({ tag, id }) => <div className="hover-background" key={id}>{tag}</div>)
-							)}
+							) : null}
 							{sessionUser ? (
 								<button
-                                    style={{ marginLeft: `1rem`}}
-                                    className="no-button white-text small-bold"
+									style={{ marginLeft: `1rem` }}
+									className="no-button white-text small-bold"
 									onClick={() => {
 										setNewTag(!newTag);
 									}}

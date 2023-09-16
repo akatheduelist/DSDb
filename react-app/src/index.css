@@ -62,7 +62,7 @@ form > button:hover {
 	background-image: linear-gradient(rgb(0 0 0/15%) 0 0);
 }
 
-form > label {
+form > label select {
 	color: #111111;
 	font-size: 13px;
 	font-weight: 700;
