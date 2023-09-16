@@ -19,11 +19,11 @@ function Navigation({ isLoaded }) {
 				<div class="nav-bar-separator"></div>
 				<div class="nav-bar-user">
 					<ul>
-						{isLoaded && (
+						{isLoaded && sessionUser ? (
 							<li>
 								<ProfileButton user={sessionUser} />
 							</li>
-						)}
+						) : <button style={{ fontSize: `14px`}} className="no-button white-text mid-bold" onClick={() => <Redirect to="/signin" />}>Signin</button>}
 					</ul>
 				</div>
 			</div>
