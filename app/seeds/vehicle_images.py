@@ -15,7 +15,6 @@ def seed_vehicle_images():
     num_of_users = len(users)
     vehicles = Vehicle.query.all()
     for vehicle in vehicles:
-        print(len(vehicle.vehicle_images))
         if len(vehicle.vehicle_images) < 1:
             # EX: https://www.youtube.com/watch?v=_UKBxM7m7qo becomes _UKBxM7m7qo
             youtube_id = vehicle.dougscore.video_link[32:43]
