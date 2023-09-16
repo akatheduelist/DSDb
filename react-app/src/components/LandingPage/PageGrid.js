@@ -1,10 +1,7 @@
-import { useHistory, Redirect } from "react-router-dom";
 import GridCard from "./GridCard";
 import "./LandingPage.css";
 
-function PageGrid({ allVehicles, isLoaded, randomVehicle }) {
-	const history = useHistory();
-
+function PageGrid({ history, allVehicles, isLoaded, randomVehicle }) {
 	return (
 		<>
 			<div className="page-grid-container">
@@ -29,7 +26,7 @@ function PageGrid({ allVehicles, isLoaded, randomVehicle }) {
 								Up next
 							</span>
 							<div className="up-next-card-container overflow-hidden border-radius">
-                            <GridCard allVehicles={allVehicles} />
+								<GridCard allVehicles={allVehicles} />
 							</div>
 							<span
 								style={{ paddingLeft: `16px`, paddingTop: `16px` }}

@@ -6,6 +6,7 @@ import { getTags } from "../../store/tags";
 import OpenModalButton from "../OpenModalButton";
 import ReviewFormModal from "../ReviewFormModal";
 import DeleteItemModal from "../DeleteItemModal";
+import VehicleHeader from "./VehicleHeader";
 import Reviews from "./Reviews";
 import "./VehicleDetails.css";
 
@@ -128,87 +129,7 @@ function VehicleDetails() {
 		<>
 			{vehicleIsLoaded && (
 				<>
-					<div
-						style={{
-							backgroundImage: vehicle.images[1] ? `url(${vehicle.images[1].image_url})` : `none`,
-							backgrounddosition: `center center`,
-							backgroundRepeat: `no-repeat`,
-							backgroundSize: `cover`,
-						}}
-						className="vehicle-details-header-container"
-					>
-						<div
-							style={{
-								background: `#1f1f1f90`,
-								backdropFilter: `blur(40px) saturate(100%)`,
-								width: `100%`,
-								height: `100%`,
-								display: `flex`,
-								flexDirection: `column`,
-								justifyContent: `center`,
-							}}
-						>
-							<div className="vehicle-details-header">
-								<div className="vehicle-details-title">
-									<span className="big-title">
-										{vehicle?.make} {vehicle?.model}
-									</span>
-									<span>
-										{vehicle?.year} <span>&#183;</span> {vehicle?.vehicle_country}
-									</span>
-								</div>
-								<div className="vehicle-header-rating">
-									<div className="rating-title">DOUGS RATING</div>
-									<span className="medium-header">{vehicle?.dougscore.dougscore_total}/10</span>
-								</div>
-								<div className="vehicle-header-rating">
-									<div className="rating-title">YOUR RATING</div>
-									{sessionUser &&
-									vehicle.reviews.find((review) => review.user_id === sessionUser.id) ? (
-										<span className="medium-header">
-											{vehicle.reviews.find((review) => review.user_id === sessionUser.id).rating}
-										</span>
-									) : (
-										<span>* RATE</span>
-									)}
-								</div>
-								<div className="vehicle-header-rating">
-									<div className="rating-title">POPULARITY</div>
-									{vehicle.reviews ? (
-										<span>{vehicle.reviews.length}</span>
-									) : (
-										<span>Not enough data...</span>
-									)}
-								</div>
-							</div>
-							<div className="vehicle-header-details">
-								<div className="header-details-poster">
-									{vehicle.images[1] ? (
-										<>
-											<img
-												className="header-poster-img"
-												src={vehicle.images[1].image_url}
-											/>
-											<div className="header-poster-img-text">
-												{vehicle.make} &nbsp;
-												{vehicle.model}
-											</div>
-										</>
-									) : null}
-								</div>
-								<div className="header-details-video-pane">
-									<img
-										className="video-pane-thumbnail"
-										src={vehicle?.images[0].image_url}
-									/>
-								</div>
-								<div className="header-details-photos-and-videos">
-									<div className="header-details-pv">## VIDEOS</div>
-									<div className="header-details-pv">## PHOTOS</div>
-								</div>
-							</div>
-						</div>
-					</div>
+                    <VehicleHeader vehicle={vehicle} sessionUser={sessionUser} />
 					<div className="vehicle-details-header-description">
 						<div className="tags">
 							{vehicleIsLoaded && newTag ? (

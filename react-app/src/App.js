@@ -8,6 +8,7 @@ import LandingPage from "./components/LandingPage";
 import Navigation from "./components/Navigation";
 import VehicleDetails from "./components/VehicleDetails";
 import QuirksFormPage from "./components/QuirksFormPage";
+import Footer from "./components/Footer/Footer"
 
 function App() {
 	const dispatch = useDispatch();
@@ -48,6 +49,7 @@ function App() {
 							<QuirksFormPage />
 						</Route>
 					</Switch>
+                    <Footer />
 				</div>
 			)}
 		</>

@@ -1,10 +1,12 @@
 import { useState } from "react";
 import Slider from "react-slick";
+import { useHistory } from "react-router-dom"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./LandingPage.css";
 
-export default function GridCard({ allVehicles }, isLoaded, Redirect, history) {
+export default function GridCard({ allVehicles }, isLoaded, Redirect) {
+    const history = useHistory()
 	const [sliderPosition, setSliderPosition] = useState(null);
 
 	const settings = {
@@ -13,20 +15,20 @@ export default function GridCard({ allVehicles }, isLoaded, Redirect, history) {
 		slidesToScroll: 1,
 		infinite: false,
 		vertical: true,
-		// responsive: [
-		// 	{
-		// 		breakpoint: 1024,
-		// 		settings: {
-		// 			slidesToShow: 2,
-		// 		},
-		// 	},
-		// 	{
-		// 		breakpoint: 800,
-		// 		settings: {
-		// 			slidesToShow: 1,
-		// 		},
-		// 	},
-		// ],
+		responsive: [
+			{
+				breakpoint: 1024,
+				settings: {
+					slidesToShow: 2,
+				},
+			},
+			{
+				breakpoint: 800,
+				settings: {
+					slidesToShow: 1,
+				},
+			},
+		],
 	};
 
 	return (
