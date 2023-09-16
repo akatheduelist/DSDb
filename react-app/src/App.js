@@ -8,49 +8,51 @@ import LandingPage from "./components/LandingPage";
 import Navigation from "./components/Navigation";
 import VehicleDetails from "./components/VehicleDetails";
 import QuirksFormPage from "./components/QuirksFormPage";
-import Footer from "./components/Footer/Footer"
+import Footer from "./components/Footer/Footer";
 
 function App() {
 	const dispatch = useDispatch();
 	const [isLoaded, setIsLoaded] = useState(false);
+
 	useEffect(() => {
 		dispatch(authenticate()).then(() => setIsLoaded(true));
 	}, [dispatch]);
 
+
+
 	return (
 		<>
 			<Navigation isLoaded={isLoaded} />
-            {/* <div className="landing-page-container" /> */}
 			{isLoaded && (
-				<div className="content-container">
-					<Switch>
-						<Route
-							exact
-							path="/"
-						>
-							<LandingPage />
-						</Route>
-						<Route path="/login">
-							<LoginFormPage />
-						</Route>
-						<Route path="/signup">
-							<SignupFormPage />
-						</Route>
-						<Route
-							exact
-							path="/vehicles/:vehicleId"
-						>
-							<VehicleDetails />
-						</Route>
-						<Route
-							exact
-							path="/vehicles/:vehicleId/quirks"
-						>
-							<QuirksFormPage />
-						</Route>
-					</Switch>
-                    <Footer />
-				</div>
+					<div className="content-container">
+						<Switch>
+							<Route
+								exact
+								path="/"
+							>
+								<LandingPage />
+							</Route>
+							<Route path="/login" >
+								<LoginFormPage />
+							</Route>
+							<Route path="/signup">
+								<SignupFormPage />
+							</Route>
+							<Route
+								exact
+								path="/vehicles/:vehicleId"
+							>
+								<VehicleDetails />
+							</Route>
+							<Route
+								exact
+								path="/vehicles/:vehicleId/quirks"
+							>
+								<QuirksFormPage />
+							</Route>
+						</Switch>
+						<Footer />
+					</div>
 			)}
 		</>
 	);

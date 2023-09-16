@@ -1,8 +1,72 @@
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getVehicle } from "../../store/vehicle";
+import { getTags } from "../../store/tags";
+
 function VehicleHeader({ vehicle, sessionUser }) {
+	const dispatch = useDispatch();
+	const tags = useSelector((state) => state.tags);
+	const [newTag, setNewTag] = useState(false);
+	const [newTagData, setNewTagData] = useState("");
+	const [editDescription, setEditDescription] = useState(false);
+	const [updateDescription, setUpdateDescription] = useState("");
+	const [tagsIsLoaded, setTagsIsLoaded] = useState(false);
+	const [errors, setErrors] = useState({});
+
+	useEffect(() => {
+		dispatch(getTags()).then(() => setTagsIsLoaded(true));
+	}, [dispatch]);
+
+	const handleDescription = async (e) => {
+		e.preventDefault();
+		// TO-DO Move to dispatch
+		if (editDescription && sessionUser) {
+			const data = await fetch(`/api/vehicles/${vehicle?.id}`, {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					description: updateDescription,
+				}),
+			});
+			if (data.errors) {
+				setErrors(data.errors);
+			} else {
+				dispatch(getVehicle(vehicle?.id));
+				setEditDescription(!editDescription);
+			}
+		}
+	};
+
+	const handleTag = async (e) => {
+		e.preventDefault();
+		// TO-DO Move to dispatch
+		if (newTag && sessionUser) {
+			const data = await fetch(`/api/vehicles/${vehicle?.id}/tags`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					tag_id: newTagData,
+				}),
+			});
+			if (data.errors) {
+				setErrors(data.errors);
+			} else {
+				dispatch(getVehicle(vehicle?.id));
+				setNewTag(!newTag);
+			}
+		}
+	};
+
 	return (
 		<>
 			<div
 				style={{
+					display: `flex`,
+					flexDirection: `column`,
 					backgroundImage: vehicle?.images[1] ? `url(${vehicle?.images[1]?.image_url})` : `none`,
 				}}
 				className="vehicle-header-container"
@@ -93,12 +157,22 @@ function VehicleHeader({ vehicle, sessionUser }) {
 						<div className="vehicle-header-details-poster">
 							{vehicle.images[1] ? (
 								<>
-										<img
-											className="vehicle-header-poster-img light-border-radius"
-											src={vehicle?.images[1]?.image_url}
-										/>
+									<img
+										className="vehicle-header-poster-img light-border-radius"
+										src={vehicle?.images[1]?.image_url}
+									/>
 									<div className="vehicle-header-poster-img-text">
-										<div style={{ color: `#1f1f1f88`, position: `absolute`, top: `25%`, fontSize: `22px`, textAlign: `center`}}><span className="title">{vehicle?.model}</span></div>
+										<div
+											style={{
+												color: `#1f1f1f88`,
+												position: `absolute`,
+												top: `25%`,
+												fontSize: `22px`,
+												textAlign: `center`,
+											}}
+										>
+											<span className="title">{vehicle?.model}</span>
+										</div>
 									</div>
 								</>
 							) : null}
@@ -110,9 +184,107 @@ function VehicleHeader({ vehicle, sessionUser }) {
 							/>
 						</div>
 						<div className="vehicle-header-pv-container">
-							<div className="header-details-pv border-radius hover-background cursor-pointer"><i style={{fontSize: `26px`, marginBottom: `1rem`}} class="fa-solid fa-film" /><span style={{ fontSize: ` 12px`, letterSpacing:`.15rem`}}>{vehicle?.dougscore?.video_link?.length}VIDEOS</span></div>
-							<div className="header-details-pv border-radius hover-background cursor-pointer"><i style={{fontSize: `26px`, marginBottom: `1rem`}} class="fa-solid fa-photo-film" /><span style={{ fontSize: ` 12px`, letterSpacing:`.15rem`}}>{vehicle?.images?.length}PHOTOS</span></div>
+							<div className="header-details-pv border-radius hover-background cursor-pointer">
+								<i
+									style={{ fontSize: `26px`, marginBottom: `1rem` }}
+									class="fa-solid fa-film"
+								/>
+								<span style={{ fontSize: ` 12px`, letterSpacing: `.15rem` }}>
+									{vehicle?.dougscore?.video_link.length}VIDEOS
+								</span>
+							</div>
+							<div className="header-details-pv border-radius hover-background cursor-pointer">
+								<i
+									style={{ fontSize: `26px`, marginBottom: `1rem` }}
+									class="fa-solid fa-photo-film"
+								/>
+								<span style={{ fontSize: ` 12px`, letterSpacing: `.15rem` }}>
+									{vehicle?.images?.length}PHOTOS
+								</span>
+							</div>
 						</div>
+					</div>
+
+					<div className="vehicle-header-description-container">
+						<div className="vehicle-header-tags">
+							{newTag ? (
+								<>
+									<form onSubmit={handleTag}>
+										{console.log(newTagData)}
+										<select
+											value={newTagData}
+											onChange={(e) => setNewTagData(e.target.value)}
+										>
+											<option disabled>Select a tag</option>
+											{Object.values(tags.vehicle_tags).map(({ tag, id }) => (
+												<option
+													key={id}
+													value={id}
+												>
+													{tag}
+												</option>
+											))}
+										</select>
+										<button type="submit">Submit</button>
+									</form>
+								</>
+							) : (
+								Object.values(vehicle.tags).map(({ tag, id }) => <div className="hover-background" key={id}>{tag}</div>)
+							)}
+							{sessionUser ? (
+								<button
+                                    style={{ marginLeft: `1rem`}}
+                                    className="no-button white-text small-bold"
+									onClick={() => {
+										setNewTag(!newTag);
+									}}
+								>
+									+ Add Tag
+								</button>
+							) : null}
+						</div>
+						<div className="description">
+							{editDescription ? (
+								<div>
+									<form onSubmit={handleDescription}>
+										<textarea
+											value={updateDescription}
+											onChange={(e) => setUpdateDescription(e.target.value)}
+										/>
+										<button type="submit">Submit</button>
+									</form>
+								</div>
+							) : (
+								vehicle.description
+							)}
+						</div>
+						{sessionUser ? (
+							<button
+								onClick={() => {
+									setEditDescription(!editDescription);
+									setUpdateDescription(vehicle.description);
+								}}
+							>
+								Update Description
+							</button>
+						) : null}
+						<div>WRITER</div>
+						<div>DIRECTOR</div>
+						<div>STARS</div>
+						{/* <h1>Dougscore: </h1>
+						<p>daily_comfort: {vehicle?.dougscore.daily_comfort}</p>
+						<p>daily_features: {vehicle?.dougscore.daily_features}</p>
+						<p>daily_practicality: {vehicle?.dougscore.daily_practicality}</p>
+						<p>daily_quality: {vehicle?.dougscore.daily_quality}</p>
+						<p>daily_total: {vehicle?.dougscore.daily_total}</p>
+						<p>weekend_acceleration: {vehicle?.dougscore.weekend_acceleration}</p>
+						<p>weekend_coolfactor: {vehicle?.dougscore.weekend_coolfactor}</p>
+						<p>weekend_funfactor: {vehicle?.dougscore.weekend_funfactor}</p>
+						<p>weekend_handling: {vehicle?.dougscore.weekend_handling}</p>
+						<p>weekend_styling: {vehicle?.dougscore.weekend_styling}</p>
+						<p>weekend_total: {vehicle?.dougscore.weekend_total}</p>
+						<p>video_link: {vehicle?.dougscore.video_link}</p>
+                    <p>filming_location: {vehicle?.dougscore.filming_location}</p> */}
 					</div>
 				</div>
 			</div>

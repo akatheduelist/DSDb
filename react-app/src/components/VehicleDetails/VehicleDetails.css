@@ -99,11 +99,24 @@
 	padding: 0px 16px;
 }
 
-.vehicle-details-header-description {
+.vehicle-header-description-container {
     display: flex;
     flex-direction: column;
     justify-content: baseline;
     padding: 15px;
+}
+
+.vehicle-header-tags {
+    display: inline-flex;
+    padding: 8px;
+}
+
+.vehicle-header-tags > div {
+    padding: 5px 12px;
+    border: 1px solid #ffffff60;
+    border-radius: 30px;
+    margin: 0px .2rem;
+    font-size: 14px;
 }
 
 .details-container {
