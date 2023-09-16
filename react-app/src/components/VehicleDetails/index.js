@@ -96,14 +96,19 @@ function VehicleDetails() {
                         <img src={image_url} />
 						</div>
 					))} */}
-				<div className="details-container">
-					<div className="details-title">
-						<h1>Photos #-- </h1>
+				<div className="vehicle-details-container">
+                    DOUGSCORE SPREAD
+					<div style={{ justifyContent: `flex-start`}} className="vehicle-details-title">
+                        <span className="title green-text mid-bold">|</span>&nbsp;<span className="title">Photos</span>&nbsp;&nbsp;<span style={{ fontSize: `12px`}}>{vehicle?.images?.length}</span><i className="title fa-solid fa-angle-right" />
 					</div>
 					<div className="details-content photos-carosel">PHOTOS CAROSEL</div>
-					<div className="details-title">
-						<span className="title">UserReviews #--</span>
-						<OpenModalButton
+					<div className="vehicle-details-title">
+                        <div style={{ display: `inline-flex`, alignItems: `center`}}>
+                    <span className="title green-text mid-bold">|</span>&nbsp;<span className="title">UserReviews</span>&nbsp;&nbsp;<span style={{ fontSize: `12px`}}>{vehicle?.reviews?.length}</span><i className="title fa-solid fa-angle-right" />
+
+                        </div>
+						<div>
+                        <OpenModalButton
 							buttonText="+ New Review"
 							buttonClass="no-button green-link"
 							modalComponent={
@@ -113,6 +118,7 @@ function VehicleDetails() {
 								/>
 							}
                             />
+                        </div>
 					</div>
 					<Reviews
 						OpenModalButton={OpenModalButton}

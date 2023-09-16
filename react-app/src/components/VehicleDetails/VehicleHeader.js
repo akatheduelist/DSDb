@@ -232,7 +232,7 @@ function VehicleHeader({ vehicle, sessionUser }) {
 											>
 												Select a tag
 											</option>
-											{Object.values(tags.vehicle_tags).map(({ tag, id }) => (
+											{Object.values(tags?.vehicle_tags).map(({ tag, id }) => (
 												<option
 													key={id}
 													value={id}
@@ -286,24 +286,10 @@ function VehicleHeader({ vehicle, sessionUser }) {
 							</button>
 						) : null}
                         </div>
+						<div className="vehicle-header-description small-bold">DAILY SCORE: {vehicle?.dougscore.daily_total}</div>
+						<div className="vehicle-header-description small-bold">WEEKEND SCORE: {vehicle?.dougscore.weekend_total}</div>
+						<div className="vehicle-header-description small-bold">REVIEW LOCATION: {vehicle?.dougscore.filming_location}</div>
                         </div>
-						<div>WRITER</div>
-						<div>DIRECTOR</div>
-						<div>STARS</div>
-						{/* <h1>Dougscore: </h1>
-						<p>daily_comfort: {vehicle?.dougscore.daily_comfort}</p>
-						<p>daily_features: {vehicle?.dougscore.daily_features}</p>
-						<p>daily_practicality: {vehicle?.dougscore.daily_practicality}</p>
-						<p>daily_quality: {vehicle?.dougscore.daily_quality}</p>
-						<p>daily_total: {vehicle?.dougscore.daily_total}</p>
-						<p>weekend_acceleration: {vehicle?.dougscore.weekend_acceleration}</p>
-						<p>weekend_coolfactor: {vehicle?.dougscore.weekend_coolfactor}</p>
-						<p>weekend_funfactor: {vehicle?.dougscore.weekend_funfactor}</p>
-						<p>weekend_handling: {vehicle?.dougscore.weekend_handling}</p>
-						<p>weekend_styling: {vehicle?.dougscore.weekend_styling}</p>
-						<p>weekend_total: {vehicle?.dougscore.weekend_total}</p>
-						<p>video_link: {vehicle?.dougscore.video_link}</p>
-                    <p>filming_location: {vehicle?.dougscore.filming_location}</p> */}
 				</div>
 			</div>
 		</>
