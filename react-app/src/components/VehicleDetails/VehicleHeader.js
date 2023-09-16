@@ -110,8 +110,8 @@ function VehicleHeader({ vehicle, sessionUser }) {
 							/>
 						</div>
 						<div className="vehicle-header-pv-container">
-							<div className="header-details-pv"><i class="fa-solid fa-film" /></div>
-							<div className="header-details-pv"><i class="fa-solid fa-photo-film" /></div>
+							<div className="header-details-pv border-radius hover-background cursor-pointer"><i style={{fontSize: `26px`, marginBottom: `1rem`}} class="fa-solid fa-film" /><span style={{ fontSize: ` 12px`, letterSpacing:`.15rem`}}>{vehicle?.dougscore?.video_link?.length}VIDEOS</span></div>
+							<div className="header-details-pv border-radius hover-background cursor-pointer"><i style={{fontSize: `26px`, marginBottom: `1rem`}} class="fa-solid fa-photo-film" /><span style={{ fontSize: ` 12px`, letterSpacing:`.15rem`}}>{vehicle?.images?.length}PHOTOS</span></div>
 						</div>
 					</div>
 				</div>
