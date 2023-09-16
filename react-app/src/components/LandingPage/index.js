@@ -9,7 +9,7 @@ import "./LandingPage.css";
 
 function LandingPage() {
 	const dispatch = useDispatch();
-    const history = useHistory();
+	const history = useHistory();
 	const allVehicles = useSelector((state) => state.vehicle.allVehicles);
 	const sessionUser = useSelector((state) => state.session.user);
 	const [errors, setErrors] = useState([]);
@@ -26,14 +26,14 @@ function LandingPage() {
 
 	return (
 		<>
-				{isLoaded && (
-					<PageGrid
-						allVehicles={allVehicles}
-						isLoaded={isLoaded}
-						randomVehicle={randomVehicle}
-                        history={history}
-					/>
-				)}
+			{isLoaded && (
+				<PageGrid
+					allVehicles={allVehicles}
+					isLoaded={isLoaded}
+					randomVehicle={randomVehicle}
+					history={history}
+				/>
+			)}
 		</>
 	);
 }
