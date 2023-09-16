@@ -38,14 +38,14 @@ function VehicleHeader({ vehicle, sessionUser }) {
 									style={{ fontSize: `22px` }}
 									className="mid-bold"
 								>
-									{vehicle?.dougscore.dougscore_total}
+									{vehicle?.dougscore?.dougscore_total}
 								</span>
 								<span className="mid-grey">/10</span>
 							</div>
 						</div>
 						<div className="vehicle-header-rating">
 							<div className="rating-title mid-grey mid-bold">YOUR RATING</div>
-							{sessionUser && vehicle.reviews.find((review) => review.user_id === sessionUser.id) ? (
+							{sessionUser && vehicle?.reviews?.find((review) => review?.user_id === sessionUser?.id) ? (
 								<div className="vehicle-header-rating-content">
 									<i
 										style={{ fontSize: `22px`, marginRight: `6px` }}
@@ -55,7 +55,7 @@ function VehicleHeader({ vehicle, sessionUser }) {
 										style={{ fontSize: `22px` }}
 										className="mid-bold"
 									>
-										{vehicle.reviews.find((review) => review.user_id === sessionUser.id).rating}
+										{vehicle?.reviews?.find((review) => review?.user_id === sessionUser?.id).rating}
 									</span>
 									<span className="mid-grey">/10</span>
 								</div>
@@ -70,43 +70,48 @@ function VehicleHeader({ vehicle, sessionUser }) {
 						</div>
 						<div className="vehicle-header-rating">
 							<div className="rating-title mid-grey mid-bold">POPULARITY</div>
-							{vehicle.reviews ? (
+							{vehicle?.reviews ? (
 								<div
 									style={{ fontSize: `22px`, padding: `6px` }}
 									className="mid-bold"
 								>
 									<i className="green-text fa-solid fa-fire" />{" "}
-									<span>{vehicle.reviews.length}</span>
+									<span>{vehicle?.reviews?.length}</span>
 								</div>
 							) : (
-								<span>Not enough data...</span>
+								<div
+									style={{ fontSize: `22px`, padding: `6px` }}
+									className="mid-bold"
+								>
+									<i className="green-text fa-regular fa-face-meh" />
+									<span>Not enough data...</span>
+								</div>
 							)}
 						</div>
 					</div>
 					<div className="vehicle-header-details">
-						<div className="header-details-poster">
+						<div className="vehicle-header-details-poster">
 							{vehicle.images[1] ? (
 								<>
-									<img
-										className="header-poster-img"
-										src={vehicle.images[1].image_url}
-									/>
-									<div className="header-poster-img-text">
-										{vehicle.make} &nbsp;
-										{vehicle.model}
+										<img
+											className="vehicle-header-poster-img light-border-radius"
+											src={vehicle?.images[1]?.image_url}
+										/>
+									<div className="vehicle-header-poster-img-text">
+										<div style={{ color: `#1f1f1f88`, position: `absolute`, top: `25%`, fontSize: `22px`, textAlign: `center`}}><span className="title">{vehicle?.model}</span></div>
 									</div>
 								</>
 							) : null}
 						</div>
-						<div className="header-details-video-pane">
+						<div className="vehicle-header-video-pane light-border-radius">
 							<img
-								className="video-pane-thumbnail"
+								className="vehicle-header-video-thumbnail"
 								src={vehicle?.images[0].image_url}
 							/>
 						</div>
-						<div className="header-details-photos-and-videos">
-							<div className="header-details-pv">## VIDEOS</div>
-							<div className="header-details-pv">## PHOTOS</div>
+						<div className="vehicle-header-pv-container">
+							<div className="header-details-pv"><i class="fa-solid fa-film" /></div>
+							<div className="header-details-pv"><i class="fa-solid fa-photo-film" /></div>
 						</div>
 					</div>
 				</div>
