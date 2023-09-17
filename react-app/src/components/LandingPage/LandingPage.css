@@ -91,3 +91,46 @@
     padding: 0px 16px;
     margin-top: 10px;
 }
+
+.list-card {
+    width: 100%;
+    margin: 3rem auto;
+}
+
+.list-card-container {
+    display: flex;
+    flex-direction: column;
+    width: 9.7rem;
+    height: 25.5rem;
+    background-color: #1a1a1a;
+}
+
+.list-card-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding-top: .8rem;
+    padding-left: .5rem;
+    padding-right: .5rem;
+    padding-bottom: .8rem;
+}
+
+.list-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: .3rem 0;
+}
+
+.list-card-title {
+    margin: .75rem 0;
+    height: 60%
+}
+
+.list-card-bottom {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}

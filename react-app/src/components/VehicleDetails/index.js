@@ -47,8 +47,7 @@ function VehicleDetails() {
 							<span className="title green-text mid-bold">|</span>&nbsp;
 							<span className="title">Photos</span>&nbsp;&nbsp;
 							<span style={{ fontSize: `12px` }}>{vehicle?.images?.length}</span>
-							<i className="title fa-solid fa-angle-right" />
-						</div>
+                            <i style={{fontSize: `32px`}} className="fa-solid fa-angle-right" />						</div>
 						<div className="vehicle-user-reviews-container">
 							{vehicleIsLoaded && <VehiclePhotos vehicle={vehicle} />}
 						</div>
@@ -57,8 +56,7 @@ function VehicleDetails() {
 								<span className="title green-text mid-bold">|</span>&nbsp;
 								<span className="title">UserReviews</span>&nbsp;&nbsp;
 								<span style={{ fontSize: `12px` }}>{vehicle?.reviews?.length}</span>
-								<i className="title fa-solid fa-angle-right" />
-							</div>
+                                <i style={{fontSize: `32px`}} className="fa-solid fa-angle-right" />							</div>
 							<div>
 								<OpenModalButton
 									buttonText="+ New Review"

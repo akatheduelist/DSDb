@@ -4,7 +4,10 @@ import { useHistory } from "react-router-dom";
 import { getAllVehicles } from "../../store/vehicle";
 import PageGrid from "./PageGrid";
 import TopTen from "./TopTen";
-import Header from "./Header";
+import WorstRating from "./WorstRating";
+import MostPractical from "./MostPractical";
+import Coolest from "./Coolest";
+import Fastest from "./Fastest";
 import "./LandingPage.css";
 
 function LandingPage() {
@@ -28,15 +31,22 @@ function LandingPage() {
 		<>
 			<div className="landing-page-container" />
 			{isLoaded && (
-                <>
-				<PageGrid
-					allVehicles={allVehicles}
-					isLoaded={isLoaded}
-					randomVehicle={randomVehicle}
-					history={history}
-				/>
-                <TopTen allVehicles={allVehicles} isLoaded={isLoaded} />
-                </>
+				<>
+					<PageGrid
+						allVehicles={allVehicles}
+						isLoaded={isLoaded}
+						randomVehicle={randomVehicle}
+						history={history}
+					/>
+					<TopTen
+						allVehicles={allVehicles}
+						isLoaded={isLoaded}
+					/>
+					<WorstRating isLoaded={isLoaded} />
+                    <Fastest isLoaded={isLoaded} />
+					<MostPractical isLoaded={isLoaded} />
+                    <Coolest isLoaded={isLoaded} />
+				</>
 			)}
 		</>
 	);
