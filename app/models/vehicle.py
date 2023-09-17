@@ -43,3 +43,19 @@ class Vehicle(db.Model):
             'tags': [tag.to_dict() for tag in self.tags]
         }
         return vehicle
+    
+    def to_dict_no_score(self):
+        vehicle = {
+            'id': self.id,
+            'year': self.year,
+            'make': self.make,
+            'model': self.model,
+            'trim': self.trim,
+            'description': self.description,
+            'vehicle_country': self.vehicle_country,
+            'images': [image.to_dict() for image in self.vehicle_images],
+            'reviews': [review.to_dict() for review in self.reviews],
+            'quirks': [quirk.to_dict() for quirk in self.quirks],
+            'tags': [tag.to_dict() for tag in self.tags]
+        }
+        return vehicle

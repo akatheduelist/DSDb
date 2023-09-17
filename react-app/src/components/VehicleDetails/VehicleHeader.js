@@ -55,7 +55,6 @@ function VehicleHeader({ vehicle, sessionUser }) {
 			if (data.errors) {
 				setErrors(data.errors);
 			} else {
-                {console.log(vehicle?.tags)}
 				dispatch(getVehicle(vehicle?.id));
 				setNewTag(!newTag);
 			}

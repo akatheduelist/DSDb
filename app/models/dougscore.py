@@ -45,5 +45,27 @@ class DougScore(db.Model):
             'video_time': self.video_time,
             'video_link': self.video_link,
             'filming_location': self.filming_location,
-            'vehicle_id': self.vehicle_id
+            'vehicle_id': self.vehicle_id,
+        }
+
+    def to_dict_with_vehicle(self):
+        return {
+            'weekend_styling': self.weekend_styling,
+            'weekend_acceleration': self.weekend_acceleration,
+            'weekend_handling': self.weekend_handling,
+            'weekend_funfactor': self.weekend_funfactor,
+            'weekend_coolfactor': self.weekend_coolfactor,
+            'weekend_total': self.weekend_total,
+            'daily_features': self.daily_features,
+            'daily_comfort': self.daily_comfort,
+            'daily_quality': self.daily_quality,
+            'daily_practicality': self.daily_practicality,
+            'daily_value': self.daily_value,
+            'daily_total': self.daily_total,
+            'dougscore_total': self.dougscore_total,
+            'video_time': self.video_time,
+            'video_link': self.video_link,
+            'filming_location': self.filming_location,
+            'vehicle_id': self.vehicle_id,
+            'vehicle': self.vehicle.to_dict_no_score()
         }

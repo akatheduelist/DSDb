@@ -25,7 +25,7 @@ function Navigation({ isLoaded }) {
 				<div class="nav-bar-search-container">
 					<input
 						class="nav-bar-search-input"
-						placeholder="Search DSDb"
+						placeholder="Search DSDb feature coming soon..."
 					></input>
 				</div>
                 <span  className="hover-background cursor-pointer border-radius" style={{ padding: `8px 16px`, fontSize: `17px`, fontFamily: `impact` }}>DSDb<span className="green-text">Pro</span></span>

@@ -62,7 +62,7 @@ function Footer() {
 						<i class="fa-solid fa-arrow-up-right-from-square" />
 					</div>
 					<div className="footer-links">
-						<span>
+						<span style={{ fontSize: `12px`, color: `#ffffff60`}}>
 							2023 by Daniel Lewis <a href="https://github.com/akatheduelist">@akatheduelist</a> on GitHub
 						</span>
 					</div>

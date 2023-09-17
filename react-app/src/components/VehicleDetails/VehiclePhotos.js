@@ -20,6 +20,7 @@ export default function VehiclePhotos({ vehicle }) {
 						<div>
 							<img
 								style={{ width: `10rem`, height: `10rem`, objectFit: `cover` }}
+                                className="border-radius"
 								src={image.image_url}
 							/>
 						</div>

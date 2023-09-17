@@ -26,13 +26,17 @@ function LandingPage() {
 
 	return (
 		<>
+			<div className="landing-page-container" />
 			{isLoaded && (
+                <>
 				<PageGrid
 					allVehicles={allVehicles}
 					isLoaded={isLoaded}
 					randomVehicle={randomVehicle}
 					history={history}
 				/>
+                <TopTen allVehicles={allVehicles} isLoaded={isLoaded} />
+                </>
 			)}
 		</>
 	);
