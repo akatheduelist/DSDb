@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { getAllVehicles } from "../../store/vehicle";
 import PageGrid from "./PageGrid";
 import TopTen from "./TopTen";
-import Header from "./Header";
+import WorstRating from "./WorstRating";
 import "./LandingPage.css";
 
 function LandingPage() {
@@ -36,6 +36,9 @@ function LandingPage() {
 					history={history}
 				/>
                 <TopTen allVehicles={allVehicles} isLoaded={isLoaded} />
+                <div>
+                    <WorstRating isLoaded={isLoaded} />
+                    </div>
                 </>
 			)}
 		</>

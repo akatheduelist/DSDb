@@ -93,8 +93,8 @@
 }
 
 .list-card {
-    width: 80%;
-    margin: 0 auto;
+    width: 100%;
+    margin: 3rem auto;
 }
 
 .list-card-container {
@@ -103,7 +103,6 @@
     width: 9.7rem;
     height: 25.5rem;
     background-color: #1a1a1a;
-    border: 1px solid pink;
 }
 
 .list-card-text {

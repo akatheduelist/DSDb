@@ -24,6 +24,15 @@ def top_ten_vehicles():
     return {'top_ten': [ten.to_dict_with_vehicle() for ten in top_ten]}
 
 
+@dougscore_routes.route('/worstrating')
+def worst_vehicles():
+    """
+    Query for bottom ten total dougscores and returns them in a list of score dictionaries
+    """
+    bottom_ten = DougScore.query.order_by(DougScore.dougscore_total).limit(10)
+    return {'bottom_ten': [ten.to_dict_with_vehicle() for ten in bottom_ten]}
+
+
 @dougscore_routes.route('/<int:id>')
 def dougscore(id):
     """
