@@ -41,6 +41,8 @@ function ProfileButton({ user }) {
 
 	return (
 		<>
+        <div>
+
 			<button
 				style={{ fontSize: `14px` }}
 				className="no-button white-text mid-bold"
@@ -84,6 +86,7 @@ function ProfileButton({ user }) {
 					</>
 				)}
 			</ul>
+        </div>
 		</>
 	);
 }

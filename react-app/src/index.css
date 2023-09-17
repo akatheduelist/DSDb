@@ -43,6 +43,12 @@ textarea {
 	box-shadow: 0 1px 2px rgba(15, 17, 17, 0.15) inset;
 }
 
+.slick-prev:before,
+.slick-next:before {
+    font-size: 40px;
+	color: #000000;
+}
+
 .hover-background:hover {
     background: #ffffff10;
 }

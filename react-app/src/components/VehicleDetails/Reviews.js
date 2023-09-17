@@ -4,13 +4,17 @@ import "./VehicleDetails.css";
 function Reviews({ OpenModalButton, vehicle, vehicleId, vehicleIsLoaded, sessionUser, DeleteItemModal }) {
 	return (
 		<>
-			<div className="details-user-reviews-container">
-				<div className="details-user-reviews">
+			<div className="vehicle-user-reviews-container">
+				<div className="details-user-reviews border-radius">
 					{vehicleIsLoaded &&
 						Object.values(vehicle.reviews).map(({ id, rating, review, user_id }) => (
 							<div key={id}>
-								<h3>rating: {rating}</h3>
-								<h3>review: {review}</h3>
+                                <div style={{ display: `inline-flex`, justifyContent: `flex-end`, width: `100%`}}>
+									<span>{rating}</span>
+                                </div>
+								<div>
+									<span style={{ fontSize: `16px`}} className="amazon-echo">{review}</span>
+								</div>
 								{sessionUser && sessionUser.id === user_id ? (
 									<>
 										<OpenModalButton
