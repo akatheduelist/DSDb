@@ -26,7 +26,8 @@ def seed_vehicle_images():
                 user_id = fake.pyint(min_value=1, max_value=num_of_users),
                 vehicle_id = vehicle.id
             )
-            db.session.add(vehicle_image1)
+            print(vehicle_image1)
+            db.session.add(vehicle_image1['image_url'])
             db.session.commit()
         if len(vehicle.vehicle_images) < 2:
             response = requests.get(f"https://api.unsplash.com/search/photos?client_id=OsLCtgt819go9Q71ENBYUh5-DK7kiWPBiy8mwXUatq0&query={vehicle.make}+{vehicle.model}&orientation=portrait&per_page=1",timeout=10)
@@ -38,6 +39,7 @@ def seed_vehicle_images():
                     user_id = fake.pyint(min_value=1, max_value=num_of_users),
                     vehicle_id = vehicle.id
                     )
+                    print(vehicle_image2['image_url'])
                     db.session.add(vehicle_image2)
                     db.session.commit()
 
