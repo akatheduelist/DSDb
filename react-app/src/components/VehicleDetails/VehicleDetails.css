@@ -1,25 +1,26 @@
 .vehicle-header-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 100%;
+    height: 100%;
 }
 .vehicle-header-content {
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-start;
-    padding: 18px;
+	padding: 18px;
 }
 
 .vehicle-header-title {
-    display: flex;
-    flex-direction: column;
-    /* margin: 0px 0px; */
-    /* padding-top: 12px; */
-    width: 75%;
+	display: flex;
+	flex-direction: column;
+	/* margin: 0px 0px; */
+	/* padding-top: 12px; */
+	width: 75%;
 }
 
 .vehicle-header-rating {
@@ -30,16 +31,16 @@
 }
 
 .vehicle-header-rating-content {
-    display: inline-flex;
-    align-items: flex-start;
-    padding: 6px;
+	display: inline-flex;
+	align-items: flex-start;
+	padding: 6px;
 }
 
 .vehicle-header-details {
 	display: inline-flex;
 	justify-content: space-between;
-    align-items: center;
-    padding: 16px;
+	align-items: center;
+	padding: 16px;
 }
 
 .vehicle-header-details-poster {
@@ -57,12 +58,12 @@
 
 .vehicle-header-poster-img-text {
 	position: absolute;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 	width: 100%;
-    height: 100%;
-    top: 50%;
+	height: 100%;
+	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	background-color: #00000010;
@@ -85,14 +86,14 @@
 	flex-direction: column;
 	align-items: flex-end;
 	justify-content: space-between;
-    height: 414px;
+	height: 414px;
 }
 
 .header-details-pv {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 	width: 200px;
 	height: 203px;
 	background-color: #1f1f1f30;
@@ -100,57 +101,68 @@
 }
 
 .vehicle-header-description-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: baseline;
-    padding: 0px 15px;
-    width: 60%;
+	display: flex;
+	flex-direction: column;
+	justify-content: baseline;
+	padding: 0px 15px;
+    padding-bottom: 2rem;
+	width: 60%;
 }
 
 .vehicle-header-tags {
-    display: inline-flex;
-    align-items: center;
-    padding: 8px;
+	display: inline-flex;
+	align-items: center;
+	padding: 8px;
 }
 
 .vehicle-header-tags > div {
-    padding: 5px 12px;
-    border: 1px solid #ffffff60;
-    border-radius: 30px;
-    margin: 0px .2rem;
-    font-size: 14px;
+	padding: 5px 12px;
+	border: 1px solid #ffffff60;
+	border-radius: 30px;
+	margin: 0px 0.2rem;
+	font-size: 14px;
 }
 
 .vehicle-header-description {
-    display: inline-flex;
-    align-items: flex-start;
-    margin: .5rem 1rem;
-    padding-bottom: .7rem;
-    border-bottom: 1px solid #ffffff60;
-    font-size: 16px;
+	display: inline-flex;
+	align-items: flex-start;
+	margin: 0.5rem 1rem;
+	padding-bottom: 0.7rem;
+	border-bottom: 1px solid #ffffff60;
+	font-size: 16px;
 }
 
 .vehicle-details-container {
 	grid-column: span 2;
-    padding: 1rem;
-    margin-left: .5rem;
+	padding: 1rem;
+	margin-left: 0.5rem;
 }
 
 .vehicle-details-title {
-    display: inline-flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+	display: inline-flex;
+	justify-content: space-between;
+	align-items: center;
+    margin-bottom: 1rem;
+	width: 100%;
 }
 
-.details-user-reviews-container {
-    margin: 1.5rem 1rem;
+.vehicle-image-carousel {
+	width: 88%;
+    /* height: 100%; */
+	margin: 8px auto;
+	/* justify-content: center; */
+}
+
+.vehicle-user-reviews-container {
+	margin-top: .5rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    margin-bottom: 5rem;
 }
 
 .details-user-reviews {
-    width: 48rem;
-    margin-bottom: 24px;
-    padding: 16px;
-    border: 1px solid pink;
+	width: 48rem;
+	margin-bottom: 24px;
+	padding: 16px;
+	border: 2px solid #00000020;
 }
-

@@ -7,7 +7,7 @@
 	height: 600px;
 	background: linear-gradient(90deg, #000, transparent 12%), linear-gradient(270deg, #000, transparent 12%),
 		linear-gradient(0deg, #000, transparent 22%),
-		url(https://i.ytimg.com/vi/G2P03XBnAqk/maxresdefault.jpg);
+		url(https://images.squarespace-cdn.com/content/v1/5c997df5ebfc7f0f5fa1bc9d/1554794694202-Q303PY139BJWJB2D3OTN/YouTube+Banner+2019.jpg?format=2500w);
 	background-size: cover;
 	background-repeat: no-repeat;
 }
@@ -83,7 +83,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    background: linear-gradient(0deg, transparent 0%, transparent 50%, rgb(33 33 33 / 70%) 78%, #302a27 100%);}
+    background: linear-gradient(0deg, transparent 0%, transparent 40%, rgb(33 33 33 / 90%) 68%, #302a27 90%);}
 
 .up-next-card {
     display: flex;

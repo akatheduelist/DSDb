@@ -4,6 +4,7 @@ from .auth_routes import validation_errors_to_error_messages
 from app.models import db, Vehicle, Review, Quirk, VehicleImage, Tag
 from app.forms import ReviewForm, QuirkForm, TagForm
 
+
 vehicle_routes = Blueprint('vehicles', __name__)
 
 
@@ -126,3 +127,5 @@ def post_vehicle_tag(id):
         db.session.commit()
         return "Success"
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
