@@ -26,7 +26,7 @@ def seed_vehicle_images():
                 user_id = fake.pyint(min_value=1, max_value=num_of_users),
                 vehicle_id = vehicle.id
             )
-            print(vehicle_image1['image_url'])
+            print("YT IMAGE ==> ", vehicle_image1)
             db.session.add(vehicle_image1)
             db.session.commit()
         if len(vehicle.vehicle_images) < 2:
@@ -39,7 +39,7 @@ def seed_vehicle_images():
                     user_id = fake.pyint(min_value=1, max_value=num_of_users),
                     vehicle_id = vehicle.id
                     )
-                    print(vehicle_image2['image_url'])
+                    print("POSTER IMG ==> ", vehicle_image2)
                     db.session.add(vehicle_image2)
                     db.session.commit()
 
