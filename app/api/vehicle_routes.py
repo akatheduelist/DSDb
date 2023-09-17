@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from .auth_routes import validation_errors_to_error_messages
 from app.models import db, Vehicle, Review, Quirk, VehicleImage, Tag
 from app.forms import ReviewForm, QuirkForm, TagForm
-
+from sqlalchemy import desc
 
 vehicle_routes = Blueprint('vehicles', __name__)
 
@@ -13,7 +13,7 @@ def vehicles():
     """
     Query for all vehicles and returns them in a list of vehicle dictionaries
     """
-    vehicles = Vehicle.query.limit(20).all()
+    vehicles = Vehicle.query.order_by(desc(Vehicle.year)).limit(12)
     return {'vehicles': [vehicle.to_dict() for vehicle in vehicles]}
 
 

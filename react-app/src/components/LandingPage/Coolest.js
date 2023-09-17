@@ -7,20 +7,20 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./LandingPage.css";
 
-export default function TopTen({ isLoaded }) {
+export default function Coolest({ isLoaded }) {
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const [errors, setErrors] = useState({});
-	const [topTen, setTopTen] = useState([]);
+	const [coolest, setCoolest] = useState([]);
 
 	useEffect(async () => {
 		if (isLoaded) {
-			const topTenResults = await fetch(`/api/dougscores/topten`);
-			const data = await topTenResults.json();
+			const coolestResults = await fetch(`/api/dougscores/coolest`);
+			const data = await coolestResults.json();
 			if (data.errors) {
 				setErrors(data.errors);
 			} else {
-				setTopTen(data);
+				setCoolest(data);
 			}
 		}
 	}, []);
@@ -35,21 +35,20 @@ export default function TopTen({ isLoaded }) {
 		<div className="list-card">
 							<div style={{ display: `inline-flex`, alignItems: `center` }}>
 								<span className="title green-text mid-bold">|</span>&nbsp;
-								<span className="title">Top Ten</span>&nbsp;&nbsp;
-								<i style={{fontSize: `32px`}} className="fa-solid fa-angle-right" />
-							</div>
+								<span className="title">Ice Cold</span>&nbsp;&nbsp;
+                                <i style={{fontSize: `32px`}} className="fa-solid fa-angle-right" />							</div>
                             <div style={{ margin: `.5rem 0 1rem 0`}}className="mid-grey">
-                                Cars with the highest total Dougscore.
+                                Whats cooler than being cool? These cars have the highest coolfactor rating.
                             </div>
 			<Slider {...settings}>
-				{topTen?.top_ten?.map((top, idx) => {
+				{coolest?.coolest?.map((cool, idx) => {
 					return (
-						<div key={top.id}>
+						<div key={cool.id}>
 							<div className="list-card-container light-border-radius">
 								<div className="list-card-img">
-									<a href={`/vehicles/${top?.vehicle?.id}`}><img
+                                <a href={`/vehicles/${cool?.vehicle?.id}`}><img
 										style={{ width: `9.5rem`, height: `14rem`, objectFit: `cover` }}
-										src={top?.vehicle?.images[1]?.image_url}
+										src={cool?.vehicle?.images[1]?.image_url}
 									/></a>
 								</div>
 								<div className="list-card-text">
@@ -58,17 +57,17 @@ export default function TopTen({ isLoaded }) {
 											style={{ fontSize: `14px` }}
 											className="green-text fa-solid fa-star"
 										/>
-										&nbsp;{top?.dougscore_total}</span>
+										&nbsp;{cool?.dougscore_total}</span>
                                         <span><span style={{fontSize: `12px`}}>#</span><span style={{fontSize: `18px`}}>{idx + 1}</span></span>
 									</div>
 										<div className="list-card-title">
 											<span>
-												{top?.vehicle?.make} {top?.vehicle?.model}
+												{cool?.vehicle?.make} {cool?.vehicle?.model}
 											</span>
 										</div>
 									<div className="list-card-bottom">
 										<div>
-											<a href={top?.vehicle?.dougscore?.video_link}>
+											<a href={cool?.vehicle?.dougscore?.video_link}>
 												<i
 													style={{ fontSize: `14px` }}
 													className="white-text fa-solid fa-play"
@@ -78,7 +77,7 @@ export default function TopTen({ isLoaded }) {
 										</div>
 										<div>
 											<i
-												onClick={() => history.push(`/vehicles/${top?.vehicle?.id}`)}
+												onClick={() => history.push(`/vehicles/${cool?.vehicle?.id}`)}
 												className="cursor-pointer fa-solid fa-circle-info"
 											></i>
 										</div>

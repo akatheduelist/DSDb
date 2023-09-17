@@ -63,8 +63,7 @@ function Quirks({ vehicleIsLoaded, sessionUser, vehicle, vehicleId, OpenModalBut
 					<span className="title green-text mid-bold">|</span>&nbsp;
 					<span className="title">Quirks and Features</span>&nbsp;&nbsp;
 					<span style={{ fontSize: `12px` }}>{vehicle?.quirks?.length}</span>
-					<i className="title fa-solid fa-angle-right" />
-				</div>
+                    <i style={{fontSize: `32px`}} className="fa-solid fa-angle-right" />				</div>
 				<div>
 					<button
 						className="no-button green-link"

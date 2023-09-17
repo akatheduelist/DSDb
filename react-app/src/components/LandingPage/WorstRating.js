@@ -36,8 +36,7 @@ export default function WorstRating({ isLoaded }) {
 							<div style={{ display: `inline-flex`, alignItems: `center` }}>
 								<span className="title green-text mid-bold">|</span>&nbsp;
 								<span className="title">Total Stinkers</span>&nbsp;&nbsp;
-								<i className="title fa-solid fa-angle-right" />
-							</div>
+                                <i style={{fontSize: `32px`}} className="fa-solid fa-angle-right" />							</div>
                             <div style={{ margin: `.5rem 0 1rem 0`}}className="mid-grey">
                                 Cars with the absolute worst Dougscore.
                             </div>
@@ -47,10 +46,10 @@ export default function WorstRating({ isLoaded }) {
 						<div key={worst.id}>
 							<div className="list-card-container light-border-radius">
 								<div className="list-card-img">
-									<img
+                                <a href={`/vehicles/${worst?.vehicle?.id}`}><img
 										style={{ width: `9.5rem`, height: `14rem`, objectFit: `cover` }}
 										src={worst?.vehicle?.images[1]?.image_url}
-									/>
+									/></a>
 								</div>
 								<div className="list-card-text">
 									<div className="list-card-top">

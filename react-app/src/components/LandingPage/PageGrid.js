@@ -21,9 +21,9 @@ function PageGrid({ history, allVehicles, isLoaded, randomVehicle }) {
 						<div className="page-grid-top-right">
 							<span
 								style={{ marginBottom: `1rem` }}
-								className="small-title green-text"
+								className="small-title white-text"
 							>
-								Up next
+								Latest models
 							</span>
 							<div className="up-next-card-container overflow-hidden border-radius">
 								<GridCard allVehicles={allVehicles} />
