@@ -63,7 +63,11 @@ function Quirks({ vehicleIsLoaded, sessionUser, vehicle, vehicleId, OpenModalBut
 					<span className="title green-text mid-bold">|</span>&nbsp;
 					<span className="title">Quirks and Features</span>&nbsp;&nbsp;
 					<span style={{ fontSize: `12px` }}>{vehicle?.quirks?.length}</span>
-                    <i style={{fontSize: `32px`}} className="fa-solid fa-angle-right" />				</div>
+					<i
+						style={{ fontSize: `32px` }}
+						className="fa-solid fa-angle-right"
+					/>{" "}
+				</div>
 				<div>
 					<button
 						className="no-button green-link"
@@ -80,7 +84,7 @@ function Quirks({ vehicleIsLoaded, sessionUser, vehicle, vehicleId, OpenModalBut
 					<div
 						style={{
 							padding: `.75rem`,
-							marginBottom: `8px`,
+							marginBottom: `1rem`,
 							borderBottom: `1px solid #00000060`,
 							display: `inline-flex`,
 							alignItems: `center`,
@@ -130,15 +134,23 @@ function Quirks({ vehicleIsLoaded, sessionUser, vehicle, vehicleId, OpenModalBut
 									>
 										<i className="green-text fa-solid fa-certificate" />
 										&nbsp;
-										<form style={{ display: `inline-flex`, width: `100%`, alignItems: `center` }} onSubmit={handleSubmit}>
+										<form
+											style={{ display: `inline-flex`, width: `100%`, alignItems: `center` }}
+											onSubmit={handleSubmit}
+										>
 											<input
 												id={id}
-                                                style={{ width: `100%` }}
+												style={{ width: `100%` }}
 												value={updateQuirk}
 												onChange={(e) => setUpdateQuirk(e.target.value)}
 											></input>
-											<button className="green-background mid-bold"
-								style={{ margin: `0px, 6px`, width: `4rem` }} type="submit">Submit</button>
+											<button
+												className="green-background mid-bold"
+												style={{ margin: `0px, 6px`, width: `4rem` }}
+												type="submit"
+											>
+												Submit
+											</button>
 											{errors?.quirk ? <span>{errors.quirk}</span> : null}
 										</form>
 									</div>

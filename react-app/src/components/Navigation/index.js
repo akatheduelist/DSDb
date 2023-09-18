@@ -19,19 +19,20 @@ function Navigation({ isLoaded }) {
 						/>
 					</a>
 				</span>
-				<span className="hover-background cursor-pointer border-radius" style={{ padding: `8px 16px`, fontSize: `15px` }}>
+				<span onClick={() => window.alert("Feature coming soon...")} className="hover-background cursor-pointer border-radius" style={{ padding: `8px 16px`, fontSize: `15px` }}>
 					<i class="fa-solid fa-bars" /> Menu
 				</span>
 				<div class="nav-bar-search-container">
 					<input
+                    onClick={() => window.alert("Feature coming soon...")}
 						class="nav-bar-search-input"
 						placeholder="Search DSDb feature coming soon..."
 					></input>
 				</div>
-                <span  className="hover-background cursor-pointer border-radius" style={{ padding: `8px 16px`, fontSize: `17px`, fontFamily: `impact` }}>DSDb<span className="green-text">Pro</span></span>
+                <span onClick={() => window.alert("Feature coming soon...")} className="hover-background cursor-pointer border-radius" style={{ padding: `8px 16px`, fontSize: `17px`, fontFamily: `impact` }}>DSDb<span className="green-text">Pro</span></span>
 				<div class="nav-bar-separator"></div>
 				<div>
-                <span className="hover-background cursor-pointer border-radius" style={{ padding: `8px 16px`, fontSize: `15px` }}>
+                <span onClick={() => window.alert("Feature coming soon...")} className="hover-background cursor-pointer border-radius" style={{ padding: `8px 16px`, fontSize: `15px` }}>
 						<i class="fa-solid fa-bookmark" />{"  "}Watchlist
 					</span>
 				</div>

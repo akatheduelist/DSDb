@@ -104,7 +104,7 @@ function VehicleHeader({ vehicle, sessionUser }) {
 								>
 									{vehicle?.dougscore?.dougscore_total}
 								</span>
-								<span className="mid-grey">/10</span>
+								<span className="mid-grey">/100</span>
 							</div>
 						</div>
 						<div className="vehicle-header-rating">
@@ -184,7 +184,7 @@ function VehicleHeader({ vehicle, sessionUser }) {
 							/>
 						</div>
 						<div className="vehicle-header-pv-container">
-							<div className="header-details-pv border-radius hover-background cursor-pointer">
+							<div onClick={() => window.alert("Feature coming soon...")} className="header-details-pv border-radius hover-background cursor-pointer">
 								<i
 									style={{ fontSize: `26px`, marginBottom: `1rem` }}
 									class="fa-solid fa-film"
@@ -193,7 +193,7 @@ function VehicleHeader({ vehicle, sessionUser }) {
 									{vehicle?.dougscore?.video_link.length}VIDEOS
 								</span>
 							</div>
-							<div className="header-details-pv border-radius hover-background cursor-pointer">
+							<div onClick={() => window.alert("Feature coming soon...")} className="header-details-pv border-radius hover-background cursor-pointer">
 								<i
 									style={{ fontSize: `26px`, marginBottom: `1rem` }}
 									class="fa-solid fa-photo-film"
@@ -253,7 +253,7 @@ function VehicleHeader({ vehicle, sessionUser }) {
 							{sessionUser && !newTag ? (
 								<button
 									style={{ marginLeft: `1rem` }}
-									className="no-button white-text small-bold"
+									className="no-button green-text small-bold"
 									onClick={() => {
 										setNewTag(!newTag);
 									}}
@@ -264,31 +264,112 @@ function VehicleHeader({ vehicle, sessionUser }) {
 						</div>
 						<div className="vehicle-header-description">
 							{editDescription ? (
-									<form style={{ display: `inline-flex`, alignItems: `flex-end`}} onSubmit={handleDescription}>
-										<textarea
-                                            style={{ width: `40.5rem` }}
-											value={updateDescription}
-											onChange={(e) => setUpdateDescription(e.target.value)}
-										/>
-										<button style={{width: `4rem`, height: `2rem`, margin: `0px 6px`}} className="green-background small-bold" type="submit">Submit</button>
-									</form>
-							) : <span>{vehicle?.description}</span> }
-						{sessionUser && !editDescription ? (
-                            <button
-                            className="no-button white-text small-bold"
-                            onClick={() => {
-                                setEditDescription(!editDescription);
-                                setUpdateDescription(vehicle.description);
-                            }}
+								<form
+									style={{ display: `inline-flex`, alignItems: `flex-end` }}
+									onSubmit={handleDescription}
+								>
+									<textarea
+										style={{ width: `40.5rem` }}
+										value={updateDescription}
+										onChange={(e) => setUpdateDescription(e.target.value)}
+									/>
+									<button
+										style={{ width: `4rem`, height: `2rem`, margin: `0px 6px` }}
+										className="green-background small-bold"
+										type="submit"
+									>
+										Submit
+									</button>
+								</form>
+							) : (
+								<span>{vehicle?.description}</span>
+							)}
+							{sessionUser && !editDescription ? (
+								<button
+									className="no-button green-text small-bold"
+									onClick={() => {
+										setEditDescription(!editDescription);
+										setUpdateDescription(vehicle.description);
+									}}
+								>
+									Update Desc
+								</button>
+							) : null}
+						</div>
+						<div className="vehicle-header-description">
+                                    <span style={{ fontSize: `16px`, fontWeight: `500`, width: `16rem` }}>
+                                        DAILY SCORE: {vehicle?.dougscore.daily_total}
+                                    </span>{" "}
+							<div
+								style={{
+									display: `flex`,
+									justifyContent: `space-around`,
+									alignItems: `center`,
+									width: `100%`,
+									fontSize: `14px`,
+								}}
 							>
-								Update Desc
-							</button>
-						) : null}
-                        </div>
-						<div className="vehicle-header-description small-bold">DAILY SCORE: {vehicle?.dougscore.daily_total}</div>
-						<div className="vehicle-header-description small-bold">WEEKEND SCORE: {vehicle?.dougscore.weekend_total}</div>
-						<div className="vehicle-header-description small-bold">REVIEW LOCATION: {vehicle?.dougscore.filming_location}</div>
-                        </div>
+								<div className="data-point">
+									<span>Features</span>
+									{vehicle?.dougscore?.daily_features}
+								</div>{" "}
+								<div className="data-point">
+									<span>Comfort</span>
+									{vehicle?.dougscore?.daily_comfort}
+								</div>{" "}
+								<div className="data-point">
+									<span>Quality</span>
+									{vehicle?.dougscore?.daily_quality}
+								</div>{" "}
+								<div className="data-point">
+									<span>Practicality</span>
+									{vehicle?.dougscore?.daily_practicality}
+								</div>{" "}
+								<div className="data-point">
+									<span>Value</span>
+									{vehicle?.dougscore?.daily_value}
+								</div>
+							</div>
+						</div>
+						<div className="vehicle-header-description">
+							<span style={{ fontSize: `16px`, fontWeight: `500`, width: `16rem` }}>
+								WEEKEND SCORE: {vehicle?.dougscore.weekend_total}
+							</span>
+							<div
+								className="amazon-echo"
+								style={{
+									display: `flex`,
+									justifyContent: `space-around`,
+									width: `100%`,
+									fontSize: `14px`,
+								}}
+							>
+								<div className="data-point">
+									<span>Styling</span>
+									{vehicle?.dougscore?.weekend_styling}
+								</div>
+								<div className="data-point">
+									<span>Acceleration</span>
+									{vehicle?.dougscore?.weekend_acceleration}
+								</div>{" "}
+								<div className="data-point">
+									<span>Handling</span>
+									{vehicle?.dougscore?.weekend_handling}
+								</div>{" "}
+								<div className="data-point">
+									<span>Fun Factor</span>
+									{vehicle?.dougscore?.weekend_funfactor}
+								</div>{" "}
+								<div className="data-point">
+									<span>Cool Factor</span>
+									{vehicle?.dougscore?.weekend_coolfactor}
+								</div>{" "}
+							</div>
+						</div>
+						<div className="vehicle-header-description small-bold">
+							REVIEW LOCATION: {vehicle?.dougscore.filming_location}
+						</div>
+					</div>
 				</div>
 			</div>
 		</>

@@ -10,14 +10,14 @@ function PageGrid({ history, allVehicles, isLoaded, randomVehicle }) {
 						<div
 							className="page-grid-top-image cursor-pointer border-radius"
 							onClick={() => history.push(`/vehicles/${randomVehicle?.id}`)}
-						>
+                            >
 							{isLoaded && (
-								<img
-									className="page-grid-top-hero-video"
-									src={randomVehicle.images[0].image_url}
+                                <img
+                                className="page-grid-top-hero-video"
+                                src={randomVehicle.images[0].image_url}
 								/>
-							)}
-						</div>
+                                )}
+                                </div>
 						<div className="page-grid-top-right">
 							<span
 								style={{ marginBottom: `1rem` }}

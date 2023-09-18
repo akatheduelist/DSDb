@@ -106,7 +106,7 @@
 	justify-content: baseline;
 	padding: 0px 15px;
     padding-bottom: 2rem;
-	width: 60%;
+	width: 64%;
 }
 
 .vehicle-header-tags {
@@ -125,16 +125,17 @@
 
 .vehicle-header-description {
 	display: inline-flex;
-	align-items: flex-start;
-	margin: 0.5rem 1rem;
-	padding-bottom: 0.7rem;
+	align-items: center;
+	margin: 0 1rem;
+    padding: 0.6rem 0;
 	border-bottom: 1px solid #ffffff60;
-	font-size: 16px;
 }
 
 .vehicle-details-container {
 	grid-column: span 2;
 	padding: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
 	margin-left: 0.5rem;
 }
 
@@ -165,4 +166,11 @@
 	margin-bottom: 24px;
 	padding: 16px;
 	border: 2px solid #00000020;
+}
+
+.data-point {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
 }
