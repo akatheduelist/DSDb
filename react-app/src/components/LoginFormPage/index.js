@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import logo from "../../images/dsdb_logo.svg";
 import "./LoginForm.css";
 
 function LoginFormPage() {
+    const history = useHistory()
 	const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state.session.user);
 	const [email, setEmail] = useState("");
@@ -33,7 +34,7 @@ function LoginFormPage() {
 						/>
 					</a>
 				</div>
-				{Object.values(errors).length && (
+				{Object.values(errors).length ? (
 					<div className="error-box bottom-spacing center">
 						<div>
 							<i
@@ -61,7 +62,7 @@ function LoginFormPage() {
 							</ul>
 						</div>
 					</div>
-				)}
+				) : null}
 				<form
 					className="signup-form"
 					onSubmit={handleSubmit}
@@ -114,7 +115,7 @@ function LoginFormPage() {
 							New to DSDb?
 						</span>
 					</div>
-					<button type="submit">Create your DSDb account</button>
+					<button onClick={() => history.push('/signup')}>Create your DSDb account</button>
 				</form>
 			</div>
 		</>

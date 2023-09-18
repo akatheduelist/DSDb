@@ -20,7 +20,8 @@
 
 #modal-content {
 	position: absolute;
-    background: transparent;
+    background: #1a1a1a;
 	height: 100%;
 	width: 30%;
+    min-width: 325px;
 }

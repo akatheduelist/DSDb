@@ -179,7 +179,6 @@ function ReviewFormModal({ vehicle, vehicleId, isEdit = false, reviewId }) {
 						</button>
 					</form>
 				</div>
-				<div></div>
 			</div>
 		</>
 	);

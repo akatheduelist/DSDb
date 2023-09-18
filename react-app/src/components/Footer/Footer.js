@@ -50,19 +50,47 @@ function Footer() {
 				<div className="footer-links-container">
 					<div className="footer-links">
 						react-slick
-						<i class="fa-solid fa-arrow-up-right-from-square" /> slick-carousel
-						<i class="fa-solid fa-arrow-up-right-from-square" />
+                        <Link
+							to={{ pathname: "https://www.npmjs.com/package/react-slick" }}
+							target="_blank"
+						>
+							<i class="fa-solid fa-arrow-up-right-from-square" />
+						</Link>
+                        slick-carousel
+						<Link
+							to={{ pathname: "https://www.npmjs.com/package/slick-carousel" }}
+							target="_blank"
+						>
+							<i class="fa-solid fa-arrow-up-right-from-square" />
+						</Link>{" "}
 					</div>
 					<div className="footer-links">
 						unsplash
-						<i class="fa-solid fa-arrow-up-right-from-square" />
+                        <Link
+							to={{ pathname: "https://unsplash.com/" }}
+							target="_blank"
+						>
+							<i class="fa-solid fa-arrow-up-right-from-square" />
+						</Link>{" "}
 					</div>
 					<div className="footer-links">
 						requests
-						<i class="fa-solid fa-arrow-up-right-from-square" />
+                        <Link
+							to={{ pathname: "https://pypi.org/project/requests/" }}
+							target="_blank"
+						>
+							<i class="fa-solid fa-arrow-up-right-from-square" />
+						</Link>{" "}
+                        Dougscore
+                        <Link
+							to={{ pathname: "https://docs.google.com/spreadsheets/d/1HcFstlJdQMlMEWhbdKXZWdAzR5RFMtj3kywLQcgkGPw/edit#gid=0" }}
+							target="_blank"
+						>
+							<i class="fa-solid fa-arrow-up-right-from-square" />
+						</Link>{" "}
 					</div>
 					<div className="footer-links">
-						<span style={{ fontSize: `12px`, color: `#ffffff60`}}>
+						<span style={{ fontSize: `12px`, color: `#ffffff60` }}>
 							2023 by Daniel Lewis <a href="https://github.com/akatheduelist">@akatheduelist</a> on GitHub
 						</span>
 					</div>

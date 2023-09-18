@@ -7,7 +7,7 @@ import "./VehicleDetails.css";
 export default function VehiclePhotos({ vehicle }) {
 
 	const settings = {
-		slidesToShow: 2,
+		slidesToShow: 4,
 		slidesToScroll: 1,
 		infinite: false,
 	};
@@ -15,20 +15,17 @@ export default function VehiclePhotos({ vehicle }) {
 	return (
 		<>
 			<Slider {...settings}>
-				{Object.values(vehicle.images).map((image, idx) => {
+				{Object.values(vehicle?.images).map((image, idx) => {
 					return (
-						<div>
-							<img
+                        <div key={image.id} style={{ width: `10rem`, height: `10rem`, objectFit: `cover` }}>
+							<a href={image?.image_url}><img
 								style={{ width: `10rem`, height: `10rem`, objectFit: `cover` }}
                                 className="border-radius"
-								src={image.image_url}
-							/>
-						</div>
+								src={image?.image_url}
+							/></a>
+                        </div>
 					);
 				})}
-				<div></div>
-				<div style={{ width: `10rem`, height: `10rem`, objectFit: `cover` }}></div>
-				<div style={{ width: `10rem`, height: `10rem`, objectFit: `cover` }}></div>
 			</Slider>
 		</>
 	);

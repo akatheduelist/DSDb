@@ -43,8 +43,7 @@ function SignupFormPage() {
 						/>
 					</a>
 				</div>
-				{console.log(errors)}
-				{Object.values(errors).length && (
+				{Object.values(errors).length ? (
 					<div className="error-box bottom-spacing center">
 						<div>
 							<i style={{fontSize: `32px`}} className="error fa-solid fa-triangle-exclamation"></i>
@@ -63,7 +62,7 @@ function SignupFormPage() {
 							</ul>
 						</div>
 					</div>
-				)}
+				) : null}
 				<form
 					className="signup-form"
 					onSubmit={handleSubmit}
