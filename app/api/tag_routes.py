@@ -55,6 +55,7 @@ def delete_tag(id):
     db.session.commit()
     return tag.to_dict()
 
+
 @tag_routes.route('/', methods=["POST"])
 @login_required
 def post_tag():
