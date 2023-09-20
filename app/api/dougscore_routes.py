@@ -38,7 +38,7 @@ def coolest_vehicles():
     """
     Query for the top coolfactor dougscores and returns them in a list of score dictionaries
     """
-    coolest = DougScore.query.order_by(DougScore.weekend_coolfactor).limit(12)
+    coolest = DougScore.query.order_by(desc(DougScore.weekend_coolfactor)).limit(12)
     return {'coolest': [cool.to_dict_with_vehicle() for cool in coolest]}
 
 
@@ -47,7 +47,7 @@ def fastest_vehicles():
     """
     Query for the top acceleration dougscores and returns them in a list of score dictionaries
     """
-    fastest = DougScore.query.order_by(DougScore.weekend_acceleration).limit(12)
+    fastest = DougScore.query.order_by(desc(DougScore.weekend_acceleration)).limit(12)
     return {'fastest': [fast.to_dict_with_vehicle() for fast in fastest]}
 
 
