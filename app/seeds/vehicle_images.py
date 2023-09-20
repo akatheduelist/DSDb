@@ -30,7 +30,7 @@ def seed_vehicle_images():
             db.session.add(vehicle_image1)
             db.session.commit()
         if len(vehicle.vehicle_images) < 2:
-            response = requests.get(f"https://api.unsplash.com/search/photos?client_id=OsLCtgt819go9Q71ENBYUh5-DK7kiWPBiy8mwXUatq0&query={vehicle.make}+{vehicle.model}&orientation=portrait&per_page=1",timeout=10)
+            response = requests.get(f"https://api.unsplash.com/search/photos?client_id=OsLCtgt819go9Q71ENBYUh5-DK7kiWPBiy8mwXUatq0&query={vehicle.make}+{vehicle.model}&orientation=portrait&per_page=1")
             if response.status_code == 200:
                 data = response.json()
                 for result in data['results']:
