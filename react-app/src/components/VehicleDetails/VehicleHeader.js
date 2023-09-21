@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getVehicle } from "../../store/vehicle";
+import { getVehicle, deleteVehicleTag } from "../../store/vehicle";
 import { getTags } from "../../store/tags";
 
 function VehicleHeader({ vehicle, sessionUser }) {
@@ -10,11 +10,10 @@ function VehicleHeader({ vehicle, sessionUser }) {
 	const [newTagData, setNewTagData] = useState("");
 	const [editDescription, setEditDescription] = useState(false);
 	const [updateDescription, setUpdateDescription] = useState("");
-	const [tagsIsLoaded, setTagsIsLoaded] = useState(false);
 	const [errors, setErrors] = useState({});
 
 	useEffect(() => {
-		dispatch(getTags()).then(() => setTagsIsLoaded(true));
+		dispatch(getTags());
 	}, [dispatch]);
 
 	const handleDescription = async (e) => {
@@ -38,6 +37,10 @@ function VehicleHeader({ vehicle, sessionUser }) {
 			}
 		}
 	};
+
+    const deleteTag = (id) => {
+        if (sessionUser) dispatch(deleteVehicleTag(id))
+    }
 
 	const handleTag = async (e) => {
 		e.preventDefault();
@@ -208,11 +211,14 @@ function VehicleHeader({ vehicle, sessionUser }) {
 					<div className="vehicle-header-description-container">
 						<div className="vehicle-header-tags">
 							{Object.values(vehicle?.tags).map(({ tag, id }) => (
-								<div
+                                <div
 									className="hover-background"
 									key={id}
 								>
-									{tag}
+									{tag}&nbsp;
+                                    <button className="no-button cursor-pointer" onClick={() => deleteTag(id)}>
+                                    <i style={{ fontSize: `14px`}} class="green-text fa-solid fa-delete-left" />
+                                    </button>
 								</div>
 							))}
 							{newTag ? (

@@ -35,8 +35,7 @@ function Quirks({ vehicleIsLoaded, sessionUser, vehicle, vehicleId, OpenModalBut
 			}
 		}
 
-		console.log(newQuirkData);
-		if (!editQuirk && sessionUser) {
+        if (!editQuirk && sessionUser) {
 			const newQuirk = await fetch(`/api/vehicles/${vehicleId}/quirks`, {
 				method: "POST",
 				headers: {

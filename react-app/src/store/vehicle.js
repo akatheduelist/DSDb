@@ -2,6 +2,7 @@
 const READ_ALL_VEHICLES = "session/READ_ALL_VEHICLES";
 const READ_VEHICLE = "session/READ_VEHICLE";
 const REMOVE_VEHICLE_REVIEW = "session/REMOVE_VEHICLE_REVIEW";
+const REMOVE_VEHICLE_TAG = "session/REMOVE_VEHICLE_TAG";
 const REMOVE_VEHICLE_QUIRK = "session/REMOVE_VEHICLE_QUIRK";
 
 const readAllVehicles = (vehicles) => {
@@ -22,6 +23,13 @@ const removeVehicleReview = (review) => {
 	return {
 		type: REMOVE_VEHICLE_REVIEW,
 		review,
+	};
+};
+
+const removeVehicleTag = (tag) => {
+	return {
+		type: REMOVE_VEHICLE_TAG,
+		tag,
 	};
 };
 
@@ -58,6 +66,19 @@ export const getVehicle = (vehicleId) => async (dispatch) => {
 	}
 };
 
+export const deleteVehicleTag = (tagId) => async (dispatch) => {
+    const response = await fetch(`/api/tags/${tagId}`, {
+        method: "DELETE"
+    });
+	if (response.ok) {
+        const data = await response.json();
+		if (data.errors) {
+            return data.errors;
+		}
+        
+		dispatch(removeVehicleTag(data));
+	}
+}
 
 // Deletes a specific review by reviewId and removes review from slice of state
 export const deleteVehicleReview = (reviewId) => async (dispatch) => {
@@ -121,6 +142,14 @@ export default function reducer(state = initialState, action) {
                 currentVehicle: {
                     ...state.currentVehicle,
                     quirks: state.currentVehicle.quirks.filter((quirk) => quirk.id !== action.quirk.id),
+                }
+			};        
+        case REMOVE_VEHICLE_TAG:
+			return {
+				...state,
+                currentVehicle: {
+                    ...state.currentVehicle,
+                    tags: state.currentVehicle.tags.filter((tag) => tag.id !== action.tag.id),
                 }
 			};
 		default:
