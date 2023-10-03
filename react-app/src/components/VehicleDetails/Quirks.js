@@ -42,7 +42,7 @@ function Quirks ({
       }
     }
 
-    if (!editQuirk && sessionUser) {
+    if (newQuirk && sessionUser) {
       dispatch(postVehicleQuirk(vehicleId, newQuirkData))
       setNewQuirk(!newQuirk)
     }
@@ -107,12 +107,11 @@ function Quirks ({
               >
                 Submit
               </button>
-              {errors?.quirk ? <span>{errors.quirk}</span> : null}
             </form>
           </div>
         ) : null}
         {vehicleIsLoaded &&
-          Object.values(vehicle.quirks)
+          Object.values(vehicle?.quirks)
             .reverse()
             .map(({ id, quirk, user_id }) => (
               <div key={id}>

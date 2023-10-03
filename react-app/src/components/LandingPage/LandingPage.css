@@ -41,6 +41,12 @@
     background: linear-gradient(180deg,transparent 0,transparent 65%,rgba(0,0,0),rgba(0,0,0));
 }
 
+.page-grid-top-image-overlay {
+    position: absolute;
+    top: 46rem;
+    left: 25rem;
+}
+
 .page-grid-top-hero-video {
     z-index: -1;
 	width: 100%;
