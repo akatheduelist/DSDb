@@ -50,9 +50,9 @@ function ProfileButton({ user }) {
 			>
 				<i
 					style={{ fontSize: `18px` }}
-					class="fa-solid fa-circle-user"
+					className="fa-solid fa-circle-user"
 				/>{" "}
-				{user.username} <i class="fa-solid fa-caret-down" />
+				{user.username} <i className="fa-solid fa-caret-down" />
 			</button>
 			<ul
 				className={ulClassName}

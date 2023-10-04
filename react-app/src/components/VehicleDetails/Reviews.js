@@ -51,6 +51,7 @@ function Reviews({ OpenModalButton, vehicle, vehicleId, vehicleIsLoaded, session
 													borderRadius: `50%`,
 												}}
 												src={user?.profile_image}
+                                                alt={user?.username}
 											/>
 											&nbsp;
 											<span

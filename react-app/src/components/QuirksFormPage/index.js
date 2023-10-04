@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
-import { getVehicle } from "../../store/vehicle";
+import { useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 function QuirksFormPage({ vehicleId }) {
-	const dispatch = useDispatch();
-	const history = useHistory();
 	const sessionUser = useSelector((state) => state.session.user);
 	const [quirk, setQuirk] = useState("");
 	// const [quirkImage, setQuirkImage] = useState("");

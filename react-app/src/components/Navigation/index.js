@@ -34,7 +34,7 @@ function Navigation ({ isLoaded }) {
       <div className='nav-bar-content'>
         <span>
           <a href='/'>
-            <img className='nav-bar-logo' src={logo} />
+            <img className='nav-bar-logo' src={logo} alt='DSDb logo' />
           </a>
         </span>
         <span
@@ -53,7 +53,7 @@ function Navigation ({ isLoaded }) {
               value={search}
               onChange={e => setSearch(e.target.value)}
             />
-            <button className='nav-bar-search-button' type='submit'><i class="fa-solid fa-magnifying-glass" /></button>
+            <button className='nav-bar-search-button' type='submit'><i className="fa-solid fa-magnifying-glass" /></button>
           </form>
         </div>
         <span

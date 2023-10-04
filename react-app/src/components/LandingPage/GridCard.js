@@ -37,17 +37,18 @@ export default function GridCard ({ allVehicles }, isLoaded, Redirect) {
       <button className='no-button' onClick={sliderPosition?.slickPrev}>
         <i
           style={{ fontSize: `22px` }}
-          class='cursor-pointer green-text fa-solid fa-caret-up'
+          className='cursor-pointer green-text fa-solid fa-caret-up'
         ></i>
       </button>
       <Slider ref={setSliderPosition} {...settings}>
         {isLoaded &&
           Object.values(allVehicles).map(vehicle => (
-            <div>
+            <div key={vehicle.id}>
               <div className='up-next-card' key={vehicle.id}>
                 <img
                   style={{ width: `5rem`, borderRadius: `1px` }}
                   src={vehicle?.images[1]?.image_url}
+                  alt={vehicle?.model}
                 />
                 <div style={{ paddingLeft: `1rem`, paddingTop: `1rem` }}>
                   <div
@@ -60,7 +61,7 @@ export default function GridCard ({ allVehicles }, isLoaded, Redirect) {
                     >
                       <i
                         style={{ fontSize: `34px`, fontWeight: `200` }}
-                        class='cursor-pointer fa-regular fa-circle-play'
+                        className='cursor-pointer fa-regular fa-circle-play'
                       />
                     </Link>
                     <span style={{ marginLeft: `8px` }}>
@@ -84,7 +85,7 @@ export default function GridCard ({ allVehicles }, isLoaded, Redirect) {
       <button className='no-button' onClick={sliderPosition?.slickNext}>
         <i
           style={{ fontSize: `22px` }}
-          class='cursor-pointer green-text fa-solid fa-caret-down'
+          className='cursor-pointer green-text fa-solid fa-caret-down'
         ></i>
       </button>
     </>

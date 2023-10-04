@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   class="ipc-logo drawer-logo"
+   className="ipc-logo drawer-logo"
    width="98"
    height="56"
    viewBox="0 0 64 32"

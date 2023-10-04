@@ -10,7 +10,6 @@ export default function Search () {
   return (
     <>
       <h1>Search Results...</h1>
-      {console.log(results)}
       {results?.map(result => {
         return (
             <div className="search-result-card-container" key={result.id}>
@@ -22,7 +21,7 @@ export default function Search () {
             <span className="search-result-card-info mid-bold">YouTube Review: <Link to={{ pathname: result.dougscore.video_link}} target="_blank">{result.dougscore.video_link}</Link></span>
            </div>
             <div className="search-result-card-right">
-            <Link to={`/vehicles/${result.id}`} target="_blank"><img className="search-result-card-img" src={result.images[0].image_url} /></Link>
+            <Link to={`/vehicles/${result.id}`} target="_blank"><img className="search-result-card-img" src={result.images[0].image_url} alt={result.model} /></Link>
             </div>
             </div>
         )
