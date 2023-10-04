@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from .auth_routes import validation_errors_to_error_messages
 from app.models import db, Vehicle, Review, Quirk, VehicleImage, Tag
-from app.forms import ReviewForm, QuirkForm, TagForm
+from app.forms import ReviewForm, QuirkForm, TagForm, SearchForm
 from sqlalchemy import desc
 
 vehicle_routes = Blueprint('vehicles', __name__)
@@ -16,6 +16,17 @@ def vehicles():
     vehicles = Vehicle.query.order_by(desc(Vehicle.year)).limit(12)
     return {'vehicles': [vehicle.to_dict() for vehicle in vehicles]}
 
+
+@vehicle_routes.route('/search', methods=["POST"])
+def vehicle_search():
+    page = request.args.get('page', 1, type=int)
+    form = SearchForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        search_query = form.search.data
+        searched = Vehicle.query.filter(db.or_(Vehicle.model.like('%' + search_query + '%'), Vehicle.year.like('%' + search_query + '%'), Vehicle.make.like('%' + search_query + '%'))).order_by(Vehicle.model).paginate(page=page, per_page=5)
+        return [search.to_dict() for search in searched]
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 @vehicle_routes.route('/<int:id>')
 def vehicle(id):

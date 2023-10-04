@@ -35,13 +35,33 @@
 .nav-bar-search-container {
 	display: flex;
 	align-items: center;
-	flex-grow: 1;
+    justify-content: space-between;
+    flex-grow: 1;
 	margin: 0px 8px;
 }
 
+.nav-bar-search {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    padding-right: .5rem;
+}
+
 .nav-bar-search-input {
-	width: 100%;
-	padding-right: 3.5rem;
+    width: 100%;
+    background-color: #ffffff;
+    appearance: none;
+    border: none;
+}
+
+.nav-bar-search-button {
+    width: 4%;
+    position: absolute;
+    z-index: 4;
+    appearance: none;
+    border: none;
+    pointer-events: none;
 }
 
 .nav-bar-dsdbpro {

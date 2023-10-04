@@ -76,7 +76,6 @@ export const getVehicle = vehicleId => async dispatch => {
 
 // POST a new Quirk for a vehicle
 export const postVehicleQuirk = (vehicleId, newQuirkData) => async dispatch => {
-    console.log("POST QUIRK", vehicleId, newQuirkData)
   const response = await fetch(`/api/vehicles/${vehicleId}/quirks`, {
     method: 'POST',
     headers: {
