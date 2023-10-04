@@ -1,0 +1,39 @@
+.search-result-card-container {
+    display: flex;
+    justify-content: space-between;
+    background-color: #ffffff12;
+    width: 96%;
+    /* border: 1px solid pink; */
+    border-radius: 8px;
+    margin: .5rem auto;
+}
+
+.search-result-card-left {
+    display: flex;
+    flex-direction: column;  
+    width: 100%;
+    padding: 1rem;
+}
+
+.search-result-card-title {
+    font-size: 2rem;
+    border-bottom: 1px solid #ffffff60;
+    margin-bottom: 1rem;
+    padding-bottom: .5rem;
+}
+
+.search-result-card-info {
+    margin-bottom: .25rem;
+}
+
+.search-result-card-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 50%;
+}
+
+.search-result-card-img {
+    object-fit: cover;
+    width: 24rem;
+}

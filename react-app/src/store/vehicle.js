@@ -1,7 +1,7 @@
 // constants
 const READ_ALL_VEHICLES = 'session/READ_ALL_VEHICLES'
 const READ_VEHICLE = 'session/READ_VEHICLE'
-const CREATE_VEHICLE_QUIRK = 'session/CREATE_VEHICLE_QUIRK'
+// const CREATE_VEHICLE_QUIRK = 'session/CREATE_VEHICLE_QUIRK'
 const REMOVE_VEHICLE_REVIEW = 'session/REMOVE_VEHICLE_REVIEW'
 const REMOVE_VEHICLE_TAG = 'session/REMOVE_VEHICLE_TAG'
 const REMOVE_VEHICLE_QUIRK = 'session/REMOVE_VEHICLE_QUIRK'
@@ -20,12 +20,12 @@ const readVehicle = vehicle => {
   }
 }
 
-const createVehicleQuirk = quirk => {
-  return {
-    type: CREATE_VEHICLE_QUIRK,
-    quirk
-  }
-}
+// const createVehicleQuirk = quirk => {
+//   return {
+//     type: CREATE_VEHICLE_QUIRK,
+//     quirk
+//   }
+// }
 
 const removeVehicleReview = review => {
   return {
@@ -73,6 +73,8 @@ export const getVehicle = vehicleId => async dispatch => {
   }
 }
 
+
+// POST a new Quirk for a vehicle
 export const postVehicleQuirk = (vehicleId, newQuirkData) => async dispatch => {
   const response = await fetch(`/api/vehicles/${vehicleId}/quirks`, {
     method: 'POST',
@@ -83,11 +85,11 @@ export const postVehicleQuirk = (vehicleId, newQuirkData) => async dispatch => {
       quirk: newQuirkData
     })
   })
-  const data = response.json()
+  const data = await response.json()
   if (data.errors) {
     return data.errors
   } else {
-    dispatch(createVehicleQuirk(newQuirkData))
+    dispatch(getVehicle(vehicleId))
   }
 }
 
@@ -153,14 +155,14 @@ export default function reducer (state = initialState, action) {
         ...state,
         currentVehicle: action.vehicle
       }
-    case CREATE_VEHICLE_QUIRK:
-      return {
-        ...state,
-        currentVehicle: {
-          ...state.currentVehicle,
-          quirks: action.payload
-        }
-      }
+    // case CREATE_VEHICLE_QUIRK:
+    //   return {
+    //     ...state,
+    //     currentVehicle: {
+    //       ...state.currentVehicle,
+    //       quirks: {...state.currentVehicle.quirks}
+    //     }
+    //   }
     case REMOVE_VEHICLE_REVIEW:
       return {
         ...state,

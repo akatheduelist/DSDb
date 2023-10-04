@@ -6,6 +6,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import LandingPage from "./components/LandingPage";
 import Navigation from "./components/Navigation";
+import Search from "./components/Search"
 import VehicleDetails from "./components/VehicleDetails";
 import QuirksFormPage from "./components/QuirksFormPage";
 import Footer from "./components/Footer/Footer";
@@ -38,6 +39,9 @@ function App() {
 							<Route path="/signup">
 								<SignupFormPage />
 							</Route>
+                            <Route path="/search">
+                                <Search />
+                            </Route>
 							<Route
 								exact
 								path="/vehicles/:vehicleId"
