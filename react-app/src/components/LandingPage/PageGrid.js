@@ -18,11 +18,11 @@ function PageGrid ({ history, allVehicles, isLoaded, randomVehicle }) {
                   target='_blank'
                 >
                   <i
-                    style={{ fontSize: `62px`, fontWeight: `100` }}
+                    style={{ fontSize: `62px`, fontWeight: `100`, marginRight: `.5rem` }}
                     className='cursor-pointer fa-regular fa-circle-play'
                   />
-                </Link>
-                <span>{randomVehicle?.year} {randomVehicle?.make} {randomVehicle?.model}</span>
+                </Link>&nbsp;
+                <span style={{ fontSize: `36px`, fontWeight: `300`}}>{randomVehicle?.year} {randomVehicle?.make} {randomVehicle?.model}</span>
               </div>
               {isLoaded && (
                 <img
