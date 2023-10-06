@@ -23,7 +23,7 @@ function Navigation ({ isLoaded }) {
     })
     const data = await result.json()
     if (data.errors) {
-        window.alert(data.errors)
+        window.alert(Object.values(data.errors))
     } else {
         history.push({pathname: '/search', state: { search: data }})
     }
@@ -53,7 +53,7 @@ function Navigation ({ isLoaded }) {
               value={search}
               onChange={e => setSearch(e.target.value)}
             />
-            <button className='nav-bar-search-button' type='submit'><i className="fa-solid fa-magnifying-glass" /></button>
+            <i onClick={handleSearch} className="nav-bar-search-button cursor-pointer fa-solid fa-magnifying-glass" />
           </form>
         </div>
         <span

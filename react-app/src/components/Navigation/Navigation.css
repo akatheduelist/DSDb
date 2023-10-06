@@ -57,12 +57,12 @@
 }
 
 .nav-bar-search-button {
-    width: 2rem;
+    width: 1.8rem;
     position: absolute;
-    z-index: 4;
+    z-index: 2;
     appearance: none;
     border: none;
-    margin-right: .1rem
+    color: #000000
 }
 
 .nav-bar-dsdbpro {
