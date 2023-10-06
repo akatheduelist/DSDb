@@ -45,11 +45,16 @@ export default function GridCard ({ allVehicles }, isLoaded, Redirect) {
           Object.values(allVehicles).map(vehicle => (
             <div key={vehicle.id}>
               <div className='up-next-card' key={vehicle.id}>
-                <img
-                  style={{ width: `5rem`, borderRadius: `1px` }}
-                  src={vehicle?.images[1]?.image_url}
-                  alt={vehicle?.model}
-                />
+                <Link
+                  to={`/vehicles/${vehicle?.id}`}
+                  target='_blank'
+                >
+                  <img
+                    style={{ width: `5rem`, borderRadius: `1px` }}
+                    src={vehicle?.images[1]?.image_url}
+                    alt={vehicle?.model}
+                  />
+                </Link>
                 <div style={{ paddingLeft: `1rem`, paddingTop: `1rem` }}>
                   <div
                     style={{ display: `inline-flex`, alignItems: `flex-end` }}
