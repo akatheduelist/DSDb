@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
@@ -31,6 +31,7 @@ function LoginFormPage() {
 						<img
 							style={{ width: `107px` }}
 							src={logo}
+                            alt='DSDb Logo'
 						/>
 					</a>
 				</div>

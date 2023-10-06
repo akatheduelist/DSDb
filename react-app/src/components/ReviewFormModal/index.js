@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector, connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getVehicle } from "../../store/vehicle";
 import { useModal } from "../../context/Modal";
 import "./ReviewForm.css";
@@ -84,6 +84,7 @@ function ReviewFormModal({ vehicle, vehicleId, isEdit = false, reviewId }) {
 						<img
 							style={{ width: `4rem` }}
 							src={vehicle?.images[1]?.image_url}
+                            alt={vehicle?.model}
 						/>
 						<div style={{ width: `70%` }}>
 							<span

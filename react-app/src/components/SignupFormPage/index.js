@@ -40,6 +40,7 @@ function SignupFormPage() {
 						<img
 							style={{ width: `107px` }}
 							src={logo}
+                            alt='DSDb logo'
 						/>
 					</a>
 				</div>

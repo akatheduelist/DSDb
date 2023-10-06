@@ -14,8 +14,8 @@ function LandingPage() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const allVehicles = useSelector((state) => state.vehicle.allVehicles);
-	const sessionUser = useSelector((state) => state.session.user);
-	const [errors, setErrors] = useState([]);
+	// const sessionUser = useSelector((state) => state.session.user);
+	// const [errors, setErrors] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(false);
 	const randomVehicle = isLoaded
 		? Object.values(allVehicles)[Math.floor(Math.random() * Object.values(allVehicles).length)]

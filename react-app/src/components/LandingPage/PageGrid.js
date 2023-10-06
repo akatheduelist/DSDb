@@ -1,4 +1,4 @@
-import { Redirect, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import GridCard from './GridCard'
 import './LandingPage.css'
 
@@ -19,7 +19,7 @@ function PageGrid ({ history, allVehicles, isLoaded, randomVehicle }) {
                 >
                   <i
                     style={{ fontSize: `62px`, fontWeight: `100` }}
-                    class='cursor-pointer fa-regular fa-circle-play'
+                    className='cursor-pointer fa-regular fa-circle-play'
                   />
                 </Link>
                 <span>{randomVehicle?.year} {randomVehicle?.make} {randomVehicle?.model}</span>
@@ -28,6 +28,7 @@ function PageGrid ({ history, allVehicles, isLoaded, randomVehicle }) {
                 <img
                   className='page-grid-top-hero-video'
                   src={randomVehicle.images[0].image_url}
+                  alt={randomVehicle?.model}
                 />
               )}
             </div>

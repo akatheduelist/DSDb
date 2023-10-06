@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getVehicle } from "../../store/vehicle";
-import { getTags } from "../../store/tags";
 import OpenModalButton from "../OpenModalButton";
-import ReviewFormModal from "../ReviewFormModal";
 import DeleteItemModal from "../DeleteItemModal";
 import VehicleHeader from "./VehicleHeader";
 import VehiclePhotos from "./VehiclePhotos";
@@ -14,16 +12,15 @@ import "./VehicleDetails.css";
 
 function VehicleDetails() {
 	const dispatch = useDispatch();
-	const history = useHistory();
 	const { vehicleId } = useParams();
 	const vehicle = useSelector((state) => state.vehicle.currentVehicle);
 	const sessionUser = useSelector((state) => state.session.user);
-	const [errors, setErrors] = useState({});
+	// const [errors, setErrors] = useState({});
 	const [vehicleIsLoaded, setVehicleIsLoaded] = useState(false);
 
 	useEffect(() => {
 		dispatch(getVehicle(vehicleId)).then(() => setVehicleIsLoaded(true));
-	}, [dispatch]);
+	}, [dispatch, vehicleId]);
 
 	// if (sessionUser) return <Redirect to="/" />;
 

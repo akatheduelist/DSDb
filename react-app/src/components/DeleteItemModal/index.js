@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import { deleteVehicleReview, deleteVehicleQuirk, getVehicleQuirks } from "../../store/vehicle";
+import { deleteVehicleReview, deleteVehicleQuirk } from "../../store/vehicle";
 import "./DeleteItem.css"
 
 function DeleteItemModal({ reviewId, quirkId }) {
 	const dispatch = useDispatch();
-	const sessionUser = useSelector((state) => state.session.user);
+	// const sessionUser = useSelector((state) => state.session.user);
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
 
