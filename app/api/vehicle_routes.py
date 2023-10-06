@@ -25,10 +25,10 @@ def vehicle_search():
     if form.validate_on_submit():
         search_query = form.search.data
         if search_query.isnumeric():
-            searched = Vehicle.query.filter(db.or_(Vehicle.year.like(search_query))).order_by(Vehicle.model).paginate(page=page, per_page=5)
+            searched = Vehicle.query.filter(db.or_(Vehicle.year.like(search_query))).order_by(Vehicle.model).paginate(page=page, per_page=10)
         else:
             string_query = ''.join(i for i in search_query if i.isalpha())
-            searched = Vehicle.query.filter(db.or_(Vehicle.model.like('%' + string_query + '%'), Vehicle.make.like('%' + string_query + '%'))).order_by(Vehicle.model).paginate(page=page, per_page=5)
+            searched = Vehicle.query.filter(db.or_(Vehicle.model.like('%' + string_query + '%'), Vehicle.make.like('%' + string_query + '%'))).order_by(Vehicle.model).paginate(page=page, per_page=10)
         return [search.to_dict() for search in searched]
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 

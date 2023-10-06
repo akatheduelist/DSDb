@@ -17,37 +17,40 @@ function Footer() {
 				</div>
 				<div className="footer-social-icons">
 					<Link
-						to={{ pathname: "https://google.com/" }}
+						to={{ pathname: "https://www.tiktok.com/@thisisdougdemuro" }}
 						target="_blank"
 					>
 						<i className="fa-brands fa-tiktok" />
 					</Link>
 					<Link
-						to={{ pathname: "https://google.com/" }}
+						to={{ pathname: "https://www.instagram.com/dougdemuro/" }}
 						target="_blank"
 					>
 						<i className="fa-brands fa-instagram" />
 					</Link>
 					<Link
-						to={{ pathname: "https://google.com/" }}
+						to={{ pathname: "https://twitter.com/DougDeMuro" }}
 						target="_blank"
 					>
 						<i className="fa-brands fa-twitter" />
 					</Link>
 					<Link
-						to={{ pathname: "https://google.com/" }}
+						to={{ pathname: "https://www.youtube.com/@DougDeMuro" }}
 						target="_blank"
 					>
 						<i className="fa-brands fa-youtube" />
 					</Link>
 					<Link
-						to={{ pathname: "https://google.com/" }}
+						to={{ pathname: "https://www.facebook.com/ddemuro/" }}
 						target="_blank"
 					>
 						<i className="fa-brands fa-square-facebook" />
 					</Link>
 				</div>
 				<div className="footer-links-container">
+                        <div className="footer-links">
+                            <span>Created using...</span>
+                        </div>
 					<div className="footer-links">
 						react-slick
                         <Link
