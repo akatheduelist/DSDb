@@ -23,7 +23,7 @@ def vehicle_search():
     form = SearchForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        search_query = form.search.data
+        search_query = form.search.data.lower()
         if search_query.isnumeric():
             searched = Vehicle.query.filter(db.or_(Vehicle.year.like(search_query))).order_by(Vehicle.model).paginate(page=page, per_page=10)
         else:
