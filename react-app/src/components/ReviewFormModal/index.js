@@ -155,7 +155,7 @@ function ReviewFormModal({ vehicle, vehicleId, isEdit = false, reviewId }) {
 							</span>
 						</div>
 						<div className="right-text">
-							<span className="small-bold amazon-echo error">Required characters: {review?.length}/600</span>
+							<span className="small-bold amazon-echo error">Required characters: {review?.length}/200</span>
 						</div>
 						<label hidden>YOUR REVIEW</label>
 						<textarea
