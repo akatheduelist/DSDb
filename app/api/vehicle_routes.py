@@ -28,7 +28,7 @@ def vehicle_search():
             searched = Vehicle.query.filter(db.or_(Vehicle.year.ilike(search_query))).order_by(Vehicle.model).paginate(page=page, per_page=10)
         else:
             string_query = ''.join(i for i in search_query if i.isalpha())
-            searched = Vehicle.query.filter(db.or_(Vehicle.model.ilike('%' + string_query + '%'), Vehicle.make.like('%' + string_query + '%'))).order_by(Vehicle.model).paginate(page=page, per_page=10)
+            searched = Vehicle.query.filter(db.or_(Vehicle.model.ilike('%' + string_query + '%'), Vehicle.make.ilike('%' + string_query + '%'))).order_by(Vehicle.model).paginate(page=page, per_page=10)
         return [search.to_dict() for search in searched]
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
