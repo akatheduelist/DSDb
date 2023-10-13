@@ -10,16 +10,19 @@ import Search from "./components/Search"
 import VehicleDetails from "./components/VehicleDetails";
 import QuirksFormPage from "./components/QuirksFormPage";
 import Footer from "./components/Footer/Footer";
+import ReactGA from 'react-ga';
+
 
 function App() {
-	const dispatch = useDispatch();
+    const dispatch = useDispatch();
 	const [isLoaded, setIsLoaded] = useState(false);
-
+    
 	useEffect(() => {
-		dispatch(authenticate()).then(() => setIsLoaded(true));
+        dispatch(authenticate()).then(() => setIsLoaded(true));
 	}, [dispatch]);
-
-
+    
+    ReactGA.initialize('G-ZG0SMLWZ64');
+    ReactGA.pageview(window.location.pathname + window.location.search);
 
 	return (
 		<>
