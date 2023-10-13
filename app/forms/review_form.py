@@ -9,7 +9,7 @@ class ReviewForm(FlaskForm):
                             ])
     review = TextAreaField('review', validators=[
                             DataRequired(message="You must provide a valid review to continue."),
-                            Length(min=600, max=10000, message="Your review must be between %(min)d and %(max)d characters long.")
+                            Length(min=200, max=10000, message="Your review must be between %(min)d and %(max)d characters long.")
                             ])
     user_id = IntegerField('user_id', validators=[DataRequired(message="Missing user_id!")])
     vehicle_id = IntegerField('vehicle_id', validators=[DataRequired(message="Missing vehicle_id!")])
