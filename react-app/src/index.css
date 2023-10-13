@@ -230,6 +230,10 @@ footer > .center {
     color: #ffffff;
 }
 
+.black-text {
+    color: #000000;
+}
+
 .green-background {
 	background-color: #4bd593;
 }

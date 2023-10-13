@@ -30,24 +30,26 @@ function LandingPage() {
 	return (
 		<>
 			<div className="landing-page-container" />
-			{isLoaded && (
-				<>
+			{isLoaded ? (
+                <>
 					<PageGrid
 						allVehicles={allVehicles}
 						isLoaded={isLoaded}
 						randomVehicle={randomVehicle}
 						history={history}
-					/>
+                        />
 					<TopTen
 						allVehicles={allVehicles}
 						isLoaded={isLoaded}
-					/>
+                        />
 					<WorstRating isLoaded={isLoaded} />
                     <Fastest isLoaded={isLoaded} />
 					<MostPractical isLoaded={isLoaded} />
                     <Coolest isLoaded={isLoaded} />
 				</>
-			)}
+			) : (
+                <div className="big-title center black-text">Loading...</div>
+            )}
 		</>
 	);
 }
