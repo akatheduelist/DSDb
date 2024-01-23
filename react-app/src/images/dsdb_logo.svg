@@ -7,7 +7,7 @@
    version="1.1"
    id="svg82"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
+   xmlnsSvg="http://www.w3.org/2000/svg">
   <defs
      id="defs86" />
   <g
@@ -31,7 +31,7 @@
      id="g80"
      style="fill:#ffffff;fill-opacity:1">
     <text
-       xml:space="preserve"
+       xmlSpace="preserve"
        style="font-size:22.6395px;font-family:RockoFLF;-inkscape-font-specification:RockoFLF;letter-spacing:0px;fill:#ffffff;fill-opacity:1;stroke-width:0.653061"
        x="-1.1171749"
        y="18.091492"
