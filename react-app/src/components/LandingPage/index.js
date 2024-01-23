@@ -18,7 +18,9 @@ function LandingPage() {
 	// const [errors, setErrors] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(false);
 	const randomVehicle = isLoaded
-		? Object.values(allVehicles)[Math.floor(Math.random() * Object.values(allVehicles).length)]
+		? Object.values(allVehicles)[
+		Math.floor(Math.random() * Object.values(allVehicles).length)
+		]
 		: null;
 
 	useEffect(() => {
@@ -31,25 +33,22 @@ function LandingPage() {
 		<>
 			<div className="landing-page-container" />
 			{isLoaded ? (
-                <>
+				<>
 					<PageGrid
 						allVehicles={allVehicles}
 						isLoaded={isLoaded}
 						randomVehicle={randomVehicle}
 						history={history}
-                        />
-					<TopTen
-						allVehicles={allVehicles}
-						isLoaded={isLoaded}
-                        />
+					/>
+					<TopTen allVehicles={allVehicles} isLoaded={isLoaded} />
 					<WorstRating isLoaded={isLoaded} />
-                    <Fastest isLoaded={isLoaded} />
+					<Fastest isLoaded={isLoaded} />
 					<MostPractical isLoaded={isLoaded} />
-                    <Coolest isLoaded={isLoaded} />
+					<Coolest isLoaded={isLoaded} />
 				</>
 			) : (
-                <div className="big-title center black-text">Loading...</div>
-            )}
+				<div className="big-title center black-text">Loading...</div>
+			)}
 		</>
 	);
 }

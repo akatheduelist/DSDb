@@ -6,60 +6,54 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import LandingPage from "./components/LandingPage";
 import Navigation from "./components/Navigation";
-import Search from "./components/Search"
+import Search from "./components/Search";
 import VehicleDetails from "./components/VehicleDetails";
 import QuirksFormPage from "./components/QuirksFormPage";
 import Footer from "./components/Footer/Footer";
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga";
 
-
+// Main app for the project
 function App() {
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
+
 	const [isLoaded, setIsLoaded] = useState(false);
-    
+
 	useEffect(() => {
-        dispatch(authenticate()).then(() => setIsLoaded(true));
+		dispatch(authenticate()).then(() => setIsLoaded(true));
 	}, [dispatch]);
-    
-    ReactGA.initialize('G-ZG0SMLWZ64');
-    ReactGA.pageview(window.location.pathname + window.location.search);
+
+	// Google Analytics integration for React App
+	// TODO Move to env variable?
+	ReactGA.initialize("G-ZG0SMLWZ64");
+	ReactGA.pageview(window.location.pathname + window.location.search);
 
 	return (
 		<>
 			<Navigation isLoaded={isLoaded} />
 			{isLoaded && (
-					<div className="content-container">
-						<Switch>
-							<Route
-								exact
-								path="/"
-							>
-								<LandingPage />
-							</Route>
-							<Route path="/login" >
-								<LoginFormPage />
-							</Route>
-							<Route path="/signup">
-								<SignupFormPage />
-							</Route>
-                            <Route path="/search">
-                                <Search />
-                            </Route>
-							<Route
-								exact
-								path="/vehicles/:vehicleId"
-							>
-								<VehicleDetails />
-							</Route>
-							<Route
-								exact
-								path="/vehicles/:vehicleId/quirks"
-							>
-								<QuirksFormPage />
-							</Route>
-						</Switch>
-						<Footer />
-					</div>
+				<div className="content-container">
+					<Switch>
+						<Route exact path="/">
+							<LandingPage />
+						</Route>
+						<Route path="/login">
+							<LoginFormPage />
+						</Route>
+						<Route path="/signup">
+							<SignupFormPage />
+						</Route>
+						<Route path="/search">
+							<Search />
+						</Route>
+						<Route exact path="/vehicles/:vehicleId">
+							<VehicleDetails />
+						</Route>
+						<Route exact path="/vehicles/:vehicleId/quirks">
+							<QuirksFormPage />
+						</Route>
+					</Switch>
+					<Footer />
+				</div>
 			)}
 		</>
 	);
