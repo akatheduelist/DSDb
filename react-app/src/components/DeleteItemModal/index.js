@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { deleteVehicleReview, deleteVehicleQuirk } from "../../store/vehicle";
-import "./DeleteItem.css"
+import "./DeleteItem.css";
 
 function DeleteItemModal({ reviewId, quirkId }) {
 	const dispatch = useDispatch();
@@ -28,12 +28,26 @@ function DeleteItemModal({ reviewId, quirkId }) {
 						))}
 					</ul>
 				)}
-				<p className="amazon-echo">Are you sure you want to delete your Review?</p>
 				<p className="amazon-echo">
-					Once pressing "confirm", your review will be removed from DSDb. Changes may take a couple of hours
-					to complete.
+					Are you sure you want to delete your Review?
 				</p>
-				<button style={{ backgroundColor: `#c40000`, padding: `.2rem .6rem`, border: `none`, fontSize: `14px`, fontWeight: `500`}} className="hover-background border-radius cursor-pointer" onClick={handleSubmit}>Confirm</button>
+				<p className="amazon-echo">
+					Once pressing "confirm", your review will be removed from DSDb.
+					Changes may take a couple of hours to complete.
+				</p>
+				<button
+					style={{
+						backgroundColor: `#c40000`,
+						padding: `.2rem .6rem`,
+						border: `none`,
+						fontSize: `14px`,
+						fontWeight: `500`,
+					}}
+					className="hover-background border-radius cursor-pointer"
+					onClick={handleSubmit}
+				>
+					Confirm
+				</button>
 			</div>
 		</>
 	);
