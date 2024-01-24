@@ -31,7 +31,8 @@ function App() {
 		<>
 			<Navigation isLoaded={isLoaded} />
 			{isLoaded && (
-				<div className="content-container">
+				<>
+					{/* <div className="content-container"> */}
 					<Switch>
 						<Route exact path="/">
 							<LandingPage />
@@ -53,7 +54,8 @@ function App() {
 						</Route>
 					</Switch>
 					<Footer />
-				</div>
+					{/* </div> */}
+				</>
 			)}
 		</>
 	);

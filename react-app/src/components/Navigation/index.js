@@ -31,75 +31,75 @@ function Navigation({ isLoaded }) {
 
   return (
     <nav className="nav-bar">
-      <div className="nav-bar-content">
-        <span>
-          <a href="/">
-            <img className="nav-bar-logo" src={logo} alt="DSDb logo" />
-          </a>
-        </span>
+      {/* <div className="nav-bar-content"> */}
+      {/* <span> */}
+      <a href="/">
+        <img className="nav-bar-logo" src={logo} alt="DSDb logo" />
+      </a>
+      {/*  </span> */}
+      {/* <span
+        onClick={() => window.alert("Feature coming soon...")}
+        className="hover-background cursor-pointer border-radius"
+        style={{ padding: `8px 16px`, fontSize: `15px` }}
+      >
+        <i className="fa-solid fa-bars" /> Menu
+      </span> */}
+      <div className="nav-bar-search-container">
+        <form className="nav-bar-search" onSubmit={handleSearch}>
+          <input
+            className="nav-bar-search-input"
+            placeholder="Search DSDb"
+            name="searched"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <i
+            onClick={handleSearch}
+            className="nav-bar-search-button cursor-pointer fa-solid fa-magnifying-glass"
+          />
+        </form>
+      </div>
+      <span
+        onClick={() => window.alert("Feature coming soon...")}
+        className="hover-background cursor-pointer border-radius"
+        style={{
+          padding: `8px 16px`,
+          fontSize: `17px`,
+          fontFamily: `impact`,
+        }}
+      >
+        DSDb<span className="green-text">Pro</span>
+      </span>
+      <div className="nav-bar-separator"></div>
+      <div>
         <span
           onClick={() => window.alert("Feature coming soon...")}
           className="hover-background cursor-pointer border-radius"
           style={{ padding: `8px 16px`, fontSize: `15px` }}
         >
-          <i className="fa-solid fa-bars" /> Menu
+          <i className="fa-solid fa-bookmark" />
+          {"  "}Watchlist
         </span>
-        <div className="nav-bar-search-container">
-          <form className="nav-bar-search" onSubmit={handleSearch}>
-            <input
-              className="nav-bar-search-input"
-              placeholder="Search DSDb"
-              name="searched"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            <i
-              onClick={handleSearch}
-              className="nav-bar-search-button cursor-pointer fa-solid fa-magnifying-glass"
-            />
-          </form>
-        </div>
-        <span
-          onClick={() => window.alert("Feature coming soon...")}
-          className="hover-background cursor-pointer border-radius"
-          style={{
-            padding: `8px 16px`,
-            fontSize: `17px`,
-            fontFamily: `impact`,
-          }}
-        >
-          DSDb<span className="green-text">Pro</span>
-        </span>
-        <div className="nav-bar-separator"></div>
-        <div>
-          <span
-            onClick={() => window.alert("Feature coming soon...")}
-            className="hover-background cursor-pointer border-radius"
-            style={{ padding: `8px 16px`, fontSize: `15px` }}
-          >
-            <i className="fa-solid fa-bookmark" />
-            {"  "}Watchlist
-          </span>
-        </div>
-        <div className="nav-bar-user">
-          <ul>
-            {isLoaded && sessionUser ? (
-              <li>
-                <ProfileButton user={sessionUser} />
-              </li>
-            ) : (
-              <span
-                className="hover-background cursor-pointer border-radius"
-                style={{ padding: `8px 16px`, fontSize: `15px` }}
-              >
-                <NavLink to="/login" className="white-text">
-                  Sign In
-                </NavLink>
-              </span>
-            )}
-          </ul>
-        </div>
       </div>
+      <div className="nav-bar-user">
+        <ul>
+          {isLoaded && sessionUser ? (
+            <li>
+              <ProfileButton user={sessionUser} />
+            </li>
+          ) : (
+            <span
+              className="hover-background cursor-pointer border-radius"
+              style={{ padding: `8px 16px`, fontSize: `15px` }}
+            >
+              <NavLink to="/login" className="white-text">
+                Sign In
+              </NavLink>
+            </span>
+          )}
+        </ul>
+      </div>
+      {/* </div> */}
     </nav>
   );
 }
