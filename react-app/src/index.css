@@ -9,14 +9,13 @@ body {
   background-color: #ffffff;
   font-weight: 400;
   color: #282828;
-  margin: 0px;
+  /* margin: 0px; */
 }
 
 /* Checked */
 a {
   cursor: pointer;
   text-decoration: none;
-  color: #4bd593;
 }
 
 /* Checked */
@@ -266,12 +265,10 @@ footer > .center {
 
 .big-green-button {
   width: 100%;
-  padding: 8px 24px;
+  padding: 12px 24px;
   cursor: pointer;
   background-color: #4bd593;
-  border: 1px solid #a6a6a6;
-  border-radius: 4px;
-  box-shadow: 0 1px 2px rgba(15, 17, 17, 0.15) inset;
+  border-radius: 6px;
 }
 
 .big-green-button:hover {

@@ -31,9 +31,9 @@ function Navigation({ isLoaded }) {
 
   return (
     <nav className="nav-bar">
-      <a href="/">
+      <NavLink to="/">
         <img className="nav-bar-logo" src={logo} alt="DSDb logo" />
-      </a>
+      </NavLink>
       <form className="nav-bar-search" onSubmit={handleSearch}>
         <input
           className="nav-bar-search-input"
@@ -47,21 +47,19 @@ function Navigation({ isLoaded }) {
           className="nav-bar-search-button cursor-pointer fa-solid fa-magnifying-glass"
         />
       </form>
-      <div className="nav-bar-user">
-        <ul>
-          {isLoaded && sessionUser ? (
-            <li>
-              <ProfileButton user={sessionUser} />
-            </li>
-          ) : (
-            <>
-              <NavLink to="/login" className="">
-                Sign In
-              </NavLink>
-            </>
-          )}
-        </ul>
-      </div>
+      <ul className="nav-bar-signin">
+        {isLoaded && sessionUser ? (
+          <li>
+            <ProfileButton user={sessionUser} />
+          </li>
+        ) : (
+          <li>
+            <NavLink to="/login" className="big-green-button">
+              Sign In
+            </NavLink>
+          </li>
+        )}
+      </ul>
     </nav>
   );
 }
