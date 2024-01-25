@@ -12,12 +12,14 @@ body {
   margin: 0px;
 }
 
+/* Checked */
 a {
   cursor: pointer;
   text-decoration: none;
   color: #4bd593;
 }
 
+/* Checked */
 h1,
 h2,
 h3 {
@@ -25,11 +27,13 @@ h3 {
   font-weight: 400;
 }
 
+/* Checked */
 ul {
   list-style-type: none;
   padding: none;
 }
 
+/* Checked */
 input,
 textarea {
   /* font-family: "PT Sans", sans-serif; */
