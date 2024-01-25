@@ -14,8 +14,8 @@
   /* background-color: #121212; */
   height: 66px;
   max-width: 1280px;
-  padding: 4px none;
-  margin: 0px auto;
+  padding: 4px 0px;
+  margin: 0px auto 18px auto;
   /* width: 100%; */
 }
 
