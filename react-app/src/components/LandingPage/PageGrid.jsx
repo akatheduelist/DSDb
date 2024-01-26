@@ -5,16 +5,22 @@ import "./LandingPage.css";
 function PageGrid({ history, allVehicles, isLoaded, randomVehicle }) {
   return (
     <>
-      <div style={{ backgroundColor: "red" }} className="page-grid-container">
+      <div className="container mx-auto bg-red-700">
+        <div className="flex">
           {isLoaded && (
-            <img
-              className="page-grid-top-img cursor-pointer"
-              src={randomVehicle.images[0].image_url}
-              alt={randomVehicle?.model}
-              onClick={() => history.push(`/vehicles/${randomVehicle?.id}`)}
-            />
+            <div className="flex-1">
+              <img
+                className="rounded-md"
+                src={randomVehicle.images[0].image_url}
+                alt={randomVehicle?.model}
+                onClick={() => history.push(`/vehicles/${randomVehicle?.id}`)}
+              />
+            </div>
           )}
-          <GridCard allVehicles={allVehicles} />
+          <div>
+            <GridCard allVehicles={allVehicles} />
+          </div>
+        </div>
       </div>
       {/* <div className="page-grid-container">
         <div className="page-grid-content">
