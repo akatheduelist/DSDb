@@ -5,7 +5,18 @@ import "./LandingPage.css";
 function PageGrid({ history, allVehicles, isLoaded, randomVehicle }) {
   return (
     <>
-      <div className="page-grid-container">
+      <div style={{ backgroundColor: "red" }} className="page-grid-container">
+          {isLoaded && (
+            <img
+              className="page-grid-top-img cursor-pointer"
+              src={randomVehicle.images[0].image_url}
+              alt={randomVehicle?.model}
+              onClick={() => history.push(`/vehicles/${randomVehicle?.id}`)}
+            />
+          )}
+          <GridCard allVehicles={allVehicles} />
+      </div>
+      {/* <div className="page-grid-container">
         <div className="page-grid-content">
           <div className="page-grid-top">
             <div
@@ -56,7 +67,7 @@ function PageGrid({ history, allVehicles, isLoaded, randomVehicle }) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

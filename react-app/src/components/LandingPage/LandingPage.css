@@ -14,28 +14,36 @@
 /* 		url(https://images.squarespace-cdn.com/content/v1/5c997df5ebfc7f0f5fa1bc9d/1554794694202-Q303PY139BJWJB2D3OTN/YouTube+Banner+2019.jpg?format=2500w); */
 /* 	background-size: cover; */
 /* 	background-repeat: no-repeat; */
-*/
 /* } */
 
+/* 
 .page-grid-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 1fr;
   grid-column-gap: 8px;
   grid-row-gap: 0px;
-  /* color: #fff; */
-}
+  color: #fff;
+} 
+*/
 
-.page-grid-content {
-  grid-column: span 3;
-}
-
-.page-grid-top {
+.page-grid-container {
   display: flex;
   justify-content: center;
-  max-width: 1280px;
-  max-height: 547px;
-  margin: 8px auto;
+  align-items: center;
+  height: 30rem;
+  width: 90%;
+  margin: 0 auto;
+
+}
+
+.page-grid-top-img {
+  height: 88%;
+  width: 80%;
+  border: 2px solid pink;
+  border-radius: 6px;
+  object-fit: cover;
+  margin: 0 auto;
 }
 
 .page-grid-top-image {
