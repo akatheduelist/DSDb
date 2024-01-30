@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -33,12 +33,9 @@ export default function Coolest ({ isLoaded }) {
     <div className='w-full'>
       <div className="inline-flex items-center">
         <span className='text-3xl font-medium'>Ice Cold</span>&nbsp;&nbsp;
-        <i
-          style={{ fontSize: `32px` }}
-          className='fa-solid fa-angle-right'
-        />{' '}
+        <i className='fa-solid fa-angle-right' />
       </div>
-      <div style={{ margin: `.5rem 0 1rem 0` }} className='mid-grey'>
+      <div className='mt-2 mb-4 text-slate-400'>
         Whats cooler than being cool? These cars have the highest coolfactor
         rating.
       </div>
@@ -46,57 +43,31 @@ export default function Coolest ({ isLoaded }) {
         {coolest?.coolest?.map((cool, idx) => {
           return (
             <div key={idx}>
-              <div className='list-card-container light-border-radius'>
-                <div className='list-card-img'>
-                  <a href={`/vehicles/${cool?.vehicle?.id}`}>
+              <div className='flex-column justify-center w-36 rounded-md'>
+                <Link to={`/vehicles/${cool?.vehicle?.id}`}>
                     <img
-                      style={{
-                        width: `9.5rem`,
-                        height: `14rem`,
-                        objectFit: `cover`
-                      }}
+                      className='w-40 h-56 object-cover'
                       src={cool?.vehicle?.images[1]?.image_url}
                       alt={cool?.vehicle?.model}
                     />
-                  </a>
-                </div>
-                <div className='list-card-text'>
-                  <div className='list-card-top'>
+                    </Link>
+                <div className='flex-column justify-between h-full px-1 py-2'>
+                  <div className='flex items-center justify-between w-full'>
                     <span>
                       <i
-                        style={{ fontSize: `14px` }}
-                        className='green-text fa-solid fa-star'
+                        className='green-text text-sm fa-solid fa-star'
                       />
                       &nbsp;{cool?.dougscore_total}
                     </span>
                     <span>
-                      <span style={{ fontSize: `12px` }}>#</span>
-                      <span style={{ fontSize: `18px` }}>{idx + 1}</span>
+                      <span className="text-xs">#</span>
+                      <span className="text-base">{idx + 1}</span>
                     </span>
                   </div>
-                  <div className='list-card-title'>
+                  <div className=''>
                     <span>
                       {cool?.vehicle?.make} {cool?.vehicle?.model}
                     </span>
-                  </div>
-                  <div className='list-card-bottom'>
-                    <div>
-                      <a href={cool?.vehicle?.dougscore?.video_link}>
-                        <i
-                          style={{ fontSize: `14px` }}
-                          className='white-text fa-solid fa-play'
-                        />
-                        &nbsp;Review
-                      </a>
-                    </div>
-                    <div>
-                      <i
-                        onClick={() =>
-                          history.push(`/vehicles/${cool?.vehicle?.id}`)
-                        }
-                        className='cursor-pointer fa-solid fa-circle-info'
-                      ></i>
-                    </div>
                   </div>
                 </div>
               </div>

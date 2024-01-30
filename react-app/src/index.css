@@ -226,9 +226,10 @@ footer > .center {
   color: #f3f3f3;
 }
 
-.mid-grey {
+/* text-slate-400 */
+/* .mid-grey {
   color: #bebdbd;
-}
+} */
 
 .image-cover {
   width: 100%;
@@ -252,10 +253,11 @@ footer > .center {
   color: #4bd593;
 }
 
-.title {
+/* text-3xl font-medium */
+/* .title {
   font-size: 32px;
   font-weight: 500;
-}
+} */
 
 .big-title {
   font-size: 3rem;

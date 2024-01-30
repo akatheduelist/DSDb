@@ -117,15 +117,15 @@
   margin: 3rem auto;
 }
 
-.list-card-container {
+/* .list-card-container {
   display: flex;
   flex-direction: column;
   width: 9.7rem;
   height: 25.5rem;
   background-color: #1a1a1a;
-}
+} */
 
-.list-card-text {
+/* .list-card-text {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -134,15 +134,15 @@
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   padding-bottom: 0.8rem;
-}
+} */
 
-.list-card-top {
+/* .list-card-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   margin: 0.3rem 0;
-}
+} */
 
 .list-card-title {
   margin: 0.75rem 0;
