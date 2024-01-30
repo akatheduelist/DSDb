@@ -11,8 +11,10 @@
 body {
   font-family: "Roboto", sans-serif;
   background-color: #ffffff;
-  /* font-weight: 400; */
   color: #282828;
+  margin: 0px auto;
+  min-width: 1024px;
+  max-width: 1280px;
 }
 
 a {

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getAllVehicles } from "../../store/vehicle";
-import CardList from "./CardList";
 import PageGrid from "./PageGrid";
 import TopTen from "./TopTen";
 import WorstRating from "./WorstRating";
@@ -31,13 +30,12 @@ function LandingPage() {
     <>
       {isLoaded ? (
         <>
-          <PageGrid
+          {/* <PageGrid
             allVehicles={allVehicles}
             isLoaded={isLoaded}
             randomVehicle={randomVehicle}
             history={history}
-          />
-          <CardList allVehicles={allVehicles} isLoaded={isLoaded} />
+          /> */}
           <TopTen allVehicles={allVehicles} isLoaded={isLoaded} />
           <WorstRating isLoaded={isLoaded} />
           <Fastest isLoaded={isLoaded} />

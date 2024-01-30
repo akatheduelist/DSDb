@@ -30,10 +30,9 @@ export default function Coolest ({ isLoaded }) {
   }
 
   return (
-    <div className='list-card'>
-      <div style={{ display: `inline-flex`, alignItems: `center` }}>
-        <span className='title green-text mid-bold'>|</span>&nbsp;
-        <span className='title'>Ice Cold</span>&nbsp;&nbsp;
+    <div className='w-full'>
+      <div className="inline-flex items-center">
+        <span className='text-3xl font-medium'>Ice Cold</span>&nbsp;&nbsp;
         <i
           style={{ fontSize: `32px` }}
           className='fa-solid fa-angle-right'
