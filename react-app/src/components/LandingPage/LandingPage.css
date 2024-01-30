@@ -112,10 +112,10 @@
   margin-top: 10px;
 }
 
-.list-card {
+/* .list-card {
   width: 100%;
   margin: 3rem auto;
-}
+} */
 
 /* .list-card-container {
   display: flex;
@@ -144,13 +144,13 @@
   margin: 0.3rem 0;
 } */
 
-.list-card-title {
+/* .list-card-title {
   margin: 0.75rem 0;
   height: 60%;
-}
+} */
 
-.list-card-bottom {
+/* .list-card-bottom {
   display: flex;
   justify-content: space-between;
   width: 100%;
-}
+} */

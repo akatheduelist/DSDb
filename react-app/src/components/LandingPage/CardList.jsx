@@ -1,111 +1,79 @@
-import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import "./LandingPage.css";
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+import './LandingPage.css'
 
-export default function TopTen({
-  query,
-  subQuery,
-  cardTitle,
-  cardDescription,
-}) {
-  const history = useHistory();
-  const [cardList, setCardList] = useState([]);
+export default function CardList({ isLoaded, apiQuery, subQuery, cardListTitle, cardListDescription }) {
+  const [list, setList] = useState([])
 
   useEffect(() => {
     async function fetchData() {
-      const results = await fetch(`${query}`);
-      const data = await results.json();
+      const results = await fetch(`${apiQuery}`)
+      const data = await results.json()
       if (data.errors) {
-        // TODO Display Errors
-        console.log(data.errors);
+        console.log(data.errors)
       } else {
-        setCardList(data);
+        setList(data[subQuery])
       }
     }
-    fetchData();
-  }, [query]);
+    fetchData()
+  }, [isLoaded])
 
   const settings = {
     slidesToShow: 7,
     slidesToScroll: 1,
-    infinite: true,
-  };
+    infinite: true
+  }
 
   return (
-    <div className="list-card">
-      <div style={{ display: `inline-flex`, alignItems: `center` }}>
-        <span className="title green-text mid-bold">|</span>&nbsp;
-        <span className="title">{cardTitle}</span>&nbsp;&nbsp;
-        <i style={{ fontSize: `32px` }} className="fa-solid fa-angle-right" />
-      </div>
-      <div style={{ margin: `.5rem 0 1rem 0` }} className="mid-grey">
-        {cardDescription}
-      </div>
-      <Slider {...settings}>
-        {cardList?.subQuery?.map((item, idx) => {
-          return (
-            <div key={idx}>
-              <div className="list-card-container light-border-radius">
-                <div className="list-card-img">
-                  <a href={`/vehicles/${item?.vehicle?.id}`}>
+    <>
+      <div className='w-full'>
+        <div className="inline-flex items-center">
+          <span className='text-3xl font-medium'>{cardListTitle}</span>&nbsp;&nbsp;
+          <i className='fa-solid fa-angle-right' />
+        </div>
+        <div className='mt-2 mb-4 text-slate-400'>
+          {cardListDescription}
+        </div>
+        <Slider {...settings}>
+          {list?.map((item, idx) => {
+            return (
+              <div key={idx}>
+                <div className='flex-column justify-center w-36 rounded-md'>
+                  <Link to={`/vehicles/${item?.vehicle?.id}`}>
                     <img
-                      style={{
-                        width: `9.5rem`,
-                        height: `14rem`,
-                        objectFit: `cover`,
-                      }}
+                      className='w-40 h-56 object-cover'
                       src={item?.vehicle?.images[1]?.image_url}
                       alt={item?.vehicle?.model}
                     />
-                  </a>
-                </div>
-                <div className="list-card-text">
-                  <div className="list-card-top">
-                    <span>
-                      <i
-                        style={{ fontSize: `14px` }}
-                        className="green-text fa-solid fa-star"
-                      />
-                      &nbsp;{item?.dougscore_total}
-                    </span>
-                    <span>
-                      <span style={{ fontSize: `12px` }}>#</span>
-                      <span style={{ fontSize: `18px` }}>{idx + 1}</span>
-                    </span>
-                  </div>
-                  <div className="list-card-title">
-                    <span>
-                      {item?.vehicle?.make} {item?.vehicle?.model}
-                    </span>
-                  </div>
-                  <div className="list-card-bottom">
-                    <div>
-                      <a href={item?.vehicle?.dougscore?.video_link}>
+                  </Link>
+                  <div className='flex-column justify-between h-full px-1 py-2'>
+                    <div className='flex items-center justify-between w-full'>
+                      <span>
                         <i
-                          style={{ fontSize: `14px` }}
-                          className="white-text fa-solid fa-play"
+                          className='green-text text-sm fa-solid fa-star'
                         />
-                        &nbsp;Review
-                      </a>
+                        &nbsp;{item?.dougscore_total}
+                      </span>
+                      <span>
+                        <span className="text-xs">#</span>
+                        <span className="text-base">{idx + 1}</span>
+                      </span>
                     </div>
-                    <div>
-                      <i
-                        onClick={() =>
-                          history.push(`/vehicles/${item?.vehicle?.id}`)
-                        }
-                        className="cursor-pointer fa-solid fa-circle-info"
-                      ></i>
+                    <div className=''>
+                      <Link to={`/vehicles/${item?.vehicle?.id}`}>
+                        {item?.vehicle?.make} {item?.vehicle?.model}
+                      </Link>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
-      </Slider>
-    </div>
-  );
+            )
+          })}
+        </Slider>
+      </div>
+    </>
+  )
 }

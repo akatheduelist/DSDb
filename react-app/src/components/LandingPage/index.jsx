@@ -9,6 +9,7 @@ import MostPractical from "./MostPractical";
 import Coolest from "./Coolest";
 import Fastest from "./Fastest";
 import "./LandingPage.css";
+import CardList from "./CardList";
 
 function LandingPage() {
   const dispatch = useDispatch();
@@ -36,10 +37,16 @@ function LandingPage() {
             randomVehicle={randomVehicle}
             history={history}
           /> */}
-          <TopTen allVehicles={allVehicles} isLoaded={isLoaded} />
+          {/* <TopTen allVehicles={allVehicles} isLoaded={isLoaded} />
           <WorstRating isLoaded={isLoaded} />
           <Fastest isLoaded={isLoaded} />
-          <MostPractical isLoaded={isLoaded} />
+          <MostPractical isLoaded={isLoaded} /> */}
+          <CardList isLoaded={isLoaded} 
+          cardListTitle={"Ice Cold"} 
+          cardListDescription={"Whats cooler than being cool? These cars have the highest coolfactor rating."}
+          apiQuery={"/api/dougscores/coolest"}
+          subQuery={"coolest"}
+          />
           <Coolest isLoaded={isLoaded} />
         </>
       ) : (
