@@ -25,9 +25,14 @@ function LandingPage() {
     <>
       {isLoaded ? (
         <>
-          <VirticleList isLoaded={isLoaded} 
-            apiQuery={"/api/dougscores/topten"}
-            subQuery={"top_ten"} />
+          <div className="flex">
+            <VirticleList isLoaded={isLoaded}
+              apiQuery={"/api/dougscores/topten"}
+              subQuery={"top_ten"} />
+            <VirticleList isLoaded={isLoaded}
+              apiQuery={"/api/dougscores/topten"}
+              subQuery={"top_ten"} />
+          </div>
           <CardList isLoaded={isLoaded}
             cardListTitle={"Zoom Zoom"}
             cardListDescription={"These cars have the highest acceleration rating out of any vehicles reviewed."}
