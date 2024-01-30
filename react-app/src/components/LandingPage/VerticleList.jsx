@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-export default function VirticleList({ isLoaded, apiQuery, subQuery, }) {
+export default function VerticleList({ isLoaded, apiQuery, subQuery, }) {
   const [listImg, setListImg] = useState("")
   const [topTen, setTopTen] = useState([])
 
@@ -25,7 +25,7 @@ export default function VirticleList({ isLoaded, apiQuery, subQuery, }) {
         <span className='text-3xl font-medium'>Top Ten</span>
         <p className="mb-2 text-slate-400">Cars with the highest total Dougscore.</p>
         <div className="flex justify-center">
-          <img className="h-64 w-full px-4 mb-4 flex-none object-cover" src={listImg} alt="" />
+          <img className="h-64 w-full mb-4 rounded-lg flex-none object-cover" src={listImg} alt="" />
         </div>
         <div className="max-h-60 overflow-auto">
           <ul role="list" className="divide-y divide-gray-100">

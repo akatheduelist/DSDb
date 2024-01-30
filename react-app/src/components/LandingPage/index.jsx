@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getAllVehicles } from "../../store/vehicle";
 import CardList from "./CardList";
-import VirticleList from "./VirticleList"
+import VerticleList from "./VerticleList"
 
 function LandingPage() {
   const dispatch = useDispatch();
@@ -26,10 +26,10 @@ function LandingPage() {
       {isLoaded ? (
         <>
           <div className="flex">
-            <VirticleList isLoaded={isLoaded}
+            <VerticleList isLoaded={isLoaded}
               apiQuery={"/api/dougscores/topten"}
               subQuery={"top_ten"} />
-            <VirticleList isLoaded={isLoaded}
+            <VerticleList isLoaded={isLoaded}
               apiQuery={"/api/dougscores/topten"}
               subQuery={"top_ten"} />
           </div>
