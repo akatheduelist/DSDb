@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, Link } from "react-router-dom";
+import Error from "../Error";
 import logo from "../../images/dsdb_logo.svg";
-import "./LoginForm.css";
 
 function LoginFormPage() {
-	const history = useHistory()
 	const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state.session.user);
 	const [email, setEmail] = useState("");
@@ -22,13 +21,10 @@ function LoginFormPage() {
 			setErrors(data);
 		}
 	};
-
-	console.log(email)
-	console.log(password)
-
 	
 	return (
 		<>
+		{Object.values(errors).length ? (<Error errors={errors} />) : null}
 			<div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
