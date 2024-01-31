@@ -136,6 +136,12 @@ function SignupFormPage() {
 								Create your DSDb account
 							</button>
 						</div>
+						<p className="mt-10 text-center text-sm text-gray-500">
+            Already a member?{' '}
+            <Link to="/login" className="font-semibold leading-6 text-emerald-500 hover:text-emerald-400">
+						Sign in with your DSDb account
+            </Link>
+          </p>
 					</form>
 				</div>
 			</div>
