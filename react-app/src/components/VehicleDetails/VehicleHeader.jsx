@@ -4,16 +4,11 @@ import { getVehicle, deleteVehicleTag } from '../../store/vehicle'
 import { getTags } from '../../store/tags'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
+import Error from '../Error'
 
 function VehicleHeader({ vehicle, sessionUser }) {
   const dispatch = useDispatch()
   const tags = useSelector(state => state.tags)
-  const [newTag, setNewTag] = useState(false)
-  const [newTagData, setNewTagData] = useState('')
   const [editDescription, setEditDescription] = useState(false)
   const [updateDescription, setUpdateDescription] = useState('')
   const [errors, setErrors] = useState({})
@@ -48,24 +43,23 @@ function VehicleHeader({ vehicle, sessionUser }) {
     if (sessionUser) dispatch(deleteVehicleTag(id))
   }
 
-  const handleTag = async e => {
-    e.preventDefault()
+  const handleTag = async (id) => {
+    // e.preventDefault()
     // TO-DO Move to dispatch
-    if (newTag && sessionUser) {
+    if (sessionUser) {
       const data = await fetch(`/api/vehicles/${vehicle?.id}/tags`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          tag_id: newTagData
+          tag_id: id
         })
       })
-      if (data.errors) {
-        setErrors(data.errors)
+      if (!data.ok) {
+        setErrors(data.statusText)
       } else {
         dispatch(getVehicle(vehicle?.id))
-        setNewTag(!newTag)
       }
     }
   }
@@ -88,9 +82,10 @@ function VehicleHeader({ vehicle, sessionUser }) {
       ]
     },
   ]
-  // console.log("sessionUser", sessionUser)
+  console.log(Object.values(tags).length)
   return (
     <>
+      {Object.values(errors).length ? (<Error errors={errors} />) : null}
       <div className="bg-white">
         <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
           <div>
@@ -99,26 +94,24 @@ function VehicleHeader({ vehicle, sessionUser }) {
               {vehicle?.description}
             </p>
             <div className="flex">
-              <div>
-                {Object.values(vehicle?.tags).map(({ tag, id }) => (
-                  <div key={id}>
-                    <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 mx-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                      {tag}
-                      {sessionUser ? (
-                        <button
-                          onClick={() => deleteTag(id)}
-                        >
-                          &nbsp;
-                          <i
-                            className='text-red-700 fa-solid fa-delete-left'
-                          />
-                        </button>
-                      ) : null}
-                    </span>
-                  </div>
-                ))}
-              </div>
-              {newTag ? (
+              {Object.values(vehicle?.tags).map(({ tag, id }) => (
+                <div key={id}>
+                  <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 mx-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                    {tag}
+                    {sessionUser ? (
+                      <button
+                        onClick={() => deleteTag(id)}
+                      >
+                        &nbsp;
+                        <i
+                          className='text-red-700 fa-solid fa-delete-left'
+                        />
+                      </button>
+                    ) : null}
+                  </span>
+                </div>
+              ))}
+              {sessionUser ? (
                 <Menu as="div" className="relative inline-block text-left">
                   <div>
                     <Menu.Button className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
@@ -138,44 +131,29 @@ function VehicleHeader({ vehicle, sessionUser }) {
                   >
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <div className="py-1">
-                      {Object.values(tags?.vehicle_tags).map(({ tag, id }) => (
-                        <Menu.Item key={id}>
-                          {({ active }) => (
-                            <a
-                              href="#"
-                              className={classNames(
-                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                'block px-4 py-1 text-sm'
-                              )}
+                        {Object.values(tags).length ? Object.values(tags.vehicle_tags).map(({ tag, id }) => (
+                          <Menu.Item key={id}>
+                            <span
+                              onClick={() => handleTag(id)}
+                              className='hover:bg-gray-100 hover:text-gray-900 text-gray-700 block px-4 py-1 text-sm'
                             >
                               {tag}
-                            </a>
-                          )}
-                        </Menu.Item>
-                        ))}
+                            </span>
+                          </Menu.Item>
+                        )): null}
                       </div>
                     </Menu.Items>
                   </Transition>
                 </Menu>
               ) : null}
-              {sessionUser && !newTag ? (
-                <button
-                  style={{ marginLeft: `1rem` }}
-                  className='no-button green-text small-bold'
-                  onClick={() => {
-                    setNewTag(!newTag)
-                  }}
-                >
-                  + Add Tag
-                </button>
-              ) : null}
+
             </div>
             <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
               {features.map((feature) => (
                 <div key={feature.name} className="border-t border-gray-200 pt-4">
                   <dt className="font-medium text-gray-900">{feature.name}</dt>
-                  {feature.description.map((description) => (
-                    <dd className="mt-2 text-sm text-gray-500">{description}</dd>
+                  {feature.description.map((description, idx) => (
+                    <dd key={idx} className="mt-2 text-sm text-gray-500">{description}</dd>
                   ))}
                 </div>
               ))}
