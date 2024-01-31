@@ -1,7 +1,13 @@
-import { useState, useEffect } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getVehicle, deleteVehicleTag } from '../../store/vehicle'
 import { getTags } from '../../store/tags'
+import { Menu, Transition } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
 
 function VehicleHeader({ vehicle, sessionUser }) {
   const dispatch = useDispatch()
@@ -94,56 +100,63 @@ function VehicleHeader({ vehicle, sessionUser }) {
             </p>
             <div className="flex">
               <div>
-              {Object.values(vehicle?.tags).map(({ tag, id }) => (
-                <div key={id}>
-                  <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                    {tag}
-                    {sessionUser ? (
-                  <button
-                    onClick={() => deleteTag(id)}
-                  >
-                    &nbsp;
-                    <i
-                      className='text-red-700 fa-solid fa-delete-left'
-                    />
-                  </button>
-                    ): null}
-                  </span>
-                </div>
-              ))}
+                {Object.values(vehicle?.tags).map(({ tag, id }) => (
+                  <div key={id}>
+                    <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 mx-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                      {tag}
+                      {sessionUser ? (
+                        <button
+                          onClick={() => deleteTag(id)}
+                        >
+                          &nbsp;
+                          <i
+                            className='text-red-700 fa-solid fa-delete-left'
+                          />
+                        </button>
+                      ) : null}
+                    </span>
+                  </div>
+                ))}
               </div>
               {newTag ? (
-                <>
-                  <form
-                    style={{
-                      display: `inline-flex`,
-                      alignItems: `center`,
-                      paddingLeft: `12px`
-                    }}
-                    onSubmit={handleTag}
+                <Menu as="div" className="relative inline-block text-left">
+                  <div>
+                    <Menu.Button className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                      New Tag
+                      <ChevronDownIcon className="-mr-1 h-4 w-5 text-gray-400" aria-hidden="true" />
+                    </Menu.Button>
+                  </div>
+
+                  <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
                   >
-                    <select
-                      value={newTagData}
-                      onChange={e => setNewTagData(e.target.value)}
-                    >
-                      <option style={{ height: `100%` }} disabled>
-                        Select a tag
-                      </option>
+                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <div className="py-1">
                       {Object.values(tags?.vehicle_tags).map(({ tag, id }) => (
-                        <option key={id} value={id}>
-                          {tag}
-                        </option>
-                      ))}
-                    </select>
-                    <button
-                      style={{ marginLeft: `4px` }}
-                      className='green-background small-bold'
-                      type='submit'
-                    >
-                      Submit
-                    </button>
-                  </form>
-                </>
+                        <Menu.Item key={id}>
+                          {({ active }) => (
+                            <a
+                              href="#"
+                              className={classNames(
+                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                'block px-4 py-1 text-sm'
+                              )}
+                            >
+                              {tag}
+                            </a>
+                          )}
+                        </Menu.Item>
+                        ))}
+                      </div>
+                    </Menu.Items>
+                  </Transition>
+                </Menu>
               ) : null}
               {sessionUser && !newTag ? (
                 <button
