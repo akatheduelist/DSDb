@@ -125,7 +125,7 @@ def vehicle_images(id):
     return [image.to_dict() for image in images]
 
 
-@vehicle_routes.route('/<int:id>/tags', methods=["POST"])
+@vehicle_routes.route('/<int:id>/tags', methods=["POST", "DELETE"])
 @login_required
 def post_vehicle_tag(id):
     """
@@ -134,7 +134,6 @@ def post_vehicle_tag(id):
     form = TagForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        print(form.data)
         vehicle = Vehicle.query.get(id)
         tag = Tag.query.get(form.data['tag_id'])
         vehicle.tags.append(tag)

@@ -39,8 +39,8 @@ function VehicleHeader({ vehicle, sessionUser }) {
     }
   }
 
-  const deleteTag = id => {
-    if (sessionUser) dispatch(deleteVehicleTag(id))
+  const deleteTag = (tagId) => {
+    if (sessionUser) dispatch(deleteVehicleTag(vehicle.id, tagId))
   }
 
   const handleTag = async (id) => {

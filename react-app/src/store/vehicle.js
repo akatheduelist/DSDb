@@ -93,8 +93,9 @@ export const postVehicleQuirk =
     }
   };
 
-export const deleteVehicleTag = (tagId) => async (dispatch) => {
-  const response = await fetch(`/api/tags/${tagId}`, {
+  // TODO Fix delete vehicle tag from route
+export const deleteVehicleTag = (vehicleId, tagId) => async (dispatch) => {
+  const response = await fetch(`/api/vehicles/${vehicleId}/tags/${tagId}`, {
     method: "DELETE",
   });
   if (response.ok) {
