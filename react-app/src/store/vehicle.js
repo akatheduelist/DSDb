@@ -93,34 +93,31 @@ export const postVehicleQuirk =
     }
   };
 
-  // TODO Fix delete vehicle tag from route
 export const deleteVehicleTag = (vehicleId, tagId) => async (dispatch) => {
   const response = await fetch(`/api/vehicles/${vehicleId}/tags/${tagId}`, {
     method: "DELETE",
   });
-  if (response.ok) {
-    const data = await response.json();
-    if (data.errors) {
-      return data.errors;
-    }
-
+  const data = await response.json();
+  if (data.errors) {
+    return data.errors;
+  } else {
     dispatch(removeVehicleTag(data));
   }
-};
+}
+
 
 // Deletes a specific review by reviewId and removes review from slice of state
 export const deleteVehicleReview = (reviewId) => async (dispatch) => {
   const response = await fetch(`/api/reviews/${reviewId}`, {
     method: "DELETE",
   });
-  if (response.ok) {
-    const data = await response.json();
-    if (data.errors) {
-      return;
-    }
-
+  const data = await response.json();
+  if (data.errors) {
+    return;
+  } else {
     dispatch(removeVehicleReview(data));
   }
+}
 };
 
 // Deletes a specific quirk by quirkId and removes quirk from slice of state
@@ -128,15 +125,13 @@ export const deleteVehicleQuirk = (quirkId) => async (dispatch) => {
   const response = await fetch(`/api/quirks/${quirkId}`, {
     method: "DELETE",
   });
-  if (response.ok) {
-    const data = await response.json();
-    if (data.errors) {
-      return;
-    }
-
+  const data = await response.json();
+  if (data.errors) {
+    return;
+  } else {
     dispatch(removeVehicleQuirk(data));
   }
-};
+}
 
 const initialState = {};
 

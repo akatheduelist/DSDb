@@ -39,7 +39,7 @@ function VehicleHeader({ vehicle, sessionUser }) {
     }
   }
 
-  const deleteTag = (tagId) => {
+  const deleteTag = (vehicle, tagId) => {
     if (sessionUser) dispatch(deleteVehicleTag(vehicle.id, tagId))
   }
 

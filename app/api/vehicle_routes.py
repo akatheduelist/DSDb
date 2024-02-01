@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from .auth_routes import validation_errors_to_error_messages
-from app.models import db, Vehicle, Review, Quirk, VehicleImage, Tag
+from app.models import db, Vehicle, Review, Quirk, VehicleImage, Tag, vehicle_tags
 from app.forms import ReviewForm, QuirkForm, TagForm, SearchForm
 from sqlalchemy import desc
 
@@ -15,6 +15,42 @@ def vehicles():
     """
     vehicles = Vehicle.query.order_by(desc(Vehicle.year)).limit(12)
     return {'vehicles': [vehicle.to_dict() for vehicle in vehicles]}
+
+
+@vehicle_routes.route('/<int:id>')
+def vehicle(id):
+    """
+    Query for a vehicle by id and returns that vehicle in a dictionary
+    """
+    vehicle = Vehicle.query.get(id)
+    return vehicle.to_dict()
+
+
+@vehicle_routes.route('/<int:id>/reviews')
+def vehicle_reviews(id):
+    """
+    Query for a vehicle review by vehicle_id and returns that vehicle review in a dictionary
+    """
+    reviews = Review.query.filter_by(vehicle_id=id)
+    return [review.to_dict() for review in reviews]
+
+
+@vehicle_routes.route('/<int:id>/quirks')
+def vehicle_quirks(id):
+    """
+    Query for a vehicle quirks by vehicle_id and returns that vehicle quirks in a dictionary
+    """
+    quirks = Quirk.query.filter_by(vehicle_id=id)
+    return [quirk.to_dict() for quirk in quirks]
+
+
+@vehicle_routes.route('/<int:id>/images')
+def vehicle_images(id):
+    """
+    Query for a vehicle images by vehicle_id and returns that vehicle images in a dictionary
+    """
+    images = VehicleImage.query.filter_by(vehicle_id=id)
+    return [image.to_dict() for image in images]
 
 
 @vehicle_routes.route('/search', methods=["POST"])
@@ -31,14 +67,6 @@ def vehicle_search():
             searched = Vehicle.query.filter(db.or_(Vehicle.model.ilike('%' + string_query + '%'), Vehicle.make.like('%' + string_query + '%'))).order_by(Vehicle.model).paginate(page=page, per_page=10)
         return [search.to_dict() for search in searched]
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-
-@vehicle_routes.route('/<int:id>')
-def vehicle(id):
-    """
-    Query for a vehicle by id and returns that vehicle in a dictionary
-    """
-    vehicle = Vehicle.query.get(id)
-    return vehicle.to_dict()
 
 
 @vehicle_routes.route('/<int:id>', methods=["PUT"])
@@ -75,24 +103,8 @@ def vehicle_review(id):
         db.session.commit()
         return review.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-    
-
-@vehicle_routes.route('/<int:id>/reviews')
-def vehicle_reviews(id):
-    """
-    Query for a vehicle review by vehicle_id and returns that vehicle review in a dictionary
-    """
-    reviews = Review.query.filter_by(vehicle_id=id)
-    return [review.to_dict() for review in reviews]
 
 
-@vehicle_routes.route('/<int:id>/quirks')
-def vehicle_quirks(id):
-    """
-    Query for a vehicle quirks by vehicle_id and returns that vehicle quirks in a dictionary
-    """
-    quirks = Quirk.query.filter_by(vehicle_id=id)
-    return [quirk.to_dict() for quirk in quirks]
 
 
 @vehicle_routes.route('/<int:id>/quirks', methods=["POST"])
@@ -116,16 +128,7 @@ def post_vehicle_quirk(id):
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-@vehicle_routes.route('/<int:id>/images')
-def vehicle_images(id):
-    """
-    Query for a vehicle images by vehicle_id and returns that vehicle images in a dictionary
-    """
-    images = VehicleImage.query.filter_by(vehicle_id=id)
-    return [image.to_dict() for image in images]
-
-
-@vehicle_routes.route('/<int:id>/tags', methods=["POST", "DELETE"])
+@vehicle_routes.route('/<int:id>/tags', methods=["POST"])
 @login_required
 def post_vehicle_tag(id):
     """
@@ -142,4 +145,16 @@ def post_vehicle_tag(id):
         return "Success"
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
+
+@vehicle_routes.route('/<int:vehicle_id>/tags/<int:tag_id>', methods=["DELETE"])
+@login_required
+def delete_vehicle_tag(vehicle_id, tag_id):
+    """
+    Delete a tag associated with a specific vehicle
+    """
+    vehicle = Vehicle.query.get(vehicle_id)
+    tag = Tag.query.get(tag_id)
+    vehicle.tags.remove(tag)
+    db.session.commit()
+    return vehicle.to_dict()
 
