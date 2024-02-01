@@ -6,7 +6,7 @@ import OpenModalButton from "../OpenModalButton";
 import DeleteItemModal from "../DeleteItemModal";
 import VehicleHeader from "./VehicleHeader";
 import Quirks from "./Quirks";
-import Reviews from "./Reviews";
+import Comments from "./Comments"
 import "./VehicleDetails.css";
 
 function VehicleDetails() {
@@ -32,14 +32,15 @@ function VehicleDetails() {
 						OpenModalButton={OpenModalButton}
 						DeleteItemModal={DeleteItemModal}
 					/>
-					<Reviews
+					{/* <Reviews
 						OpenModalButton={OpenModalButton}
 						vehicle={vehicle}
 						vehicleId={vehicleId}
 						vehicleIsLoaded={vehicleIsLoaded}
 						sessionUser={sessionUser}
 						DeleteItemModal={DeleteItemModal}
-					/>
+					/> */}
+					<Comments />
 				</>
 			}
 		</>
