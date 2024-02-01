@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-export default function VerticleList({ isLoaded, apiQuery, subQuery, }) {
+export default function VerticleList({ isLoaded, apiQuery, subQuery, verticleListTitle, verticleListDescription }) {
   const [listImg, setListImg] = useState("")
   const [topTen, setTopTen] = useState([])
 
@@ -19,15 +19,16 @@ export default function VerticleList({ isLoaded, apiQuery, subQuery, }) {
     fetchData()
   }, [isLoaded])
 
+  console.log(verticleListTitle)
   return (
     <>
-      <div className="flex flex-col max-w-xl mx-auto my-12">
-        <span className='text-3xl font-medium'>Top Ten</span>
-        <p className="mb-2 text-slate-400">Cars with the highest total Dougscore.</p>
-        <div className="flex justify-center">
-          <img className="h-64 w-full mb-4 rounded-lg flex-none object-cover" src={listImg} alt="" />
-        </div>
-        <div className="max-h-60 overflow-auto">
+      <div className="flex flex-col max-w-xl drop-shadow-xl mx-auto my-14">
+        <span className='text-3xl font-medium'>{verticleListTitle}</span>
+        <p className="mb-2 text-slate-400">{verticleListDescription}</p>
+        {/* <div className="flex justify-center">
+          <img className="h-64 w-full mb-4 rounded-lg flex-none object-cover drop-shadow-xl" src={listImg} alt="" />
+        </div> */}
+        <div className="max-h-80 overflow-auto">
           <ul role="list" className="divide-y divide-gray-100">
             {topTen?.map((item, index) => (
               <li key={item.vehicle_id} className="flex justify-between gap-x-6 py-2">

@@ -29,10 +29,14 @@ function LandingPage() {
           <div className="flex">
             <VerticleList isLoaded={isLoaded}
               apiQuery={"/api/dougscores/topten"}
-              subQuery={"top_ten"} />
+              subQuery={"top_ten"}
+              verticleListTitle={"The GOATs"}
+              verticleListDescription={"Cars with the highest total Dougscore."} />
             <VerticleList isLoaded={isLoaded}
-              apiQuery={"/api/dougscores/topten"}
-              subQuery={"top_ten"} />
+              apiQuery={"/api/dougscores/worstrating"}
+              subQuery={"bottom_ten"}
+              verticleListTitle={"Total Stinkers"}
+              verticleListDescription={"Cars with the absolute worst Dougscore."} />
           </div>
           <CardList isLoaded={isLoaded}
             cardListTitle={"Zoom Zoom"}
