@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { getAllVehicles } from "../../store/vehicle";
 import CardList from "./CardList";
 import VerticleList from "./VerticleList"
 
 function LandingPage() {
   const dispatch = useDispatch();
-  const history = useHistory();
   const allVehicles = useSelector((state) => state.vehicle.allVehicles);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const randomVehicle = isLoaded
-    ? Object.values(allVehicles)[
-    Math.floor(Math.random() * Object.values(allVehicles).length)
-    ]
-    : null;
+  // const randomVehicle = isLoaded
+  //   ? Object.values(allVehicles)[
+  //   Math.floor(Math.random() * Object.values(allVehicles).length)
+  //   ]
+  //   : null;
 
   useEffect(() => {
-    dispatch(getAllVehicles()).then(() => setIsLoaded(true));
+    // dispatch(getAllVehicles()).then(() => setIsLoaded(true));
+    setIsLoaded(true)
   }, [dispatch]);
 
   return (

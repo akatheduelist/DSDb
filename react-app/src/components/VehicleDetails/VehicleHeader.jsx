@@ -40,8 +40,6 @@ function VehicleHeader({ vehicle, sessionUser }) {
   }
 
   const deleteTag = (vehicle, tagId) => {
-    console.log("VheicleID =>", vehicle.id)
-    console.log("tagId =>", tagId)
     if (sessionUser) dispatch(deleteVehicleTag(vehicle.id, tagId))
   }
 
@@ -66,7 +64,7 @@ function VehicleHeader({ vehicle, sessionUser }) {
       }
     }
   }
-
+  console.log()
   const features = [
     {
       name: 'Daily Score', description: [`Features ${vehicle?.dougscore?.daily_features}`,
@@ -83,6 +81,9 @@ function VehicleHeader({ vehicle, sessionUser }) {
       `Fun Factor ${vehicle?.dougscore?.weekend_funfactor}`,
       `Cool Factor ${vehicle?.dougscore?.weekend_coolfactor}`
       ]
+    },
+    {
+      name: 'Quirks', description: [`Quirks`]
     },
   ]
   console.log(Object.values(tags).length)

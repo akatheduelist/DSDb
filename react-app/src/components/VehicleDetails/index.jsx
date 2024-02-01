@@ -20,10 +20,10 @@ function VehicleDetails() {
 
 	useEffect(() => {
 		dispatch(getVehicle(vehicleId)).then(() => setVehicleIsLoaded(true));
-	}, [dispatch, vehicleId]);
+		console.log("Vehicle =>", vehicleIsLoaded)
+	}, [dispatch]);
 
 	// if (sessionUser) return <Redirect to="/" />;
-
 	return (
 		<>
 			{vehicleIsLoaded && (
