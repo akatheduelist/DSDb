@@ -19,7 +19,7 @@ export default function Comments() {
         {Object.values(vehicle?.reviews)
           .reverse()
           .map(({ id, rating, review, user_id, user }) => (
-            <div className="p-4 antialiased flex max-w-xl">
+            <div key={id} className="p-4 antialiased flex max-w-xl">
               <img
                 className="rounded-full h-10 w-10 mr-2 mt-1 object-cover"
                 src={user?.profile_image}
@@ -52,8 +52,8 @@ export default function Comments() {
                         y1="0%"
                         y2="100%"
                       >
-                        <stop offset="0%" stop-color="#18AFFF" />
-                        <stop offset="100%" stop-color="#0062DF" />
+                        <stop offset="0%" stopColor="#18AFFF" />
+                        <stop offset="100%" stopColor="#0062DF" />
                       </linearGradient>
                       <filter
                         id="c1"
@@ -114,8 +114,8 @@ export default function Comments() {
                         y1="0%"
                         y2="100%"
                       >
-                        <stop offset="0%" stop-color="#FF6680" />
-                        <stop offset="100%" stop-color="#E61739" />
+                        <stop offset="0%" stopColor="#FF6680" />
+                        <stop offset="100%" stopColor="#E61739" />
                       </linearGradient>
                       <filter
                         id="c2"

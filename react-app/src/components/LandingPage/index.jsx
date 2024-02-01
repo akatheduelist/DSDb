@@ -45,12 +45,6 @@ function LandingPage() {
             subQuery={"fastest"}
           />
           <CardList isLoaded={isLoaded}
-            cardListTitle={"Total Stinkers"}
-            cardListDescription={"Cars with the absolute worst Dougscore."}
-            apiQuery={"/api/dougscores/worstrating"}
-            subQuery={"bottom_ten"}
-          />
-          <CardList isLoaded={isLoaded}
             cardListTitle={"Handy"}
             cardListDescription={"You know whats useful? These cars have the highest practicality rating."}
             apiQuery={"/api/dougscores/mostpractical"}
