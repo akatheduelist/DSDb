@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllVehicles } from "../../store/vehicle";
 import CardList from "./CardList";
 import VerticleList from "./VerticleList"
+import Hero from "./Hero"
 
 function LandingPage() {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ function LandingPage() {
     <>
       {isLoaded ? (
         <>
+        <Hero />
           <div className="flex">
             <VerticleList isLoaded={isLoaded}
               apiQuery={"/api/dougscores/topten"}
