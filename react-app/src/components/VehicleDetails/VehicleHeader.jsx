@@ -6,15 +6,17 @@ import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import Error from '../Error'
 
-function VehicleHeader({ vehicle, sessionUser }) {
+function VehicleHeader() {
   const dispatch = useDispatch()
+  const vehicle = useSelector((state) => state.vehicle.currentVehicle);
+  const sessionUser = useSelector((state) => state.session.user);
   const tags = useSelector(state => state.tags)
   const [editDescription, setEditDescription] = useState(false)
   const [updateDescription, setUpdateDescription] = useState('')
   const [errors, setErrors] = useState({})
 
   useEffect(() => {
-    dispatch(getTags())
+    if(!Object.values(tags).length) dispatch(getTags())
   }, [dispatch])
 
   const handleDescription = async e => {
@@ -64,7 +66,7 @@ function VehicleHeader({ vehicle, sessionUser }) {
       }
     }
   }
-  console.log()
+  console.log(!Object.values(tags).length)
   const features = [
     {
       name: 'Daily Score', description: [`Features ${vehicle?.dougscore?.daily_features}`,
@@ -144,7 +146,7 @@ function VehicleHeader({ vehicle, sessionUser }) {
                               {tag}
                             </span>
                           </Menu.Item>
-                        )): null}
+                        )) : null}
                       </div>
                     </Menu.Items>
                   </Transition>
