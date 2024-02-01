@@ -40,6 +40,8 @@ function VehicleHeader({ vehicle, sessionUser }) {
   }
 
   const deleteTag = (vehicle, tagId) => {
+    console.log("VheicleID =>", vehicle.id)
+    console.log("tagId =>", tagId)
     if (sessionUser) dispatch(deleteVehicleTag(vehicle.id, tagId))
   }
 
@@ -56,6 +58,7 @@ function VehicleHeader({ vehicle, sessionUser }) {
           tag_id: id
         })
       })
+      console.log(typeof data)
       if (!data.ok) {
         setErrors(data.statusText)
       } else {
@@ -100,7 +103,7 @@ function VehicleHeader({ vehicle, sessionUser }) {
                     {tag}
                     {sessionUser ? (
                       <button
-                        onClick={() => deleteTag(id)}
+                        onClick={() => deleteTag(vehicle, id)}
                       >
                         &nbsp;
                         <i

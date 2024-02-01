@@ -1,7 +1,6 @@
 // constants
 const READ_ALL_VEHICLES = "session/READ_ALL_VEHICLES";
 const READ_VEHICLE = "session/READ_VEHICLE";
-// const CREATE_VEHICLE_QUIRK = 'session/CREATE_VEHICLE_QUIRK'
 const REMOVE_VEHICLE_REVIEW = "session/REMOVE_VEHICLE_REVIEW";
 const REMOVE_VEHICLE_TAG = "session/REMOVE_VEHICLE_TAG";
 const REMOVE_VEHICLE_QUIRK = "session/REMOVE_VEHICLE_QUIRK";
@@ -20,13 +19,6 @@ const readVehicle = (vehicle) => {
   };
 };
 
-// const createVehicleQuirk = quirk => {
-//   return {
-//     type: CREATE_VEHICLE_QUIRK,
-//     quirk
-//   }
-// }
-
 const removeVehicleReview = (review) => {
   return {
     type: REMOVE_VEHICLE_REVIEW,
@@ -34,10 +26,10 @@ const removeVehicleReview = (review) => {
   };
 };
 
-const removeVehicleTag = (tag) => {
+const removeVehicleTag = (vehicle) => {
   return {
     type: REMOVE_VEHICLE_TAG,
-    tag,
+    vehicle,
   };
 };
 
@@ -105,7 +97,6 @@ export const deleteVehicleTag = (vehicleId, tagId) => async (dispatch) => {
   }
 }
 
-
 // Deletes a specific review by reviewId and removes review from slice of state
 export const deleteVehicleReview = (reviewId) => async (dispatch) => {
   const response = await fetch(`/api/reviews/${reviewId}`, {
@@ -118,7 +109,6 @@ export const deleteVehicleReview = (reviewId) => async (dispatch) => {
     dispatch(removeVehicleReview(data));
   }
 }
-};
 
 // Deletes a specific quirk by quirkId and removes quirk from slice of state
 export const deleteVehicleQuirk = (quirkId) => async (dispatch) => {
@@ -151,14 +141,6 @@ export default function reducer(state = initialState, action) {
         ...state,
         currentVehicle: action.vehicle,
       };
-    // case CREATE_VEHICLE_QUIRK:
-    //   return {
-    //     ...state,
-    //     currentVehicle: {
-    //       ...state.currentVehicle,
-    //       quirks: {...state.currentVehicle.quirks}
-    //     }
-    //   }
     case REMOVE_VEHICLE_REVIEW:
       return {
         ...state,
@@ -182,12 +164,7 @@ export default function reducer(state = initialState, action) {
     case REMOVE_VEHICLE_TAG:
       return {
         ...state,
-        currentVehicle: {
-          ...state.currentVehicle,
-          tags: state.currentVehicle.tags.filter(
-            (tag) => tag.id !== action.tag.id,
-          ),
-        },
+        currentVehicle: action.vehicle
       };
     default:
       return state;
