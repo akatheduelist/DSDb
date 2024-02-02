@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../store/session";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
-import logo from "../../images/dsdb_logo.svg";
+import logo from "../../images/dsdb_logo.png";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -75,7 +75,7 @@ export default function Navigation({ isLoaded }) {
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                   <NavLink to="/">
-                    <img className="h-8 w-full" src={logo} alt="DSDb logo" />
+                    <img className="h-10" src={logo} alt="DSDb logo" />
                   </NavLink>
                 </div>
                 {/* <div>
