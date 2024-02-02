@@ -170,28 +170,28 @@ function VehicleHeader() {
               <img
                 src={vehicle?.images[0]?.image_url}
                 alt={vehicle?.model}
-                className="h-64 w-64 object-cover rounded-lg bg-gray-100"
+                className="h-64 w-64 object-cover rounded-lg drop-shadow-lg bg-gray-100"
               />
             </a>
             <a href={vehicle?.images[1]?.image_url}>
               <img
                 src={vehicle?.images[1]?.image_url}
                 alt={vehicle?.model}
-                className="h-64 w-64 object-cover rounded-lg bg-gray-100"
+                className="h-64 w-64 object-cover rounded-lg drop-shadow-lg bg-gray-100"
               />
             </a>
             <a href={vehicle?.images[2]?.image_url}>
               <img
                 src={vehicle?.images[2]?.image_url}
                 alt={vehicle?.model}
-                className="h-64 w-64 object-cover rounded-lg bg-gray-100"
+                className="h-64 w-64 object-cover rounded-lg drop-shadow-lg bg-gray-100"
               />
             </a>
             <a href={vehicle?.images[3]?.image_url}>
               <img
                 src={vehicle?.images[3]?.image_url}
                 alt={vehicle?.model}
-                className="h-64 w-64 object-cover rounded-lg bg-gray-100"
+                className="h-64 w-64 object-cover rounded-lg drop-shadow-lg bg-gray-100"
               />
             </a>
           </div>
