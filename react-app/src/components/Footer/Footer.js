@@ -1,19 +1,21 @@
 import { useHistory, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./Footer.css";
 
 function Footer() {
 	const history = useHistory();
+	const sessionUser = useSelector((state) => state.session.user);
 
 	return (
 		<>
 			<footer className="footer-container center">
 				<div className="footer-top">
-					<button
+					{sessionUser ? null : <button
 						className="big-green-button small-bold"
 						onClick={() => history.push("/login")}
 					>
 						Sign in for more access
-					</button>
+					</button>}
 				</div>
 				<div className="footer-social-icons">
 					<Link
