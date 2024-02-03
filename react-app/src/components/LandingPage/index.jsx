@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllVehicles } from "../../store/vehicle";
 import CardList from "./CardList";
-import VerticleList from "./VerticleList"
-import Hero from "./Hero"
+import Hero from "./Hero";
+import VerticalList from "./VerticalList";
+import { getAllVehicles } from "../../store/vehicle";
 
 function LandingPage() {
   const dispatch = useDispatch();
-  const allVehicles = useSelector((state) => state.vehicle.allVehicles);
   const [isLoaded, setIsLoaded] = useState(false);
 
   // const randomVehicle = isLoaded
@@ -17,42 +16,57 @@ function LandingPage() {
   //   : null;
 
   useEffect(() => {
-    // dispatch(getAllVehicles()).then(() => setIsLoaded(true));
-    setIsLoaded(true)
+    dispatch(getAllVehicles()).then(() => setIsLoaded(true));
+    // setIsLoaded(true);
   }, [dispatch]);
 
   return (
     <>
       {isLoaded ? (
         <>
-        <Hero />
+          <Hero />
           <div className="flex">
-            <VerticleList isLoaded={isLoaded}
+            <VerticalList
+              isLoaded={isLoaded}
               apiQuery={"/api/dougscores/topten"}
               subQuery={"top_ten"}
               verticleListTitle={"The GOATs"}
-              verticleListDescription={"Cars with the highest total Dougscore."} />
-            <VerticleList isLoaded={isLoaded}
+              verticleListDescription={"Cars with the highest total Dougscore."}
+            />
+            <VerticalList
+              isLoaded={isLoaded}
               apiQuery={"/api/dougscores/worstrating"}
               subQuery={"bottom_ten"}
               verticleListTitle={"Total Stinkers"}
-              verticleListDescription={"Cars with the absolute worst Dougscore."} />
+              verticleListDescription={
+                "Cars with the absolute worst Dougscore."
+              }
+            />
           </div>
-          <CardList isLoaded={isLoaded}
+          <CardList
+            isLoaded={isLoaded}
             cardListTitle={"Zoom Zoom"}
-            cardListDescription={"These cars have the highest acceleration rating out of any vehicles reviewed."}
+            cardListDescription={
+              "These cars have the highest acceleration rating out of any vehicles reviewed."
+            }
             apiQuery={"/api/dougscores/fastest"}
             subQuery={"fastest"}
           />
-          <CardList isLoaded={isLoaded}
+          <CardList
+            isLoaded={isLoaded}
             cardListTitle={"Handy"}
-            cardListDescription={"You know whats useful? These cars have the highest practicality rating."}
+            cardListDescription={
+              "You know whats useful? These cars have the highest practicality rating."
+            }
             apiQuery={"/api/dougscores/mostpractical"}
             subQuery={"most_practical"}
           />
-          <CardList isLoaded={isLoaded}
+          <CardList
+            isLoaded={isLoaded}
             cardListTitle={"Ice Cold"}
-            cardListDescription={"Whats cooler than being cool? These cars have the highest coolfactor rating."}
+            cardListDescription={
+              "Whats cooler than being cool? These cars have the highest coolfactor rating."
+            }
             apiQuery={"/api/dougscores/coolest"}
             subQuery={"coolest"}
           />

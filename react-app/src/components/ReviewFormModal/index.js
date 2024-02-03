@@ -8,7 +8,9 @@ function ReviewFormModal({ vehicle, vehicleId, isEdit = false, reviewId }) {
 	const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state.session.user);
 	const currentReview = useSelector((state) =>
-		state.vehicle.currentVehicle.reviews.find((review) => review.id === reviewId)
+		state.vehicle.currentVehicle.reviews.find(
+			(review) => review.id === reviewId,
+		),
 	);
 	const [rating, setRating] = useState(isEdit ? currentReview.rating : 1);
 	const [review, setReview] = useState(isEdit ? currentReview.review : "");
@@ -47,7 +49,6 @@ function ReviewFormModal({ vehicle, vehicleId, isEdit = false, reviewId }) {
 		}
 
 		if (isEdit && sessionUser) {
-			console.log("PUT");
 			const updateReview = await fetch(`/api/reviews/${currentReview.id}`, {
 				method: "PUT",
 				headers: {
@@ -84,7 +85,7 @@ function ReviewFormModal({ vehicle, vehicleId, isEdit = false, reviewId }) {
 						<img
 							style={{ width: `4rem` }}
 							src={vehicle?.images[1]?.image_url}
-                            alt={vehicle?.model}
+							alt={vehicle?.model}
 						/>
 						<div style={{ width: `70%` }}>
 							<span
@@ -94,19 +95,19 @@ function ReviewFormModal({ vehicle, vehicleId, isEdit = false, reviewId }) {
 								{vehicle?.make} {vehicle?.model}
 							</span>
 							<span>({vehicle?.year})</span>
-							<hr style={{ marginTop: `.7rem`, marginBottom: `.5rem`, width: `90%` }} />
+							<hr
+								style={{
+									marginTop: `.7rem`,
+									marginBottom: `.5rem`,
+									width: `90%`,
+								}}
+							/>
 							<span className="small-title amazon-echo">Add an Item</span>
 						</div>
 						<span>Test</span>
 					</div>
-					<div
-						style={{ width: `100%` }}
-						className="light-grey-background"
-					>
-						<span
-							style={{ fontSize: `14px` }}
-							className="amazon-echo"
-						>
+					<div style={{ width: `100%` }} className="light-grey-background">
+						<span style={{ fontSize: `14px` }} className="amazon-echo">
 							YOUR RATING
 						</span>
 					</div>
@@ -136,26 +137,26 @@ function ReviewFormModal({ vehicle, vehicleId, isEdit = false, reviewId }) {
 							})}
 							<span>{hover}</span>
 						</div>
-						{errors?.rating ? <span className="small-bold amazon-echo error">{errors.rating}</span> : null}
+						{errors?.rating ? (
+							<span className="small-bold amazon-echo error">
+								{errors.rating}
+							</span>
+						) : null}
 						{/* <label hidden>Review Headline</label>
                         <input
                             type="text"
                             placeholder="Write a headline for your review here"
                         />
                         {errors?.headline ? <span>{errors.headline}</span> : null} */}
-						<div
-							style={{ width: `100%` }}
-							className="light-grey-background"
-						>
-							<span
-								style={{ fontSize: `14px` }}
-								className="amazon-echo"
-							>
+						<div style={{ width: `100%` }} className="light-grey-background">
+							<span style={{ fontSize: `14px` }} className="amazon-echo">
 								YOUR REVIEW
 							</span>
 						</div>
 						<div className="right-text">
-							<span className="small-bold amazon-echo error">Required characters: {review?.length}/200</span>
+							<span className="small-bold amazon-echo error">
+								Required characters: {review?.length}/200
+							</span>
 						</div>
 						<label hidden>YOUR REVIEW</label>
 						<textarea
@@ -166,13 +167,19 @@ function ReviewFormModal({ vehicle, vehicleId, isEdit = false, reviewId }) {
 							onChange={(e) => setReview(e.target.value)}
 							required
 						/>
-						<br /> 
-                        {!sessionUser && (
-							<span className="small-bold amazon-echo error">You must be logged in to post a review.</span>
+						<br />
+						{!sessionUser && (
+							<span className="small-bold amazon-echo error">
+								You must be logged in to post a review.
+							</span>
 						)}
-						{errors?.review ? <span className="small-bold amazon-echo error">{errors.review}</span> : null}
+						{errors?.review ? (
+							<span className="small-bold amazon-echo error">
+								{errors.review}
+							</span>
+						) : null}
 						<button
-                            className="small-bold amazon-echo"
+							className="small-bold amazon-echo"
 							type="submit"
 							disabled={!sessionUser}
 						>

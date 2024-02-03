@@ -2,7 +2,6 @@ import React, { Fragment, useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../store/session";
-import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import logo from "../../images/dsdb_logo.png";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
@@ -53,7 +52,7 @@ export default function Navigation({ isLoaded }) {
     e.preventDefault();
     dispatch(logout());
   };
-  console.log(sessionUser);
+
   return (
     <Disclosure as="nav" className="">
       {({ open }) => (
@@ -145,7 +144,7 @@ export default function Navigation({ isLoaded }) {
                         <img
                           className="h-10 w-10 rounded-full object-cover drop-shadow-lg"
                           src={sessionUser?.profile_image}
-                          alt={`${sessionUser.username} profile image`}
+                          alt={`${sessionUser.username} profile`}
                         />
                       </Menu.Button>
                     </div>
@@ -165,7 +164,7 @@ export default function Navigation({ isLoaded }) {
                               href="#"
                               className={classNames(
                                 active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
+                                "block px-4 py-2 text-sm text-gray-700",
                               )}
                             >
                               Your Profile
@@ -178,7 +177,7 @@ export default function Navigation({ isLoaded }) {
                               href="#"
                               className={classNames(
                                 active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
+                                "block px-4 py-2 text-sm text-gray-700",
                               )}
                             >
                               Settings
@@ -191,7 +190,7 @@ export default function Navigation({ isLoaded }) {
                               onClick={handleLogout}
                               className={classNames(
                                 active ? "bg-gray-100 cursor-pointer" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
+                                "block px-4 py-2 text-sm text-gray-700",
                               )}
                             >
                               Sign out
@@ -223,7 +222,7 @@ export default function Navigation({ isLoaded }) {
                     item.current
                       ? "bg-gray-900 text-white"
                       : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "block rounded-md px-3 py-2 text-base font-medium"
+                    "block rounded-md px-3 py-2 text-base font-medium",
                   )}
                   aria-current={item.current ? "page" : undefined}
                 >
