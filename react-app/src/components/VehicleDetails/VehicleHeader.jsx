@@ -12,15 +12,15 @@ function VehicleHeader() {
   const sessionUser = useSelector((state) => state.session.user);
   const tags = useSelector((state) => state.tags);
   const [editDescription, setEditDescription] = useState(false);
-  const [updateDescription, setUpdateDescription] = useState("");
+  const [description, setDescription] = useState("");
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (!Object.values(tags).length) dispatch(getTags());
-  }, [dispatch]);
+    setDescription(vehicle?.description);
+  }, [dispatch, tags, vehicle?.description]);
 
-  const handleDescription = async (e) => {
-    e.preventDefault();
+  const handleDescription = async () => {
     // TO-DO Move to dispatch
     if (editDescription && sessionUser) {
       const data = await fetch(`/api/vehicles/${vehicle?.id}`, {
@@ -29,14 +29,15 @@ function VehicleHeader() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          description: updateDescription,
+          description: description,
         }),
       });
       if (data.errors) {
         setErrors(data.errors);
       } else {
-        dispatch(getVehicle(vehicle?.id));
-        setEditDescription(!editDescription);
+        dispatch(getVehicle(vehicle?.id)).then(() =>
+          setEditDescription(!editDescription),
+        );
       }
     }
   };
@@ -93,7 +94,7 @@ function VehicleHeader() {
       description: [`Quirks`],
     },
   ];
-  console.log("editDescription", editDescription);
+  console.log(description);
   return (
     <>
       {Object.values(errors).length ? <Error errors={errors} /> : null}
@@ -107,38 +108,57 @@ function VehicleHeader() {
               Ranked #{vehicle?.id} by Doug
             </h4>
 
-            <div className="flex flex-col justify-between">
-              <label for="Description" className="block text-sm text-gray-400">
+            <div className="flex flex-col justify-between mt-1">
+              <label for="description" className="block text-sm text-gray-400">
                 Description
               </label>
 
-              <div className="h-24">
+              <div className="h-24 mr-4">
                 {sessionUser && editDescription ? (
-                  <textarea class="block w-full rounded-lg bg-gray-100 border border-emerald-200 p-2 h-full text-gray-900 focus:border-emerald-400 focus:outline-none focus:ring focus:ring-emerald-300 focus:ring-opacity-40">
-                    {vehicle?.description}
+                  <textarea
+                    id="description"
+                    name="description"
+                    type="textarea"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    className="block w-full rounded-lg bg-gray-100 border border-emerald-200 p-2 h-full text-gray-900 focus:border-emerald-400 focus:outline-none focus:ring focus:ring-emerald-300 focus:ring-opacity-40"
+                  >
+                    {description}
                   </textarea>
                 ) : (
                   <p className="text-gray-600">{vehicle?.description}</p>
                 )}
               </div>
-              <div className="flex justify-between items-start mt-2">
+              <div className="flex justify-between items-start mt-1">
                 <p class="text-xs text-gray-400">
                   All edits will be reviewed by the community{" "}
                   <span className="underline decoration-dashed">before</span>{" "}
                   posting.
                 </p>
-                <button
-                  class="flex w-22 ml-auto items-center justify-between px-2 py-2 tracking-wide text-white transition-colors duration-300 transform bg-emerald-400 rounded-lg hover:bg-emerald-300 focus:outline-none focus:ring focus:ring-emerald-300 focus:ring-opacity-80"
-                  onClick={() => setEditDescription(!editDescription)}
-                >
-                  <PencilSquareIcon className="w-5 h-5" />
-                  <span class="mx-1 text-sm font-medium">
-                    {sessionUser && editDescription ? "Submit" : "Edit"}
-                  </span>
-                </button>
+                {sessionUser && editDescription ? (
+                  <button
+                    onClick={() =>
+                      handleDescription().then(() =>
+                        setEditDescription(!editDescription),
+                      )
+                    }
+                    class="flex w-22 mr-4 items-center justify-between px-2 py-2 tracking-wide text-white transition-colors duration-300 transform bg-emerald-400 rounded-lg hover:bg-emerald-300 focus:outline-none focus:ring focus:ring-emerald-300 focus:ring-opacity-80"
+                  >
+                    <PencilSquareIcon className="w-5 h-5" />
+                    <span class="mx-1 text-sm font-medium">Submit</span>
+                  </button>
+                ) : (
+                  <button
+                    class="flex w-22 mr-4 items-center justify-between px-2 py-2 tracking-wide text-white transition-colors duration-300 transform bg-emerald-400 rounded-lg hover:bg-emerald-300 focus:outline-none focus:ring focus:ring-emerald-300 focus:ring-opacity-80"
+                    onClick={() => setEditDescription(!editDescription)}
+                  >
+                    <PencilSquareIcon className="w-5 h-5" />
+                    <span class="mx-1 text-sm font-medium">Edit</span>
+                  </button>
+                )}
               </div>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col mt-1">
               <label for="Description" className="block text-sm text-gray-400">
                 Tags
               </label>
@@ -177,12 +197,15 @@ function VehicleHeader() {
                       leaveFrom="transform opacity-100 scale-100"
                       leaveTo="transform opacity-0 scale-95"
                     >
-                      <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <Menu.Items className="absolute z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <div className="py-1">
                           {Object.values(tags).length
                             ? Object.values(tags.vehicle_tags).map(
                               ({ tag, id }) => (
-                                <Menu.Item key={id}>
+                                <Menu.Item
+                                  key={id}
+                                  className="cursor-pointer"
+                                >
                                   <span
                                     onClick={() => handleTag(id)}
                                     className="hover:bg-gray-100 hover:text-gray-900 text-gray-700 block px-4 py-1 text-sm"
