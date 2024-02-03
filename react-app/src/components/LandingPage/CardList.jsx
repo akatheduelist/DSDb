@@ -9,6 +9,7 @@ import {
   FaceSmileIcon,
   FaceFrownIcon,
   HandThumbDownIcon,
+  CursorArrowRaysIcon,
 } from "@heroicons/react/24/outline";
 
 export default function CardList({
@@ -42,25 +43,29 @@ export default function CardList({
 
   return (
     <>
-      <div className="inline-flex items-center">
+      <div className="inline-flex items-center mt-6">
         <span className="text-3xl font-medium">{cardListTitle}</span>
         &nbsp;&nbsp;
         <i className="fa-solid fa-angle-right" />
       </div>
-      <div className="mt-1 mb-4 text-slate-400">{cardListDescription}</div>
-      <Slider {...settings}>
+      <div className="flex justify-between mt-1 mb-4 text-slate-400">
+        {cardListDescription}{" "}
+        <div className="flex gap-2">
+          <CursorArrowRaysIcon className="h-5" />
+          <span>Swipe or grab to scroll...</span>
+        </div>
+      </div>
+      <Slider {...settings} className="">
         {list?.map((item, idx) => {
           return (
-            <div key="{idx}">
-              <div className="bg-gray-100 w-44 py-1 mx-2 rounded-md">
+            <div key="{idx}" className="cursor-grab">
+              <div className="bg-gray-100 w-44 pt-2 pb-4 mx-2 rounded-md">
                 <div className="flex justify-center">
-                  <Link to={`/vehicles/${item?.vehicle?.id}`}>
-                    <img
-                      className="w-40 h-56 rounded-md object-cover drop-shadow-md"
-                      src={item?.vehicle?.images[1]?.image_url}
-                      alt={item?.vehicle?.model}
-                    />
-                  </Link>
+                  <img
+                    className="w-40 h-56 rounded-md object-cover drop-shadow-md"
+                    src={item?.vehicle?.images[1]?.image_url}
+                    alt={item?.vehicle?.model}
+                  />
                 </div>
                 <div className="flex justify-between px-3 my-2">
                   <div className="inline-flex items-center">

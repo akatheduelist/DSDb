@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  PresentationChartLineIcon,
+  FireIcon,
+  FaceSmileIcon,
+  FaceFrownIcon,
+  HandThumbDownIcon,
+} from "@heroicons/react/24/outline";
 
 export default function VerticalList({
   isLoaded,
@@ -53,9 +60,26 @@ export default function VerticalList({
                   </div>
                 </div>
                 <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                  <p className="text-sm leading-6 text-gray-900">
+                  <div className="flex justify-end gap-x-1 w-14">
+                    {item?.dougscore_total > 70 ? (
+                      <FireIcon className="h-5" />
+                    ) : item?.dougscore_total <= 70 &&
+                      item?.dougscore_total > 60 ? (
+                      <FaceSmileIcon className="h-5" />
+                    ) : item?.dougscore_total < 50 &&
+                      item?.dougscore_total >= 40 ? (
+                      <FaceFrownIcon className="h-5" />
+                    ) : item?.dougscore_total < 40 ? (
+                      <HandThumbDownIcon className="h-5" />
+                    ) : (
+                      <PresentationChartLineIcon className="h-5" />
+                    )}{" "}
                     #{index + 1}
-                  </p>
+                  </div>
+                  <span className="text-sm">
+                    &nbsp;{item?.dougscore_total}
+                    <span className="text-xs text-gray-500">/100</span>
+                  </span>
                 </div>
               </li>
             ))}
