@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getVehicle, deleteVehicleTag } from "../../store/vehicle";
 import { getTags } from "../../store/tags";
 import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { ChevronDownIcon, PencilSquareIcon } from "@heroicons/react/20/solid";
 import Error from "../Error";
 
 function VehicleHeader() {
@@ -93,7 +93,7 @@ function VehicleHeader() {
       description: [`Quirks`],
     },
   ];
-
+  console.log("editDescription", editDescription);
   return (
     <>
       {Object.values(errors).length ? <Error errors={errors} /> : null}
@@ -103,7 +103,42 @@ function VehicleHeader() {
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               {vehicle?.year} {vehicle?.make} {vehicle?.model}
             </h2>
-            <p className="mt-4 text-gray-500">{vehicle?.description}</p>
+            <h4 className="text-lg tracking-tight text-gray-800">
+              Ranked #{vehicle?.id} by Doug
+            </h4>
+
+            <div>
+              {sessionUser && editDescription ? (
+                <div>
+                  <label
+                    for="Description"
+                    class="block text-sm text-gray-500 dark:text-gray-300"
+                  >
+                    Description
+                  </label>
+
+                  <textarea
+                    placeholder="lorem..."
+                    class="block  mt-2 w-full placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 bg-white px-4 h-32 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
+                  ></textarea>
+
+                  <p class="mt-3 text-xs text-gray-400 dark:text-gray-600">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  </p>
+                </div>
+              ) : (
+                <p className="mt-4 text-gray-500">{vehicle?.description}</p>
+              )}
+              <button
+                class="flex ml-auto items-center px-2 py-2 tracking-wide text-white transition-colors duration-300 transform bg-emerald-500 rounded-lg hover:bg-emerald-400 focus:outline-none focus:ring focus:ring-emerald-300 focus:ring-opacity-80"
+                onClick={() => setEditDescription(!editDescription)}
+              >
+                <PencilSquareIcon className="w-5 h-5" />
+                <span class="mx-1 text-xs tracking-wide font-medium">
+                  Edit Description
+                </span>
+              </button>
+            </div>
             <div className="flex">
               {Object.values(vehicle?.tags).map(({ tag, id }) => (
                 <div key={id}>
