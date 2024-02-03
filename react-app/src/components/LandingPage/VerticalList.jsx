@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function VerticleList({
+export default function VerticalList({
   isLoaded,
   apiQuery,
   subQuery,
@@ -14,7 +14,7 @@ export default function VerticleList({
       const results = await fetch(`${apiQuery}`);
       const data = await results.json();
       if (data.errors) {
-        console.log(data.errors);
+        // console.log(data.errors);
       } else {
         setTopTen(data[subQuery]);
       }

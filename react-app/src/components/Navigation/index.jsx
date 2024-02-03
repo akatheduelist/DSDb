@@ -2,7 +2,6 @@ import React, { Fragment, useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../store/session";
-import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import logo from "../../images/dsdb_logo.png";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
@@ -145,7 +144,7 @@ export default function Navigation({ isLoaded }) {
                         <img
                           className="h-10 w-10 rounded-full object-cover drop-shadow-lg"
                           src={sessionUser?.profile_image}
-                          alt={`${sessionUser.username} profile image`}
+                          alt={`${sessionUser.username} profile`}
                         />
                       </Menu.Button>
                     </div>
