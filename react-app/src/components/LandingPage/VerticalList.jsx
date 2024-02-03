@@ -56,15 +56,6 @@ export default function VerticalList({
                   <p className="text-sm leading-6 text-gray-900">
                     #{index + 1}
                   </p>
-                  {index === 0 ? (
-                    <p className="mt-1 text-xs leading-5">🥇</p>
-                  ) : null}
-                  {index === 1 ? (
-                    <p className="mt-1 text-xs leading-5">🥈</p>
-                  ) : null}
-                  {index === 2 ? (
-                    <p className="mt-1 text-xs leading-5">🥉</p>
-                  ) : null}
                 </div>
               </li>
             ))}
