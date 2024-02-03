@@ -107,94 +107,98 @@ function VehicleHeader() {
               Ranked #{vehicle?.id} by Doug
             </h4>
 
-            <div>
-              {sessionUser && editDescription ? (
-                <div>
-                  <label
-                    for="Description"
-                    class="block text-sm text-gray-500 dark:text-gray-300"
-                  >
-                    Description
-                  </label>
+            <div className="flex flex-col justify-between">
+              <label for="Description" className="block text-sm text-gray-400">
+                Description
+              </label>
 
-                  <textarea
-                    placeholder="lorem..."
-                    class="block  mt-2 w-full placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 bg-white px-4 h-32 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
-                  ></textarea>
-
-                  <p class="mt-3 text-xs text-gray-400 dark:text-gray-600">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  </p>
-                </div>
-              ) : (
-                <p className="mt-4 text-gray-500">{vehicle?.description}</p>
-              )}
-              <button
-                class="flex ml-auto items-center px-2 py-2 tracking-wide text-white transition-colors duration-300 transform bg-emerald-500 rounded-lg hover:bg-emerald-400 focus:outline-none focus:ring focus:ring-emerald-300 focus:ring-opacity-80"
-                onClick={() => setEditDescription(!editDescription)}
-              >
-                <PencilSquareIcon className="w-5 h-5" />
-                <span class="mx-1 text-xs tracking-wide font-medium">
-                  Edit Description
-                </span>
-              </button>
-            </div>
-            <div className="flex">
-              {Object.values(vehicle?.tags).map(({ tag, id }) => (
-                <div key={id}>
-                  <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 mx-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                    {tag}
-                    {sessionUser ? (
-                      <button onClick={() => deleteTag(vehicle, id)}>
-                        &nbsp;
-                        <i className="text-red-700 fa-solid fa-delete-left" />
-                      </button>
-                    ) : null}
+              <div className="h-24">
+                {sessionUser && editDescription ? (
+                  <textarea class="block w-full rounded-lg bg-gray-100 border border-emerald-200 p-2 h-full text-gray-900 focus:border-emerald-400 focus:outline-none focus:ring focus:ring-emerald-300 focus:ring-opacity-40">
+                    {vehicle?.description}
+                  </textarea>
+                ) : (
+                  <p className="text-gray-600">{vehicle?.description}</p>
+                )}
+              </div>
+              <div className="flex justify-between items-start mt-2">
+                <p class="text-xs text-gray-400">
+                  All edits will be reviewed by the community{" "}
+                  <span className="underline decoration-dashed">before</span>{" "}
+                  posting.
+                </p>
+                <button
+                  class="flex w-22 ml-auto items-center justify-between px-2 py-2 tracking-wide text-white transition-colors duration-300 transform bg-emerald-400 rounded-lg hover:bg-emerald-300 focus:outline-none focus:ring focus:ring-emerald-300 focus:ring-opacity-80"
+                  onClick={() => setEditDescription(!editDescription)}
+                >
+                  <PencilSquareIcon className="w-5 h-5" />
+                  <span class="mx-1 text-sm font-medium">
+                    {sessionUser && editDescription ? "Submit" : "Edit"}
                   </span>
-                </div>
-              ))}
-              {sessionUser ? (
-                <Menu as="div" className="relative inline-block text-left">
-                  <div>
-                    <Menu.Button className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                      New Tag
-                      <ChevronDownIcon
-                        className="-mr-1 h-4 w-5 text-gray-400"
-                        aria-hidden="true"
-                      />
-                    </Menu.Button>
+                </button>
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <label for="Description" className="block text-sm text-gray-400">
+                Tags
+              </label>
+              <div className="flex flex-wrap p-1 gap-1">
+                {Object.values(vehicle?.tags).map(({ tag, id }) => (
+                  <div key={id}>
+                    <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                      {tag}
+                      {sessionUser ? (
+                        <button onClick={() => deleteTag(vehicle, id)}>
+                          &nbsp;
+                          <i className="text-red-700 fa-solid fa-delete-left" />
+                        </button>
+                      ) : null}
+                    </span>
                   </div>
+                ))}
+                {sessionUser ? (
+                  <Menu as="div" className="relative inline-block text-left">
+                    <div>
+                      <Menu.Button className="inline-flex items-center rounded-md bg-emerald-400 hover:bg-emerald-300 px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-emerald-300">
+                        New Tag
+                        <ChevronDownIcon
+                          className="-mr-1 h-4 w-5 text-white"
+                          aria-hidden="true"
+                        />
+                      </Menu.Button>
+                    </div>
 
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                  >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <div className="py-1">
-                        {Object.values(tags).length
-                          ? Object.values(tags.vehicle_tags).map(
-                            ({ tag, id }) => (
-                              <Menu.Item key={id}>
-                                <span
-                                  onClick={() => handleTag(id)}
-                                  className="hover:bg-gray-100 hover:text-gray-900 text-gray-700 block px-4 py-1 text-sm"
-                                >
-                                  {tag}
-                                </span>
-                              </Menu.Item>
-                            ),
-                          )
-                          : null}
-                      </div>
-                    </Menu.Items>
-                  </Transition>
-                </Menu>
-              ) : null}
+                    <Transition
+                      as={Fragment}
+                      enter="transition ease-out duration-100"
+                      enterFrom="transform opacity-0 scale-95"
+                      enterTo="transform opacity-100 scale-100"
+                      leave="transition ease-in duration-75"
+                      leaveFrom="transform opacity-100 scale-100"
+                      leaveTo="transform opacity-0 scale-95"
+                    >
+                      <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <div className="py-1">
+                          {Object.values(tags).length
+                            ? Object.values(tags.vehicle_tags).map(
+                              ({ tag, id }) => (
+                                <Menu.Item key={id}>
+                                  <span
+                                    onClick={() => handleTag(id)}
+                                    className="hover:bg-gray-100 hover:text-gray-900 text-gray-700 block px-4 py-1 text-sm"
+                                  >
+                                    {tag}
+                                  </span>
+                                </Menu.Item>
+                              ),
+                            )
+                            : null}
+                        </div>
+                      </Menu.Items>
+                    </Transition>
+                  </Menu>
+                ) : null}
+              </div>
             </div>
             <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
               {features.map((feature) => (
