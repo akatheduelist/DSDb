@@ -43,30 +43,32 @@ export default function CardList({
       <Slider {...settings}>
         {list?.map((item, idx) => {
           return (
-            <div key="{idx}" className="flex-col w-36 rounded-md">
-              <div className="flex justify-center">
-                <Link to={`/vehicles/${item?.vehicle?.id}`}>
-                  <img
-                    className="w-40 h-56 rounded-md object-cover"
-                    src={item?.vehicle?.images[1]?.image_url}
-                    alt={item?.vehicle?.model}
-                  />
-                </Link>
-              </div>
-              <div className="flex justify-between w-full px-3">
-                <span>
-                  <i className="green-text text-sm fa-solid fa-star" />
-                  &nbsp;{item?.dougscore_total}
-                </span>
-                <span>
-                  <span className="text-xs">#</span>
-                  <span className="text-base">{idx + 1}</span>
-                </span>
-              </div>
-              <div className="px-3 h-12">
-                <Link to={`/vehicles/${item?.vehicle?.id}`}>
-                  {item?.vehicle?.make} {item?.vehicle?.model}
-                </Link>
+            <div key="{idx}">
+              <div className="bg-gray-100 w-44 py-1 mx-2 rounded-md">
+                <div className="flex justify-center">
+                  <Link to={`/vehicles/${item?.vehicle?.id}`}>
+                    <img
+                      className="w-40 h-56 rounded-md object-cover"
+                      src={item?.vehicle?.images[1]?.image_url}
+                      alt={item?.vehicle?.model}
+                    />
+                  </Link>
+                </div>
+                <div className="flex justify-between px-3 my-1">
+                  <span>
+                    <i className="green-text text-sm fa-solid fa-star" />
+                    &nbsp;{item?.dougscore_total}
+                  </span>
+                  <span>
+                    <span className="text-xs">#</span>
+                    <span className="text-base">{idx + 1}</span>
+                  </span>
+                </div>
+                <div className="px-3 h-12">
+                  <Link to={`/vehicles/${item?.vehicle?.id}`}>
+                    {item?.vehicle?.make} {item?.vehicle?.model}
+                  </Link>
+                </div>
               </div>
             </div>
           );
