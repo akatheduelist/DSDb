@@ -3,6 +3,13 @@ import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import {
+  PresentationChartLineIcon,
+  FireIcon,
+  FaceSmileIcon,
+  FaceFrownIcon,
+  HandThumbDownIcon,
+} from "@heroicons/react/24/outline";
 
 export default function CardList({
   isLoaded,
@@ -18,7 +25,8 @@ export default function CardList({
       const results = await fetch(`${apiQuery}`);
       const data = await results.json();
       if (data.errors) {
-        // console.log(data.errors);
+        // TODO Error Handle
+        console.log(data.errors);
       } else {
         setList(data[subQuery]);
       }
@@ -48,20 +56,36 @@ export default function CardList({
                 <div className="flex justify-center">
                   <Link to={`/vehicles/${item?.vehicle?.id}`}>
                     <img
-                      className="w-40 h-56 rounded-md object-cover"
+                      className="w-40 h-56 rounded-md object-cover drop-shadow-md"
                       src={item?.vehicle?.images[1]?.image_url}
                       alt={item?.vehicle?.model}
                     />
                   </Link>
                 </div>
-                <div className="flex justify-between px-3 my-1">
+                <div className="flex justify-between px-3 my-2">
+                  <div className="inline-flex items-center">
+                    {item?.dougscore_total > 70 ? (
+                      <FireIcon className="h-5" />
+                    ) : item?.dougscore_total <= 70 &&
+                      item?.dougscore_total > 60 ? (
+                      <FaceSmileIcon className="h-5" />
+                    ) : item?.dougscore_total < 50 &&
+                      item?.dougscore_total >= 40 ? (
+                      <FaceFrownIcon className="h-5" />
+                    ) : item?.dougscore_total < 40 ? (
+                      <HandThumbDownIcon className="h-5" />
+                    ) : (
+                      <PresentationChartLineIcon className="h-5" />
+                    )}
+                    <span className="text-lg">
+                      &nbsp;{item?.dougscore_total}
+                      <span className="text-xs text-gray-500">/100</span>
+                    </span>
+                  </div>
+
                   <span>
-                    <i className="green-text text-sm fa-solid fa-star" />
-                    &nbsp;{item?.dougscore_total}
-                  </span>
-                  <span>
-                    <span className="text-xs">#</span>
-                    <span className="text-base">{idx + 1}</span>
+                    <span className="text-xs text-gray-500">#</span>
+                    <span className="text-lg">{idx + 1}</span>
                   </span>
                 </div>
                 <div className="px-3 h-12">
