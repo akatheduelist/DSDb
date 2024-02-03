@@ -9,7 +9,6 @@ function QuirksFormPage({ vehicleId }) {
 	const [errors, setErrors] = useState([]);
 
 	// if !(sessionUser) return <Redirect to="/" />;
-    console.log(vehicleId)
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -20,8 +19,8 @@ function QuirksFormPage({ vehicleId }) {
 			},
 			body: JSON.stringify({
 				user_id: sessionUser.id,
-                vehicle_id: vehicleId,
-                quirk
+				vehicle_id: vehicleId,
+				quirk,
 			}),
 		});
 		if (data.errors) {
