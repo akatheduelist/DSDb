@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function VerticalList({
   isLoaded,
   apiQuery,
   subQuery,
-  verticleListTitle,
-  verticleListDescription,
+  verticalListTitle,
+  verticalListDescription,
 }) {
   const [topTen, setTopTen] = useState([]);
 
@@ -25,8 +26,8 @@ export default function VerticalList({
   return (
     <>
       <div className="flex flex-col max-w-xl drop-shadow-xl mx-auto my-14">
-        <span className="text-3xl font-medium">{verticleListTitle}</span>
-        <p className="mb-2 text-slate-400">{verticleListDescription}</p>
+        <span className="text-3xl font-medium">{verticalListTitle}</span>
+        <p className="mb-2 text-slate-400">{verticalListDescription}</p>
         <div className="max-h-80 overflow-auto">
           <ul className="divide-y divide-gray-100">
             {topTen?.map((item, index) => (
@@ -39,10 +40,13 @@ export default function VerticalList({
                   {index === 1 ? <span className="text-2xl">🥈</span> : null}
                   {index === 2 ? <span className="text-2xl">🥉</span> : null}
                   <div className="min-w-0 flex-auto">
-                    <p className="text-sm font-semibold leading-6 text-gray-900">
+                    <Link
+                      to={`/vehicles/${item?.vehicle?.id}`}
+                      className="text-sm font-semibold leading-6 text-gray-900"
+                    >
                       {item?.vehicle?.year} {item?.vehicle?.make}{" "}
                       {item?.vehicle?.model}
-                    </p>
+                    </Link>
                     <p className="mt-1 truncate text-xs leading-5 text-gray-500">
                       {item?.vehicle?.description}
                     </p>
