@@ -17,7 +17,6 @@ function LandingPage() {
 
   useEffect(() => {
     dispatch(getAllVehicles()).then(() => setIsLoaded(true));
-    // setIsLoaded(true);
   }, [dispatch]);
 
   return (
@@ -30,15 +29,15 @@ function LandingPage() {
               isLoaded={isLoaded}
               apiQuery={"/api/dougscores/topten"}
               subQuery={"top_ten"}
-              verticleListTitle={"The GOATs"}
-              verticleListDescription={"Cars with the highest total Dougscore."}
+              verticalListTitle={"🐐 The GOATs"}
+              verticalListDescription={"Cars with the highest total Dougscore."}
             />
             <VerticalList
               isLoaded={isLoaded}
               apiQuery={"/api/dougscores/worstrating"}
               subQuery={"bottom_ten"}
-              verticleListTitle={"Total Stinkers"}
-              verticleListDescription={
+              verticalListTitle={"💩 Total Stinkers"}
+              verticalListDescription={
                 "Cars with the absolute worst Dougscore."
               }
             />
