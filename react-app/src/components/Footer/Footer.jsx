@@ -174,7 +174,7 @@ export default function Footer() {
         {/* <hr className="h-px my-6 bg-gray-200 border-none dark:bg-gray-700"> */}
 
         <div>
-          <p class="text-center text-gray-500 dark:text-gray-400">
+          <p className="text-center text-gray-500 dark:text-gray-400">
             Created by me, 👋{" "}
             <Link
               to={{ pathname: "https://github.com/akatheduelist" }}

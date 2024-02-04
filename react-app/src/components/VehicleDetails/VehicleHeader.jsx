@@ -14,11 +14,14 @@ function VehicleHeader() {
   const [editDescription, setEditDescription] = useState(false);
   const [description, setDescription] = useState("");
   const [errors, setErrors] = useState({});
+  const [goodBad, setGoodBad] = useState("");
+  const [higherLower, setHigherLower] = useState("");
 
   useEffect(() => {
     if (!Object.values(tags).length) dispatch(getTags());
     setDescription(vehicle?.description);
-  }, [dispatch, tags, vehicle?.description]);
+    totalScoreAnalysis(vehicle);
+  }, [dispatch, tags, vehicle, vehicle?.description]);
 
   const handleDescription = async () => {
     // TO-DO Move to dispatch
@@ -47,7 +50,6 @@ function VehicleHeader() {
   };
 
   const handleTag = async (id) => {
-    // e.preventDefault()
     // TO-DO Move to dispatch
     if (sessionUser) {
       const data = await fetch(`/api/vehicles/${vehicle?.id}/tags`, {
@@ -60,17 +62,63 @@ function VehicleHeader() {
         }),
       });
 
-      if (!data.ok) {
-        setErrors(data.statusText);
+      if (data.errors) {
+        setErrors(data.errors);
       } else {
         dispatch(getVehicle(vehicle?.id));
       }
     }
   };
 
+  function totalScoreAnalysis(vehicle) {
+    if (vehicle.dougscore.dougscore_total >= 72) {
+      setGoodBad("stellar 👑 ");
+      setHigherLower("as one of the highest 🏆");
+    }
+    if (
+      vehicle.dougscore.dougscore_total < 72 &&
+      vehicle.dougscore.dougscore_total >= 68
+    ) {
+      setGoodBad("🚀 outstanding");
+      setHigherLower("a cut above the rest 🤌");
+    }
+    if (
+      vehicle.dougscore.dougscore_total < 68 &&
+      vehicle.dougscore.dougscore_total > 62
+    ) {
+      setGoodBad("😎 above average");
+      setHigherLower("higher than normal 🫶");
+    }
+    if (
+      vehicle.dougscore.dougscore_total < 62 &&
+      vehicle.dougscore.dougscore_total >= 48
+    ) {
+      setGoodBad("😐 pretty average");
+      setHigherLower("right in the middle 👀");
+    }
+    if (
+      vehicle.dougscore.dougscore_total < 48 &&
+      vehicle.dougscore.dougscore_total >= 40
+    ) {
+      setGoodBad("🫠 not great");
+      setHigherLower("lower than normal 💔");
+    }
+    if (
+      vehicle.dougscore.dougscore_total < 40 &&
+      vehicle.dougscore.dougscore_total >= 35
+    ) {
+      setGoodBad("🤢 horrible");
+      setHigherLower("a far outlier (in a bad way) 🙅");
+    }
+    if (vehicle.dougscore.dougscore_total < 35) {
+      setGoodBad("🤮 craptastic");
+      setHigherLower("in the mariana trench 🚨");
+    }
+    return;
+  }
   const features = [
     {
-      name: "Daily Score",
+      name: `Daily Score: ${vehicle?.dougscore?.daily_total}`,
       description: [
         `Features ${vehicle?.dougscore?.daily_features}`,
         `Comfort ${vehicle?.dougscore?.daily_comfort}`,
@@ -80,7 +128,7 @@ function VehicleHeader() {
       ],
     },
     {
-      name: "Weekend Score",
+      name: `Weekend Score: ${vehicle?.dougscore?.weekend_total}`,
       description: [
         `Styling ${vehicle?.dougscore?.weekend_styling}`,
         `Acceleration ${vehicle?.dougscore?.weekend_acceleration}`,
@@ -90,17 +138,19 @@ function VehicleHeader() {
       ],
     },
     {
-      name: "Quirks",
-      description: [`Quirks`],
+      name: `Total Score: ${vehicle?.dougscore?.dougscore_total}`,
+      description: [
+        `This is a ${goodBad} overall DougScore, and it ranks ${higherLower} compared to the median score.`,
+      ],
     },
   ];
-  console.log(description);
+
   return (
     <>
       {Object.values(errors).length ? <Error errors={errors} /> : null}
       <div className="bg-white">
-        <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
-          <div>
+        <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-4 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
+          <div className="py-8">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               {vehicle?.year} {vehicle?.make} {vehicle?.model}
             </h2>
@@ -108,8 +158,11 @@ function VehicleHeader() {
               Ranked #{vehicle?.id} by Doug
             </h4>
 
-            <div className="flex flex-col justify-between mt-1">
-              <label for="description" className="block text-sm text-gray-400">
+            <div className="flex flex-col justify-between mt-3">
+              <label
+                htmlFor="description"
+                className="block text-sm text-gray-400"
+              >
                 Description
               </label>
 
@@ -130,36 +183,37 @@ function VehicleHeader() {
                 )}
               </div>
               <div className="flex justify-between items-start mt-1">
-                <p class="text-xs text-gray-400">
+                <p className="text-xs text-gray-400">
                   All edits will be reviewed by the community{" "}
                   <span className="underline decoration-dashed">before</span>{" "}
                   posting.
                 </p>
                 {sessionUser && editDescription ? (
                   <button
-                    onClick={() =>
-                      handleDescription().then(() =>
-                        setEditDescription(!editDescription),
-                      )
-                    }
-                    class="flex w-22 mr-4 items-center justify-between px-2 py-2 tracking-wide text-white transition-colors duration-300 transform bg-emerald-400 rounded-lg hover:bg-emerald-300 focus:outline-none focus:ring focus:ring-emerald-300 focus:ring-opacity-80"
+                    onClick={() => {
+                      handleDescription();
+                    }}
+                    className="flex w-22 mr-4 items-center justify-between px-2 py-2 tracking-wide text-white transition-colors duration-300 transform bg-emerald-400 rounded-lg hover:bg-emerald-300 focus:outline-none focus:ring focus:ring-emerald-300 focus:ring-opacity-80"
                   >
                     <PencilSquareIcon className="w-5 h-5" />
-                    <span class="mx-1 text-sm font-medium">Submit</span>
+                    <span className="mx-1 text-sm font-medium">Submit</span>
                   </button>
                 ) : (
                   <button
-                    class="flex w-22 mr-4 items-center justify-between px-2 py-2 tracking-wide text-white transition-colors duration-300 transform bg-emerald-400 rounded-lg hover:bg-emerald-300 focus:outline-none focus:ring focus:ring-emerald-300 focus:ring-opacity-80"
+                    className="flex w-22 mr-4 items-center justify-between px-2 py-2 tracking-wide text-white transition-colors duration-300 transform bg-emerald-400 rounded-lg hover:bg-emerald-300 focus:outline-none focus:ring focus:ring-emerald-300 focus:ring-opacity-80"
                     onClick={() => setEditDescription(!editDescription)}
                   >
                     <PencilSquareIcon className="w-5 h-5" />
-                    <span class="mx-1 text-sm font-medium">Edit</span>
+                    <span className="mx-1 text-sm font-medium">Edit</span>
                   </button>
                 )}
               </div>
             </div>
             <div className="flex flex-col mt-1">
-              <label for="Description" className="block text-sm text-gray-400">
+              <label
+                htmlFor="Description"
+                className="block text-sm text-gray-400"
+              >
                 Tags
               </label>
               <div className="flex flex-wrap p-1 gap-1">
@@ -223,7 +277,7 @@ function VehicleHeader() {
                 ) : null}
               </div>
             </div>
-            <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
+            <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:grid-cols-3 gap-x-6">
               {features.map((feature) => (
                 <div
                   key={feature.name}
@@ -231,7 +285,7 @@ function VehicleHeader() {
                 >
                   <dt className="font-medium text-gray-900">{feature.name}</dt>
                   {feature.description.map((description, idx) => (
-                    <dd key={idx} className="mt-2 text-sm text-gray-500">
+                    <dd key={idx} className="mt-2 text-medium text-gray-500">
                       {description}
                     </dd>
                   ))}
