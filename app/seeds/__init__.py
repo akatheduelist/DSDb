@@ -31,7 +31,7 @@ def seed():
     seed_dougscores()
     seed_reviews()
     seed_quirks()
-    seed_vehicle_images()
+    # seed_vehicle_images()
     seed_tags()
 
 

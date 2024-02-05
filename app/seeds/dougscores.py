@@ -2,6 +2,7 @@ from app.models import db, DougScore, Vehicle, environment, SCHEMA
 from sqlalchemy.sql import text
 import csv
 import os
+import pandas as pd
 from faker import Faker
 from faker.providers import lorem, python
 
@@ -10,6 +11,11 @@ fake.add_provider(lorem)
 fake.add_provider(python)
 
 def seed_dougscores():
+    spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1HcFstlJdQMlMEWhbdKXZWdAzR5RFMtj3kywLQcgkGPw/export?format=csv'
+    pd.options.display.max_rows = 200
+    df = pd.read_csv(spreadsheet_url)
+    df.dropna(inplace = True) 
+    print(df.loc[2])
     # Get the local path where the seed file exists on the system
     seed_dir = os.path.dirname(__file__)
     # Notate the relative path to the CSV file to be parsed

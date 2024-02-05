@@ -6,26 +6,23 @@ import OpenModalButton from "../OpenModalButton";
 import DeleteItemModal from "../DeleteItemModal";
 import VehicleHeader from "./VehicleHeader";
 import Quirks from "./Quirks";
-import Comments from "./Comments"
+import Comments from "./Comments";
 import "./VehicleDetails.css";
 
 function VehicleDetails() {
 	const dispatch = useDispatch();
 	const { vehicleId } = useParams();
-	const vehicle = useSelector((state) => state.vehicle.currentVehicle);
-	const sessionUser = useSelector((state) => state.session.user);
 	const [vehicleIsLoaded, setVehicleIsLoaded] = useState(false);
 
 	useEffect(() => {
-		dispatch(getVehicle(vehicleId))
-			.then(() => setVehicleIsLoaded(true))
+		dispatch(getVehicle(vehicleId)).then(() => setVehicleIsLoaded(true));
 	}, [dispatch]);
 
 	// if (sessionUser) return <Redirect to="/" />;
 
 	return (
 		<>
-			{vehicleIsLoaded &&
+			{vehicleIsLoaded && (
 				<>
 					<VehicleHeader />
 					<Quirks
@@ -42,9 +39,9 @@ function VehicleDetails() {
 					/> */}
 					<Comments />
 				</>
-			}
+			)}
 		</>
-	)
+	);
 }
 
 export default VehicleDetails;
