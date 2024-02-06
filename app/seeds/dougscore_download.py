@@ -83,10 +83,10 @@ def analyze_excel(filepath, column_index, rows_to_delete):
     # For each row in the new sheet iterate over just the target column index
     for row in ws.iter_rows(min_col=column_index, max_col=column_index):
 
+        row_number = row[0].row
         # Check if the value in the cell is not None, if not, continue.
         if row[0].value is not None:
             cell_value = row[0].value
-            row_number = row[0].row
 
             if isinstance(cell_value, str):
                 # If the value is a string, split the hyperlink and extract the URL
@@ -105,7 +105,7 @@ def analyze_excel(filepath, column_index, rows_to_delete):
                     data_ws[f"{column_letter}{row_number}"] = str("")
         else:
             # Handle the case where the value is None
-            pass
+            data_ws[f"{column_letter}{row_number}"] = str("")
 
     # Save the modified data workbook
     data_wb.save(filepath)
@@ -113,10 +113,11 @@ def analyze_excel(filepath, column_index, rows_to_delete):
 
 def convert_excel_to_csv(filepath):
     """Use pandas library to convert sanitized excel file to csv"""
-    # Load excel file into a pandas dataframe, with no index column
-    df = pd.read_excel(filepath, engine="openpyxl", index_col=None)
+    # Load excel file into a pandas dataframe, with no index column.
+    # We specify "no header" row so the first row is not treaded differently from the others.
+    df = pd.read_excel(filepath, index_col=None, engine="openpyxl", header=None)
     # Export dataframe to csv file
-    df.to_csv(csv_filepath)
+    df.to_csv(csv_filepath, index=False, header=None)
 
 
 download_google_sheet(excel_filepath)

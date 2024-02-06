@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
 import { signUp } from "../../store/session";
-import logo from "../../images/dsdb_logo.svg";
+import logo from "../../images/dsdb_logo.png";
 import Error from "../Error";
 import "./SignupForm.css";
 
@@ -27,7 +27,8 @@ function SignupFormPage() {
 		} else {
 			const confirmPassword = {
 				...errors,
-				confirm_password: "Confirm Password field must be the same as the Password field",
+				confirm_password:
+					"Confirm Password field must be the same as the Password field",
 			};
 			setErrors(confirmPassword);
 		}
@@ -35,14 +36,10 @@ function SignupFormPage() {
 
 	return (
 		<>
-			{Object.values(errors).length > 0 ? (<Error errors={errors} />) : null}
+			{Object.values(errors).length > 0 ? <Error errors={errors} /> : null}
 			<div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
 				<div className="sm:mx-auto sm:w-full sm:max-w-sm">
-					<img
-						className="mx-auto w-auto"
-						src={logo}
-						alt="DSDb Logo"
-					/>
+					<img className="mx-auto w-auto" src={logo} alt="DSDb Logo" />
 					<h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
 						Create an account
 					</h2>
@@ -51,7 +48,10 @@ function SignupFormPage() {
 				<div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 					<form className="space-y-6" onSubmit={handleSubmit} noValidate>
 						<div>
-							<label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+							<label
+								htmlFor="email"
+								className="block text-sm font-medium leading-6 text-gray-900"
+							>
 								Your name
 							</label>
 							<div className="mt-2">
@@ -65,12 +65,17 @@ function SignupFormPage() {
 									onChange={(e) => setName(e.target.value)}
 									required
 								/>
-								{errors.name ? <span className="text-sm text-red-700">{errors.name}</span> : null}
+								{errors.name ? (
+									<span className="text-sm text-red-700">{errors.name}</span>
+								) : null}
 							</div>
 						</div>
 
 						<div>
-							<label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+							<label
+								htmlFor="email"
+								className="block text-sm font-medium leading-6 text-gray-900"
+							>
 								Email
 							</label>
 							<div className="mt-2">
@@ -84,13 +89,17 @@ function SignupFormPage() {
 									onChange={(e) => setEmail(e.target.value)}
 									required
 								/>
-																{errors.email ? <span className="text-sm text-red-700">{errors.email}</span> : null}
-
+								{errors.email ? (
+									<span className="text-sm text-red-700">{errors.email}</span>
+								) : null}
 							</div>
 						</div>
 
 						<div>
-							<label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+							<label
+								htmlFor="password"
+								className="block text-sm font-medium leading-6 text-gray-900"
+							>
 								Password
 							</label>
 							<div className="mt-2">
@@ -104,13 +113,19 @@ function SignupFormPage() {
 									onChange={(e) => setPassword(e.target.value)}
 									required
 								/>
-								{errors.password ? <span className="text-sm text-red-700">{errors.password}</span> : null}
+								{errors.password ? (
+									<span className="text-sm text-red-700">
+										{errors.password}
+									</span>
+								) : null}
 							</div>
 						</div>
 
-
 						<div>
-							<label htmlFor="repassword" className="block text-sm font-medium leading-6 text-gray-900">
+							<label
+								htmlFor="repassword"
+								className="block text-sm font-medium leading-6 text-gray-900"
+							>
 								Re-enter password
 							</label>
 							<div className="mt-2">
@@ -124,7 +139,11 @@ function SignupFormPage() {
 									onChange={(e) => setConfirmPassword(e.target.value)}
 									required
 								/>
-								{errors.confirm_password ? <span className="text-sm text-red-700">{errors.confirm_password}</span> : null}
+								{errors.confirm_password ? (
+									<span className="text-sm text-red-700">
+										{errors.confirm_password}
+									</span>
+								) : null}
 							</div>
 						</div>
 
@@ -137,11 +156,14 @@ function SignupFormPage() {
 							</button>
 						</div>
 						<p className="mt-10 text-center text-sm text-gray-500">
-            Already a member?{' '}
-            <Link to="/login" className="font-semibold leading-6 text-emerald-500 hover:text-emerald-400">
-						Sign in with your DSDb account
-            </Link>
-          </p>
+							Already a member?{" "}
+							<Link
+								to="/login"
+								className="font-semibold leading-6 text-emerald-500 hover:text-emerald-400"
+							>
+								Sign in with your DSDb account
+							</Link>
+						</p>
 					</form>
 				</div>
 			</div>

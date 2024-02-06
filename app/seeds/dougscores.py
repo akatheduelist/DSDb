@@ -21,6 +21,7 @@ def seed_dougscores():
     # Open seed file and parse out columns of each row to corresponding attribute
     with open(seed_file_path, "r") as csv_file:
         reader = csv.reader(csv_file)
+        # next(reader, None)
         for row in reader:
             vehicle = Vehicle(
                 year=row[0],
@@ -28,7 +29,7 @@ def seed_dougscores():
                 model=row[2],
                 trim="N/A",
                 description=fake.paragraph(),
-                vehicle_country=row[20],
+                vehicle_country=row[19],
             )
             dougscore = DougScore(
                 vehicle=vehicle,
@@ -45,9 +46,9 @@ def seed_dougscores():
                 daily_value=row[13],
                 daily_total=row[14],
                 dougscore_total=row[15],
-                video_time=row[16],
-                video_link=row[17],
-                filming_location=row[18] + ", " + row[19],
+                video_time="N/A",
+                video_link=row[16],
+                filming_location=row[17] + ", " + row[18],
             )
             db.session.add(vehicle)
             db.session.add(dougscore)

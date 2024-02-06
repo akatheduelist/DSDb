@@ -8,14 +8,13 @@
    id="svg82"
    xmlnsSvg="http://www.w3.org/2000/svg"
    sodipodi:docname="dsdb_logo.svg"
-   inkscape:export-filename="dsdb_logo2.svg"
+   inkscape:export-filename="dsdb_logo.svg"
    inkscape:export-xdpi="195.91837"
    inkscape:export-ydpi="195.91837"
-   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlnsInkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlnsSodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
+   xmlnsSvg="http://www.w3.org/2000/svg">
   <sodipodi:namedview
      id="namedview1"
      pagecolor="#ffffff"
@@ -26,13 +25,13 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="13.846939"
-     inkscape:cx="49.036109"
+     inkscape:cx="48.963891"
      inkscape:cy="27.984525"
-     inkscape:window-width="1499"
-     inkscape:window-height="991"
-     inkscape:window-x="26"
-     inkscape:window-y="23"
-     inkscape:window-maximized="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1011"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
      inkscape:current-layer="svg82" />
   <defs
      id="defs86" />
