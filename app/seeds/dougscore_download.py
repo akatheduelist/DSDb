@@ -1,3 +1,5 @@
+"""Imports"""
+
 import os
 import re
 import requests
@@ -8,10 +10,10 @@ from openpyxl.utils import get_column_letter
 # TODO Add some try catches for errors
 
 URL = "https://docs.google.com/spreadsheets/d/1HcFstlJdQMlMEWhbdKXZWdAzR5RFMtj3kywLQcgkGPw/export"
-
 OUTPUT_DIR = os.path.dirname(__file__)
-EXCEL_FILE = "dougscore.xlsx"
-CSV_FILE = "dougscore.csv"
+os.makedirs("dougscore_files", exist_ok=True)
+EXCEL_FILE = "dougscore_files/dougscore.xlsx"
+CSV_FILE = "dougscore_files/dougscore.csv"
 
 excel_filepath = os.path.join(OUTPUT_DIR, EXCEL_FILE)
 csv_filepath = os.path.join(OUTPUT_DIR, CSV_FILE)
@@ -46,78 +48,77 @@ def remove_empty_rows(sheet):
 
 def analyze_excel(filepath, column_index, rows_to_delete):
     """Cleanup excel sheet and export it with urls"""
+
     # Load the Excel workbook (wb) and the desired worksheet (ws)
+    # We need data_wb to import as "data_only" so we can get the actual data from the cells
+    # not the formulas. We need wb so we can get the formulas and parse the embedded url links.
+    data_wb = load_workbook(filepath, data_only=True)
+    data_ws = data_wb["DougScore"]
     wb = load_workbook(filepath)
     ws = wb["DougScore"]
 
+    # TODO Check and see if there is a more effecient way to accomplish this
+    # Remove all of the empty rows from the bottom of the sheet
     remove_empty_rows(ws)
+    remove_empty_rows(data_ws)
 
+    # Our sheet has several merged cells at the top of the sheet for formatting, un-merge them.
     for merged_cells in list(ws.merged_cells):
         ws.unmerge_cells(range_string=str(merged_cells))
+    for merged_cells in list(data_ws.merged_cells):
+        data_ws.unmerge_cells(range_string=str(merged_cells))
 
+    # Our sheet has 3 rows of pinned (frozen) panes at the top for formatting, un-freeze them.
     ws.freeze_panes = None
-    ws.delete_rows(1, amount=rows_to_delete)
-    ws.insert_rows(1)
-    new_column_index = column_index + 1
-    ws.insert_cols(new_column_index)
-    new_column_letter = get_column_letter(new_column_index)
+    data_ws.freeze_panes = None
 
+    # Our sheet has 3 rows of formatted heading at the top of the page, delete them.
+    ws.delete_rows(1, amount=rows_to_delete)
+    data_ws.delete_rows(1, amount=rows_to_delete)
+
+    # Get the column_letter at the location of our target column index so we can
+    # append the same calumn letter in the new sheet.
+    column_letter = get_column_letter(column_index)
+
+    # For each row in the new sheet iterate over just the target column index
     for row in ws.iter_rows(min_col=column_index, max_col=column_index):
-        # Check if the value in the cell is not None
+
+        # Check if the value in the cell is not None, if not, continue.
         if row[0].value is not None:
             cell_value = row[0].value
-            row_number = row[
-                0
-            ].row  # Access the row number directly from the row object
+            row_number = row[0].row
 
             if isinstance(cell_value, str):
                 # If the value is a string, split the hyperlink and extract the URL
                 hyperlink_parts = cell_value.split(",")
                 url = extract_url_from_hyperlink(hyperlink_parts[0])
-                ws[f"{new_column_letter}{row_number}"] = str(url)
+                # Save the extracted string the "data_ws", this is the ws we will export.
+                data_ws[f"{column_letter}{row_number}"] = str(url)
             else:
-                # If the value is not a string, check if it has the 'target' attribute
+                # If the value is not a string, check if it has the 'hyperlink.target' attribute
                 if hasattr(row[0], "hyperlink") and hasattr(row[0].hyperlink, "target"):
                     hyperlink_target = row[0].hyperlink.target
-                    ws[f"{new_column_letter}{row_number}"] = str(hyperlink_target)
+                    # Save the hyperlink_target the "data_ws", this is the ws we will export.
+                    data_ws[f"{column_letter}{row_number}"] = str(hyperlink_target)
                 else:
-                    # Handle the case where 'target' attribute is not present
-                    ws[f"{new_column_letter}{row_number}"] = str("")
+                    # 'hyperlink.target' attribute is not present? Append an empty string.
+                    data_ws[f"{column_letter}{row_number}"] = str("")
         else:
             # Handle the case where the value is None
             pass
 
-    # Save the modified workbook
-    wb.save(filepath)
+    # Save the modified data workbook
+    data_wb.save(filepath)
+
+
+def convert_excel_to_csv(filepath):
+    """Use pandas library to convert sanitized excel file to csv"""
+    # Load excel file into a pandas dataframe, with no index column
+    df = pd.read_excel(filepath, engine="openpyxl", index_col=None)
+    # Export dataframe to csv file
+    df.to_csv(csv_filepath)
 
 
 download_google_sheet(excel_filepath)
 analyze_excel(excel_filepath, 17, 3)
-
-col_names = [
-    "year",
-    "make",
-    "model",
-    "weekend_styling",
-    "weekend_acceleration",
-    "weekend_handling",
-    "weekend_funfactor",
-    "weekend_coolfactor",
-    "weekend_total",
-    "daily_features",
-    "daily_comfort",
-    "daily_quality",
-    "daily_practical",
-    "daily_value",
-    "daily_total",
-    "dougscore_total",
-    "video_runtime",
-    "video_link",
-    "filming_city",
-    "filming_state",
-    "vehicle_country",
-]
-
-df = pd.read_excel(excel_filepath)
-df.columns = col_names
-df.to_csv(csv_filepath)
+convert_excel_to_csv(excel_filepath)
