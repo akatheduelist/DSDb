@@ -87,7 +87,6 @@ def vehicle_search():
         # If there is a match put it in the strings_set.
         # EX: ["Jeep", "Gladiator", "BMW", "M5"] would get all Jeeps(make), Gladiators(models), BMWs(make), and M5s(model)
         for search_string in query_strings:
-            print("search_string", search_string)
             filtered_by_make_model = Vehicle.query.filter(db.or_(Vehicle.model.ilike(search_string), Vehicle.make.ilike(search_string)))
             for result in filtered_by_make_model:
                 strings_set.add(result)
@@ -109,6 +108,8 @@ def vehicle_search():
         if len(years_set) >= 1 and len(strings_set) >= 1:
             results = list(years_set.intersection(strings_set))
             return [result.to_dict() for result in results]
+        else:
+            return {'errors': ['wat?']}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
