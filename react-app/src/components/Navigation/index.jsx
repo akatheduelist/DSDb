@@ -37,7 +37,7 @@ export default function Navigation({ isLoaded }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        search,
+        search: search,
       }),
     });
     const data = await result.json();
@@ -52,7 +52,7 @@ export default function Navigation({ isLoaded }) {
     e.preventDefault();
     dispatch(logout());
   };
-  console.log(search)
+
   return (
     <Disclosure as="nav" className="">
       {({ open }) => (
