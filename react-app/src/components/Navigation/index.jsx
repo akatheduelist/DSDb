@@ -47,12 +47,12 @@ export default function Navigation({ isLoaded }) {
       history.push({ pathname: "/search", state: { search: data } });
     }
   };
-
+  
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
   };
-
+  console.log(search)
   return (
     <Disclosure as="nav" className="">
       {({ open }) => (
