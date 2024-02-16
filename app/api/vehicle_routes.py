@@ -79,7 +79,8 @@ def vehicle_search():
         # Map through each 'year' in the years list and put the results in a years_set.
         # EX: ["1999", "2001", "2021"] would put all vehicles from these years into the years_set.
         for search_year in query_years:
-            filtered_by_year = Vehicle.query.filter(db.or_(Vehicle.year.ilike(search_year)))
+            search_int = int(search_year)
+            filtered_by_year = Vehicle.query.filter(Vehicle.year.like(search_int)).all()
             for result in filtered_by_year:
                 years_set.add(result)
 
