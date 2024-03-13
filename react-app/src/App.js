@@ -10,6 +10,7 @@ import Search from "./components/Search";
 import VehicleDetails from "./components/VehicleDetails";
 import QuirksFormPage from "./components/QuirksFormPage";
 import Footer from "./components/Footer/Footer";
+import ProfilePage from "./components/ProfilePage";
 import ReactGA from "react-ga";
 
 // Main app for the project
@@ -45,6 +46,9 @@ function App() {
             </Route>
             <Route path="/search">
               <Search />
+            </Route>
+            <Route path="/profile">
+              <ProfilePage />
             </Route>
             <Route exact path="/vehicles/:vehicleId">
               <VehicleDetails />
