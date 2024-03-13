@@ -39,7 +39,7 @@ function VehicleHeader() {
         setErrors(data.errors);
       } else {
         dispatch(getVehicle(vehicle?.id)).then(() =>
-          setEditDescription(!editDescription),
+          setEditDescription(!editDescription)
         );
       }
     }
@@ -201,7 +201,11 @@ function VehicleHeader() {
                 ) : (
                   <button
                     className="flex w-22 mr-4 items-center justify-between px-2 py-2 tracking-wide text-white transition-colors duration-300 transform bg-emerald-400 rounded-lg hover:bg-emerald-300 focus:outline-none focus:ring focus:ring-emerald-300 focus:ring-opacity-80"
-                    onClick={() => setErrors({test: "You must be logged in to make an edit."})}
+                    onClick={() =>
+                      setErrors({
+                        test: "You must be logged in to edit a description.",
+                      })
+                    }
                   >
                     <PencilSquareIcon className="w-5 h-5" />
                     <span className="mx-1 text-sm font-medium">Edit</span>
@@ -255,26 +259,36 @@ function VehicleHeader() {
                         <div className="py-1">
                           {Object.values(tags).length
                             ? Object.values(tags.vehicle_tags).map(
-                              ({ tag, id }) => (
-                                <Menu.Item
-                                  key={id}
-                                  className="cursor-pointer"
-                                >
-                                  <span
-                                    onClick={() => handleTag(id)}
-                                    className="hover:bg-gray-100 hover:text-gray-900 text-gray-700 block px-4 py-1 text-sm"
+                                ({ tag, id }) => (
+                                  <Menu.Item
+                                    key={id}
+                                    className="cursor-pointer"
                                   >
-                                    {tag}
-                                  </span>
-                                </Menu.Item>
-                              ),
-                            )
+                                    <span
+                                      onClick={() => handleTag(id)}
+                                      className="hover:bg-gray-100 hover:text-gray-900 text-gray-700 block px-4 py-1 text-sm"
+                                    >
+                                      {tag}
+                                    </span>
+                                  </Menu.Item>
+                                )
+                              )
                             : null}
                         </div>
                       </Menu.Items>
                     </Transition>
                   </Menu>
-                ) : null}
+                ) : (
+                  <button className="inline-flex items-center rounded-md bg-emerald-400 hover:bg-emerald-300 px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-emerald-300"
+                    onClick={() => setErrors({notLoggedIn: "You must be logged in to add a tag."})}
+                  >
+                    New Tag
+                    <ChevronDownIcon
+                      className="-mr-1 h-4 w-5 text-white"
+                      aria-hidden="true"
+                    />
+                  </button>
+                )}
               </div>
             </div>
             <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:grid-cols-3 gap-x-6">
