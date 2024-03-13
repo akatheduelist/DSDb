@@ -12,6 +12,7 @@ import QuirksFormPage from "./components/QuirksFormPage";
 import Footer from "./components/Footer/Footer";
 import ProfilePage from "./components/ProfilePage";
 import ReactGA from "react-ga";
+import SettingsPage from "./components/SettingsPage";
 
 // Main app for the project
 function App() {
@@ -53,7 +54,7 @@ function App() {
               <ProfilePage sessionUser={sessionUser} />
             </Route>
             <Route path="/settings">
-              <ProfilePage />
+              <SettingsPage />
             </Route>
             <Route exact path="/vehicles/:vehicleId">
               <VehicleDetails />
