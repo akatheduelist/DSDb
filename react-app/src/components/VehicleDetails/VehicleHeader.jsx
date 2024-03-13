@@ -120,21 +120,21 @@ function VehicleHeader() {
     {
       name: `Daily Score: ${vehicle?.dougscore?.daily_total}`,
       description: [
-        `Features ${vehicle?.dougscore?.daily_features}`,
-        `Comfort ${vehicle?.dougscore?.daily_comfort}`,
-        `Quality ${vehicle?.dougscore?.daily_quality}`,
-        `Practicality ${vehicle?.dougscore?.daily_practicality}`,
-        `Value ${vehicle?.dougscore?.daily_value}`,
+        `Features: ${vehicle?.dougscore?.daily_features}`,
+        `Comfort: ${vehicle?.dougscore?.daily_comfort}`,
+        `Quality: ${vehicle?.dougscore?.daily_quality}`,
+        `Practicality: ${vehicle?.dougscore?.daily_practicality}`,
+        `Value: ${vehicle?.dougscore?.daily_value}`,
       ],
     },
     {
       name: `Weekend Score: ${vehicle?.dougscore?.weekend_total}`,
       description: [
-        `Styling ${vehicle?.dougscore?.weekend_styling}`,
-        `Acceleration ${vehicle?.dougscore?.weekend_acceleration}`,
-        `Handling ${vehicle?.dougscore?.weekend_handling}`,
-        `Fun Factor ${vehicle?.dougscore?.weekend_funfactor}`,
-        `Cool Factor ${vehicle?.dougscore?.weekend_coolfactor}`,
+        `Styling: ${vehicle?.dougscore?.weekend_styling}`,
+        `Acceleration: ${vehicle?.dougscore?.weekend_acceleration}`,
+        `Handling: ${vehicle?.dougscore?.weekend_handling}`,
+        `Fun Factor: ${vehicle?.dougscore?.weekend_funfactor}`,
+        `Cool Factor: ${vehicle?.dougscore?.weekend_coolfactor}`,
       ],
     },
     {
@@ -201,7 +201,7 @@ function VehicleHeader() {
                 ) : (
                   <button
                     className="flex w-22 mr-4 items-center justify-between px-2 py-2 tracking-wide text-white transition-colors duration-300 transform bg-emerald-400 rounded-lg hover:bg-emerald-300 focus:outline-none focus:ring focus:ring-emerald-300 focus:ring-opacity-80"
-                    onClick={() => setEditDescription(!editDescription)}
+                    onClick={() => setErrors({test: "You must be logged in to make an edit."})}
                   >
                     <PencilSquareIcon className="w-5 h-5" />
                     <span className="mx-1 text-sm font-medium">Edit</span>
