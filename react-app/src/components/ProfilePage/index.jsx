@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 
 
-function ProfilePage() {
-  const [userImage, setUserImage] = useState("");
-  const [userName, setUserName] = useState("");
-  const [userEmail, setUserEmail] = useState("");
-  const [userBio, setUserBio] = useState("");
-  const [userBirthdate, setUserBirthdate] = useState("");
+function ProfilePage({ sessionUser }) {
+  const [userImage, setUserImage] = useState(sessionUser.profile_image);
+  const [userName, setUserName] = useState(sessionUser.full_name);
+  const [userEmail, setUserEmail] = useState(sessionUser.email);
+  const [userBio, setUserBio] = useState(sessionUser.bio);
+  const [userBirthdate, setUserBirthdate] = useState(sessionUser.dob);
+
+  console.log(sessionUser);
 
   return (
     <>

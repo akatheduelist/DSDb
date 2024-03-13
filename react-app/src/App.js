@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { authenticate } from "./store/session";
 import SignupFormPage from "./components/SignupFormPage";
@@ -16,6 +16,8 @@ import ReactGA from "react-ga";
 // Main app for the project
 function App() {
   const dispatch = useDispatch();
+  
+  const sessionUser = useSelector((state) => state.session.user);
 
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -48,6 +50,9 @@ function App() {
               <Search />
             </Route>
             <Route path="/profile">
+              <ProfilePage sessionUser={sessionUser} />
+            </Route>
+            <Route path="/settings">
               <ProfilePage />
             </Route>
             <Route exact path="/vehicles/:vehicleId">
