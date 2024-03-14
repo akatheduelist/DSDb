@@ -11,45 +11,21 @@ function ProfilePage({ sessionUser }) {
 
   return (
     <>
-      <h1>Profile Page</h1>
-      <div>
-        <img src={userImage} alt="User Image" />
-        <button onClick={() => {}}>Change Image</button>
-      </div>
-      <div>
-        <label>Name:</label>
-        <input
-          type="text"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
-        />
-        <button onClick={() => {}}>Change Name</button>
-      </div>
-      <div>
-        <label>Email:</label>
-        <input
-          type="email"
-          value={userEmail}
-          onChange={(e) => setUserEmail(e.target.value)}
-        />
-        <button onClick={() => {}}>Change Email</button>
-      </div>
-      <div>
-        <label>Bio:</label>
-        <textarea
-          value={userBio}
-          onChange={(e) => setUserBio(e.target.value)}
-        />
-        <button onClick={() => {}}>Change Bio</button>
-      </div>
-      <div>
-        <label>Birthdate:</label>
-        <input
-          type="date"
-          value={userBirthdate}
-          onChange={(e) => setUserBirthdate(e.target.value)}
-        />
-        <button onClick={() => {}}>Change Birthdate</button>
+      <div className="flex gap-4 w-2/3 mx-auto my-12">
+        <div>
+          <img
+            src={userImage}
+            className="rounded-full w-48 h-48 object-cover"
+            alt="User Image"
+          />
+          <button onClick={() => {}}>Change Image</button>
+        </div>
+        <div className="flex flex-col py-4">
+          <span className="text-3xl">{userName}</span>
+          <span>{userEmail}</span>
+          <span className="my-2">{userBio}</span>
+          <span>{userBirthdate}</span>
+        </div>
       </div>
     </>
   );
