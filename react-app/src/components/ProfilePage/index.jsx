@@ -7,8 +7,6 @@ function ProfilePage({ sessionUser }) {
   const [userBio, setUserBio] = useState(sessionUser.bio);
   const [userBirthdate, setUserBirthdate] = useState(sessionUser.dob);
 
-  console.log(sessionUser);
-
   return (
     <>
       <div className="flex gap-4 w-2/3 mx-auto my-12">

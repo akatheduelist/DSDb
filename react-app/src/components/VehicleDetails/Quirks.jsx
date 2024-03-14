@@ -11,20 +11,23 @@ export default function Quirks() {
           Quirks and Features
         </h3>
         <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
-          These are the items tha Doug found particularly quirky...
+          These are the items tha Doug found particularly quirky about the {vehicle?.make} {vehicle?.model}...
         </p>
       </div>
       <div className="mt-6 border-t border-gray-100">
         <dl className="divide-y divide-gray-100">
-          {vehicle.quirks.map(({id, quirk}) => (
-          <div key={id} className="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm font-medium leading-6 text-gray-900">
-              Quirk #{id}
-            </dt>
-            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              {quirk}
-            </dd>
-          </div>
+          {vehicle.quirks.map(({ id, quirk }) => (
+            <div
+              key={id}
+              className="px-4 py-4 sm:flex sm:gap-4 sm:px-0"
+            >
+              <div className="text-sm font-medium leading-6 text-gray-900">
+                Quirk #{id}
+              </div>
+              <div className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                {quirk}
+              </div>
+            </div>
           ))}
           <div className="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt className="text-sm font-medium leading-6 text-gray-900">
@@ -43,7 +46,8 @@ export default function Quirks() {
                     />
                     <div className="ml-4 flex min-w-0 flex-1 gap-2">
                       <span className="truncate font-medium">
-                        {vehicle?.id}_{vehicle?.year}_{vehicle?.make}_{vehicle?.model}.pdf
+                        {vehicle?.id}_{vehicle?.year}_{vehicle?.make}_
+                        {vehicle?.model}.pdf
                       </span>
                       <span className="flex-shrink-0 text-gray-400">2.4mb</span>
                     </div>
@@ -57,7 +61,6 @@ export default function Quirks() {
                     </a>
                   </div>
                 </li>
-            
               </ul>
             </dd>
           </div>

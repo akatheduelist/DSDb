@@ -9,12 +9,6 @@ function LandingPage() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // const randomVehicle = isLoaded
-  //   ? Object.values(allVehicles)[
-  //   Math.floor(Math.random() * Object.values(allVehicles).length)
-  //   ]
-  //   : null;
-
   useEffect(() => {
     dispatch(getAllVehicles()).then(() => setIsLoaded(true));
   }, [dispatch]);

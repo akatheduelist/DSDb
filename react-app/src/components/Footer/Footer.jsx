@@ -100,7 +100,7 @@ export default function Footer() {
               </div>
 
               <div>
-                <h3 className="text-gray-700 uppercase text-white">Thanks</h3>
+                <h3 className="text-gray-700 uppercase">Thanks</h3>
                 <Link
                   to={{ pathname: "https://www.postgresql.org" }}
                   target="_blank"
@@ -130,7 +130,7 @@ export default function Footer() {
               </div>
 
               <div>
-                <h3 className="text-gray-700 uppercase text-white">Thanks</h3>
+                <h3 className="text-gray-700 uppercase">Thanks</h3>
                 <Link
                   to={{ pathname: "https://tailwindcss.com/" }}
                   target="_blank"

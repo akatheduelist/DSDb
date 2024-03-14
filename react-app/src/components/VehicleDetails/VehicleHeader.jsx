@@ -149,7 +149,7 @@ function VehicleHeader() {
     <>
       {Object.values(errors).length ? <Error errors={errors} /> : null}
       <div className="bg-white">
-        <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-4 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
+        <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-4 sm:px-6 sm:pt-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
           <div className="py-8">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               {vehicle?.year} {vehicle?.make} {vehicle?.model}
@@ -279,8 +279,13 @@ function VehicleHeader() {
                     </Transition>
                   </Menu>
                 ) : (
-                  <button className="inline-flex items-center rounded-md bg-emerald-400 hover:bg-emerald-300 px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-emerald-300"
-                    onClick={() => setErrors({notLoggedIn: "You must be logged in to add a tag."})}
+                  <button
+                    className="inline-flex items-center rounded-md bg-emerald-400 hover:bg-emerald-300 px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-emerald-300"
+                    onClick={() =>
+                      setErrors({
+                        notLoggedIn: "You must be logged in to add a tag.",
+                      })
+                    }
                   >
                     New Tag
                     <ChevronDownIcon
